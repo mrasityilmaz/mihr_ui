@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.0-dev.2]
+
+### Fixed
+
+- README badges now use dynamic Codecov coverage and CI status for
+the `develop` branch instead of hardcoded values.
+
+### Changed
+
+- Widened SDK constraints: Dart `>=3.4.0`, Flutter `>=3.22.0`.
+
 ## [0.1.0-dev.1]
 
 ### Added
