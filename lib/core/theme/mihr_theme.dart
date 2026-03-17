@@ -53,11 +53,11 @@ import 'package:mihr_ui/core/theme/typography/mihr_typography.dart';
 class MihrTheme {
   MihrTheme._();
 
-  static const _defaultRadius = MihrRadius.md;
-  static const _cardRadius = MihrRadius.xl;
-  static const _sheetRadius = MihrRadius.xxl;
-  static const _chipRadius = MihrRadius.xxl;
-  static const _fabRadius = MihrRadius.xl;
+  static const double _defaultRadius = MihrRadius.md;
+  static const double _cardRadius = MihrRadius.xl;
+  static const double _sheetRadius = MihrRadius.xxl;
+  static const double _chipRadius = MihrRadius.xxl;
+  static const double _fabRadius = MihrRadius.xl;
 
   /// Creates a light mode [ThemeData] with all semantic extensions.
   ///

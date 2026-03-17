@@ -446,7 +446,7 @@ class _RenderInputPadding extends RenderShiftedBox {
     return result.addWithRawTransform(
       transform: MatrixUtils.forceToPoint(center),
       position: center,
-      hitTest: (BoxHitTestResult result, Offset position) {
+      hitTest: (result, position) {
         assert(position == center, 'Hit test position must match center');
         return child!.hitTest(result, position: center);
       },
