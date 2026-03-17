@@ -1,8 +1,8 @@
 # Mihr UI
 
 [![pub package](https://img.shields.io/pub/v/mihr_ui.svg)](https://pub.dev/packages/mihr_ui)
-[![CI](https://github.com/mrasityilmaz/mihr_ui/actions/workflows/ci.yaml/badge.svg)](https://github.com/mrasityilmaz/mihr_ui/actions/workflows/ci.yaml)
-[![coverage](https://img.shields.io/badge/coverage-80%25-brightgreen)](https://github.com/mrasityilmaz/mihr_ui)
+[![CI](https://github.com/mrasityilmaz/mihr_ui/actions/workflows/ci.yaml/badge.svg?branch=develop)](https://github.com/mrasityilmaz/mihr_ui/actions/workflows/ci.yaml)
+[![codecov](https://codecov.io/gh/mrasityilmaz/mihr_ui/branch/develop/graph/badge.svg)](https://codecov.io/gh/mrasityilmaz/mihr_ui)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
