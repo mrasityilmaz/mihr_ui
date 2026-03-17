@@ -1,0 +1,26 @@
+name: mihr_ui
+description: >-
+  A complete Flutter UI kit: design tokens (colors, typography, spacing,
+  shadows, radius), semantic theme extensions with automatic light/dark mode,
+  WCAG-compliant palette generation, and a growing set of production-ready
+  components. Drop-in theming for any Flutter app.
+version: 0.1.0-dev.1
+homepage: https://github.com/mrasityilmaz/mihr_ui
+repository: https://github.com/mrasityilmaz/mihr_ui
+issue_tracker: https://github.com/mrasityilmaz/mihr_ui/issues
+
+environment:
+  sdk: ^3.10.7
+  flutter: ">=3.29.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^7.0.0
+
+flutter:
+  uses-material-design: true

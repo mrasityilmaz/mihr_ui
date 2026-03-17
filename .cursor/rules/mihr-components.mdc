@@ -1,0 +1,98 @@
+---
+description: Component architecture rules for Mihr UI widgets
+globs: ["lib/components/**/*.dart"]
+alwaysApply: false
+---
+
+# Mihr UI Component Architecture
+
+## Base Class Pattern
+
+All components extend from a base class (e.g., `MihrButtonBase`) that provides:
+- Shared rendering stack
+- Style resolution pipeline
+- State management via `WidgetStatesController`
+
+## Size Variants
+
+Components support standardized sizes: `sm`, `md` (default), `lg`, `xl`.
+
+```dart
+enum MihrButtonSize { sm, md, lg, xl }
+```
+
+## Named Constructors
+
+Use named constructors for variants:
+- `.sm()`, `.lg()`, `.xl()` — size variants
+- `.icon()` — icon-only (medium, square)
+- `.iconSm()` — small icon-only
+
+```dart
+MihrPrimaryButton(onPressed: ..., child: Text('Save'))  // md default
+MihrPrimaryButton.sm(onPressed: ..., child: Text('Small'))
+MihrPrimaryButton.icon(onPressed: ..., icon: Icon(Icons.add))
+```
+
+## Style Resolution
+
+Resolution order (highest priority first):
+
+```
+widget.style  >  themeStyleOf(context)  >  defaultStyleOf(context)
+```
+
+- **widget.style**: Per-instance override
+- **themeStyleOf(context)**: ThemeExtension (e.g., `MihrButtonThemeData.of(context)`)
+- **defaultStyleOf(context)**: Component-specific defaults
+
+## Color Access
+
+Components MUST access colors via semantic tokens only:
+
+```dart
+context.textColors
+context.bgColors
+context.borderColors
+context.fgColors
+context.componentColors
+context.utilityColors
+```
+
+Never use raw `Color` values or `Colors.xxx` in components.
+
+## Shadow System
+
+Use component-specific shadow config (e.g., `MihrButtonShadows`):
+- `MihrButtonShadows.standard` — outer xs + inner ring + skeuomorphic
+- `MihrButtonShadows.flat` — no shadows (link/ghost variants)
+- `MihrButtonShadows.subtle` — light outer shadow only
+
+Override via `shadowsOf(BuildContext context)` in the base class.
+
+## State Handling
+
+Use `WidgetStatesController` for interactive states:
+- `WidgetState.hovered`
+- `WidgetState.focused`
+- `WidgetState.pressed`
+- `WidgetState.disabled`
+
+Components may accept an external `statesController` or create an internal one.
+
+## Container Pattern
+
+Separate the rendering surface into a dedicated container widget (e.g., `MihrButtonContainer`):
+- Handles background color, shape, border, shadows
+- Supports outer and inner shadows
+- Integrates focus ring via `focusOuter` shadows
+
+## ThemeExtension
+
+Each component family has a ThemeExtension for customization:
+- `MihrButtonThemeData` — shape, shadows, sizes, per-variant style overrides
+- Register in `ThemeData.extensions` via `MihrTheme.light()` / `MihrTheme.dark()`
+
+## Documentation
+
+All public members (constructors, parameters, methods, classes) MUST have dartdoc comments.

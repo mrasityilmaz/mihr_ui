@@ -1,0 +1,14 @@
+cursor_project_rules/
+tool/
+.cursor/
+.vscode/
+.idea/
+.github/
+docs/
+build/
+example/android/
+example/ios/
+example/web/
+example/linux/
+example/macos/
+example/windows/

@@ -1,0 +1,68 @@
+---
+description: Testing conventions for Mihr UI package
+globs: ["test/**/*.dart"]
+alwaysApply: false
+---
+
+# Mihr UI Testing Conventions
+
+## Test Framework
+
+- Use `package:flutter_test` for all tests
+- Import from `package:mihr_ui/mihr_ui.dart` (the barrel file)
+
+## Widget Test Setup
+
+Wrap widgets with `MaterialApp` + `MihrTheme` for widget tests:
+
+```dart
+Widget _wrap(Widget child, {Brightness brightness = Brightness.light}) {
+  final theme = brightness == Brightness.light
+      ? MihrTheme.light()
+      : MihrTheme.dark();
+  return MaterialApp(
+    theme: theme,
+    home: Scaffold(body: Center(child: child)),
+  );
+}
+```
+
+## Mode Coverage
+
+Test both light and dark modes when behavior or appearance differs.
+
+## Theme Tests
+
+Verify ThemeExtension registration in theme tests (e.g., `MihrButtonThemeData`, semantic color extensions).
+
+## Component Coverage
+
+For each component, test:
+- All size variants (sm, md, lg, xl)
+- Icon variants (.icon, .iconSm) where applicable
+- Disabled vs enabled states
+- Semantic flags (e.g., `SemanticsFlag.isEnabled`, `SemanticsFlag.isButton`)
+
+## Structure
+
+Follow the Arrange-Act-Assert pattern:
+
+```dart
+testWidgets('renders text label', (tester) async {
+  await tester.pumpWidget(_wrap(
+    MihrPrimaryButton(onPressed: () {}, child: const Text('Save')),
+  ));
+  await tester.pumpAndSettle();
+
+  expect(find.text('Save'), findsOneWidget);
+  expect(find.byType(MihrPrimaryButton), findsOneWidget);
+});
+```
+
+## Coverage Target
+
+Aim for 80% minimum line coverage.
+
+## Pre-Commit
+
+Run `dart analyze` before committing to catch static analysis issues.

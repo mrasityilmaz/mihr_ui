@@ -1,0 +1,516 @@
+---
+description: Core rules for the Mihr UI Flutter component library. Always follow when working on theme, colors, typography, spacing, components, or any UI-related code.
+globs:
+  - "lib/**/*.dart"
+alwaysApply: true
+---
+
+# Mihr UI Flutter - Project Rules
+
+## Architecture
+
+This project is a Flutter UI component library. It uses Flutter's native `ThemeData` and `ThemeExtension` system — no external theme packages.
+
+### Layer Structure
+
+```
+1. Primitives (ColorScale, static values)
+   └── Base color palettes, spacing, radius, shadow constants
+
+2. Semantic Tokens (ThemeExtension classes)
+   └── TextColors, BackgroundColors, BorderColors, ForegroundColors
+   └── Different values for light/dark mode
+
+3. Components (Widgets)
+   └── MihrPrimaryButton, MihrSecondaryButton, MihrBadge, etc.
+   └── Read colors ONLY via semantic tokens from context
+```
+
+### File Organization
+
+```
+lib/core/theme/
+├── colors/
+│   ├── color_scale.dart           # ColorScale data class (12 shades: 25-950)
+│   ├── color_scale_generator.dart # Runtime palette generation + WCAG validation
+│   ├── mihr_colors.dart            # Core palettes (brand, gray, grayDark, error, warning, success)
+│   ├── accent_colors.dart         # Accent palettes (blue, green, teal, indigo, etc.)
+│   ├── gray_variants.dart         # Gray palette variants (gray-blue, gray-cool, etc.)
+│   ├── text_colors.dart           # ThemeExtension<TextColors> — 23 semantic tokens
+│   ├── background_colors.dart     # ThemeExtension<BackgroundColors> — 32 semantic tokens
+│   ├── border_colors.dart         # ThemeExtension<BorderColors> — 10 semantic tokens
+│   ├── foreground_colors.dart     # ThemeExtension<ForegroundColors> — 21 semantic tokens
+│   ├── alpha_colors.dart          # ThemeExtension<AlphaColors> — white/black opacity tokens
+│   ├── utility_scale.dart         # UtilityScale data class (8+2 shades, dark-mode-aware)
+│   ├── utility_colors.dart        # ThemeExtension<UtilityColors> — 18 color families for badges/tags
+│   ├── component_colors.dart      # ThemeExtension<ComponentColors> — 29 component-specific tokens
+│   └── mihr_gradients.dart         # GrayGradients, BrandGradients, DecoGradients (91 decorative)
+├── shadows/
+│   └── mihr_backdrop_blurs.dart    # MihrBackdropBlurs (sm, md, lg, xl + light/dark overlay)
+├── typography/
+│   └── mihr_typography.dart        # TypeStyle + MihrTypography (11 sizes × 4 weights = 44 styles)
+├── spacing/
+│   ├── mihr_spacing.dart           # MihrSpacing (30 primitives + 17 semantic tokens + EdgeInsets/Gap helpers)
+│   ├── mihr_widths.dart            # MihrWidths (11 maxWidth tokens + container padding/maxWidth + paragraph)
+│   └── mihr_breakpoints.dart       # MihrBreakpoints (mobile/tablet/desktop) + GridConfig
+├── radius/
+│   └── mihr_radius.dart            # MihrRadius (11 sizes: none–full + BorderRadius constants)
+└── mihr_theme.dart                 # Main theme provider (ColorScheme + TextTheme + widget themes + extensions)
+
+lib/components/
+├── buttons/
+├── inputs/
+├── badges/
+└── ...
+```
+
+## Color System Rules
+
+### NEVER use raw Color values in components
+
+```dart
+// WRONG - hardcoded colors
+Container(color: Color(0xFF7F56D9))
+Text('Hello', style: TextStyle(color: Colors.grey[900]))
+
+// CORRECT - semantic tokens via context
+Container(color: context.bgColors.brandSolid)
+Text('Hello', style: TextStyle(color: context.textColors.primary))
+```
+
+### NEVER use Material Colors.xxx in components
+
+```dart
+// WRONG
+color: Colors.red
+color: Colors.grey[200]
+
+// CORRECT - use MihrColors for direct palette access
+color: MihrColors.error.shade600
+color: MihrColors.gray.shade200
+
+// BEST - use semantic tokens
+color: context.textColors.errorPrimary
+color: context.borderColors.secondary
+```
+
+### Color Scale Convention
+
+Every color family uses 12 shades on a 25-950 scale:
+
+- 25, 50: Lightest tints (backgrounds)
+- 100, 200: Light shades (hover states, subtle backgrounds)
+- 300, 400: Mid-light (borders, disabled states)
+- 500: Base color
+- 600: Primary interactive color (buttons, links)
+- 700, 800: Dark shades (hover states on dark)
+- 900, 950: Darkest (text, dark backgrounds)
+
+### Dark Mode Pattern
+
+Dark mode does NOT invert colors. It uses different semantic mappings:
+
+- text-primary: gray.shade900 (light) → grayDark.shade50 (dark)
+- bg-primary: white (light) → grayDark.shade950 (dark)
+- Gray palette has separate dark-mode-optimized values (grayDark)
+
+Key dark mode rules:
+
+- Brand text tokens lose brand tint in dark mode → fall back to gray (for WCAG contrast)
+- Error/warning/success shift from shade 600 to 400 (lighter on dark bg)
+- Hover states go +100 shade in light (darker), -100 shade in dark (lighter)
+- `_alt` suffix tokens swap between primary↔secondary or brand↔gray across modes
+- Utility colors invert shade positions (50↔950, 100↔900, ..., 500=same)
+- Alpha colors swap bases: white→gray-950, black→white
+
+### Backdrop Blurs
+
+Use `MihrBackdropBlurs` for frosted-glass effects.
+
+```dart
+final blur = MihrBackdropBlurs.md;
+ClipRRect(
+  child: BackdropFilter(
+    filter: blur.imageFilter,
+    child: Container(color: blur.overlay(Theme.of(context).brightness)),
+  ),
+);
+```
+
+Sizes: `sm` (8px), `md` (16px), `lg` (24px), `xl` (40px).
+
+### Utility Colors
+
+Use `context.utilityColors` for multi-color components (badges, tags, charts):
+
+```dart
+// For a blue badge that auto-inverts in dark mode
+Container(color: context.utilityColors.blue.shade100)
+
+// Brand badge that falls back to gray in dark mode
+Container(color: context.utilityColors.brandAlt.shade50)
+```
+
+### Gradients
+
+Use `GrayGradients`, `BrandGradients`, or `DecoGradients` for gradient backgrounds:
+
+```dart
+Container(decoration: BoxDecoration(gradient: GrayGradients.dark800to600_45))
+
+// Custom palette gradients
+final grads = BrandGradients.fromScale(myBrandPalette);
+```
+
+### ColorScaleGenerator — Runtime Palette Generation
+
+Use `ColorScaleGenerator` to create a `ColorScale` from a single brand color at runtime:
+
+```dart
+final palette = ColorScaleGenerator.fromColor(Color(0xFFE63946));
+// or
+final palette = ColorScaleGenerator.fromHex('#E63946');
+
+MaterialApp(
+  theme: MihrTheme.light(brand: palette),
+  darkTheme: MihrTheme.dark(brand: palette),
+);
+```
+
+For contrast debugging, use `fromColorWithReport()`:
+
+```dart
+final (palette, report) = ColorScaleGenerator.fromColorWithReport(myColor);
+assert(report.allPassed);
+```
+
+The generator places the input color at **shade 600**, generates 12 shades using proportional HSL distribution, and auto-corrects for 8 WCAG AA contrast rules. After correction, a monotonicity pass ensures lightness always decreases from shade25 to shade950.
+
+**MANDATORY**: After generating any palette, run tests to validate:
+
+```bash
+flutter test test/core/theme/colors/color_scale_generator_test.dart
+```
+
+This validates WCAG contrast (8 rules), lightness monotonicity, hue family, edge cases, and compatibility with all semantic token ThemeExtension classes.
+
+### Test File Location
+
+```
+test/core/theme/colors/color_scale_generator_test.dart
+```
+
+Covers: known palette verification, 8+ diverse color WCAG compliance, edge cases (white/black/pastel/dark/gray/saturated), hex parsing, contrast utilities, and full semantic token compatibility (TextColors, BackgroundColors, BorderColors, ForegroundColors, ComponentColors, UtilityColors, UtilityScale).
+
+If adding a permanent new palette, add it to the `testColors` map in the test file.
+
+### Material Theme Bridge
+
+`MihrTheme` configures the full Flutter `ColorScheme` (30+ properties) and widget-level themes so that standard Material widgets (TextField, ElevatedButton, Card, Checkbox, etc.) automatically use Mihr UI design tokens.
+
+**Priority rule for custom components:**
+
+```dart
+// BEST — use semantic tokens
+Container(color: context.bgColors.brandSolid)
+
+// OK — standard Material widgets use ColorScheme automatically
+ElevatedButton(onPressed: ..., child: Text('Save'))
+
+// AVOID — direct ColorScheme access in custom components
+Container(color: Theme.of(context).colorScheme.primary)
+```
+
+Widget themes configured: AppBar, ElevatedButton, OutlinedButton, TextButton, InputDecoration, Card, Dialog, BottomSheet, Divider, Checkbox, Switch, Radio, Chip, FAB, ProgressIndicator, SnackBar, PopupMenu, Tooltip, TabBar, NavigationBar, Drawer, ListTile, TextSelection.
+
+## Typography System
+
+### Type Scale
+
+Two categories, each with 4 weight variants (Regular 400, Medium 500, Semibold 600, Bold 700):
+
+**Display** (headings, -2% letter spacing):
+
+- `display2xl` 72/90, `displayXl` 60/72, `displayLg` 48/60
+- `displayMd` 36/44, `displaySm` 30/38, `displayXs` 24/32
+
+**Text** (body, labels, no tracking):
+
+- `textXl` 20/30, `textLg` 18/28, `textMd` 16/24
+- `textSm` 14/20, `textXs` 12/18
+
+### Usage
+
+```dart
+// Direct access (preferred for custom components)
+Text('Heading', style: MihrTypography.displayLg.semibold);
+Text('Body', style: MihrTypography.textMd.regular);
+
+// With semantic color
+Text(
+  'Hello',
+  style: MihrTypography.textMd.medium.copyWith(
+    color: context.textColors.primary,
+  ),
+);
+
+// Material TextTheme (automatic via MihrTheme)
+Text('Title', style: Theme.of(context).textTheme.headlineLarge);
+```
+
+### Font Family Override
+
+Pass `fontFamily` to `MihrTheme.light()` / `MihrTheme.dark()`:
+
+```dart
+MihrTheme.light(fontFamily: 'DM Sans')
+```
+
+Or override individual styles:
+
+```dart
+MihrTypography.displayLg.withFontFamily('DM Sans').bold
+```
+
+### NEVER hardcode text styles
+
+```dart
+// WRONG
+Text('Hi', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))
+
+// CORRECT
+Text('Hi', style: MihrTypography.textMd.medium)
+```
+
+## Spacing System
+
+4px soft-grid system. Every spacing value is divisible by 4 (with 2px and 6px exceptions for fine-tuning).
+
+### Semantic Tokens
+
+| Token | Pixels | Use case |
+|-------|--------|----------|
+| `none` | 0 | No spacing |
+| `xxs` | 2 | Hairline gaps |
+| `xs` | 4 | Tight gaps |
+| `sm` | 6 | Compact padding |
+| `md` | 8 | Default inner padding |
+| `lg` | 12 | List item gaps |
+| `xl` | 16 | Standard component padding |
+| `x2l` | 20 | Relaxed padding |
+| `x3l` | 24 | Card padding |
+| `x4l` | 32 | Desktop section gap |
+| `x5l` | 40 | Large section gaps |
+| `x6l` | 48 | Hero section padding |
+| `x7l`–`x11l` | 64–160 | Page section spacing |
+
+### NEVER hardcode spacing values
+
+```dart
+// WRONG
+Padding(padding: EdgeInsets.all(16))
+SizedBox(height: 24)
+
+// CORRECT — semantic tokens
+Padding(padding: MihrSpacing.insetsXl)       // 16px
+SizedBox(height: MihrSpacing.x3l)             // 24px
+
+// CORRECT — gap helpers in Column/Row
+Column(children: [
+  header,
+  MihrSpacing.gapVLg,                          // 12px vertical gap
+  body,
+])
+
+// CORRECT — primitives when semantic names don't fit
+SizedBox(width: MihrSpacing.p48)              // 192px
+```
+
+### EdgeInsets helpers
+
+```dart
+MihrSpacing.insetsXl      // EdgeInsets.all(16)
+MihrSpacing.insetsHXl     // EdgeInsets.symmetric(horizontal: 16)
+MihrSpacing.insetsVX3l    // EdgeInsets.symmetric(vertical: 24)
+```
+
+### Gap helpers
+
+```dart
+MihrSpacing.gapVLg   // SizedBox(height: 12)
+MihrSpacing.gapHMd   // SizedBox(width: 8)
+```
+
+## Border Radius System
+
+11 named sizes from `none` (0px) to `full` (9999px pill).
+
+| Token | Pixels | Use case |
+|-------|--------|----------|
+| `none` | 0 | Sharp corners |
+| `xxs` | 2 | Checkboxes |
+| `xs` | 4 | Tags, small inputs |
+| `sm` | 6 | Compact buttons, chips |
+| `md` | 8 | Buttons, inputs, cards (default) |
+| `lg` | 10 | Dropdowns, popovers |
+| `xl` | 12 | Cards, dialogs, FABs |
+| `xxl` | 16 | Bottom sheets |
+| `xxxl` | 20 | Modal containers |
+| `xxxxl` | 24 | Hero cards |
+| `full` | 9999 | Pill / circle |
+
+### NEVER hardcode border radius
+
+```dart
+// WRONG
+BorderRadius.circular(8)
+Radius.circular(12)
+
+// CORRECT — BorderRadius constants
+Container(
+  decoration: BoxDecoration(borderRadius: MihrRadius.borderMd),
+)
+
+// CORRECT — raw double when building custom BorderRadius
+ClipRRect(
+  borderRadius: BorderRadius.only(
+    topLeft: Radius.circular(MihrRadius.xl),
+    topRight: Radius.circular(MihrRadius.xl),
+  ),
+  child: image,
+)
+
+// Top-only for bottom sheets
+bottomSheetShape: RoundedRectangleBorder(
+  borderRadius: MihrRadius.topXxl,
+)
+
+// Pill shape
+borderRadius: MihrRadius.borderFull
+```
+
+## Width & Container System
+
+Width tokens are **maxWidth constraints only** — never fixed widths. Elements remain fluid.
+
+### Max-Width Tokens
+
+| Token | Pixels | Use case |
+|-------|--------|----------|
+| `xxs` | 320 | Compact mobile dialogs |
+| `xs` | 384 | Narrow modals |
+| `sm` | 480 | Auth forms |
+| `md` | 560 | Content dialogs |
+| `lg` | 640 | Wide forms |
+| `xl` | 768 | Tablet baseline |
+| `x2l` | 1024 | Dashboard panels |
+| `x3l` | 1280 | Desktop max-content |
+| `x4l`–`x6l` | 1440–1920 | Wide/ultra-wide |
+
+### Container Tokens
+
+- `containerPaddingMobile` = 16px
+- `containerPaddingDesktop` = 32px
+- `containerMaxWidth` = 1280px
+- `paragraphMaxWidth` = 720px (optimal line length: 45-85 chars)
+
+### Usage
+
+```dart
+// CORRECT — maxWidth constraint (fluid)
+ConstrainedBox(
+  constraints: MihrWidths.constraintsContainer,
+  child: content,
+)
+
+// CORRECT — paragraph readability
+ConstrainedBox(
+  constraints: MihrWidths.constraintsParagraph,
+  child: Text(longContent),
+)
+
+// WRONG — never use as fixed width
+SizedBox(width: MihrWidths.x3l, child: content)
+```
+
+## Responsive Breakpoints
+
+| Breakpoint | Width | Columns | Gutter |
+|-----------|-------|---------|--------|
+| Mobile | < 768px | 6 | 16px |
+| Tablet | 768–1279px | 8 | 32px |
+| Desktop | >= 1280px | 12 | 32px |
+
+### Usage
+
+```dart
+final width = MediaQuery.sizeOf(context).width;
+if (MihrBreakpoints.isDesktop(width)) { ... }
+
+// Auto grid config
+final grid = MihrBreakpoints.gridFor(constraints.maxWidth);
+// grid.columns, grid.gutter
+```
+
+## Naming Conventions
+
+- Files: `kebab-case.dart` (e.g., `mihr_colors.dart`, `text_colors.dart`)
+  Note: Dart convention uses snake_case for files, which maps to kebab-case intent
+- Classes: `PascalCase` (e.g., `MihrColors`, `TextColors`)
+- Color constants: `camelCase` (e.g., `shade25`, `shade950`)
+- Semantic tokens: `camelCase` matching CSS names (e.g., `brandPrimary`, `errorSolid`)
+
+## Component Rules
+
+### Size Variants
+
+Components support standardized sizes: `sm`, `md`, `lg`, `xl`
+
+```dart
+enum MihrButtonSize { sm, md, lg, xl }
+```
+
+### State Props
+
+Common state properties across components:
+
+- `isDisabled` - Disabled state
+- `isLoading` - Loading state with spinner
+- `isInvalid` - Error/validation state
+- `isRequired` - Required field indicator
+
+### Component Color Access
+
+Components MUST access colors through semantic tokens:
+
+```dart
+class MihrPrimaryButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final bgColors = context.bgColors;
+    final textColors = context.textColors;
+    final fgColors = context.fgColors;
+    final borderColors = context.borderColors;
+    final compColors = context.componentColors;
+    // Use these for all color references
+  }
+}
+```
+
+Available context getters:
+
+- `context.textColors` — TextColors (23 tokens)
+- `context.bgColors` — BackgroundColors (32 tokens)
+- `context.borderColors` — BorderColors (10 tokens)
+- `context.fgColors` — ForegroundColors (21 tokens)
+- `context.alphaColors` — AlphaColors (20 tokens)
+- `context.utilityColors` — UtilityColors (18 families × 8-10 shades)
+- `context.componentColors` — ComponentColors (29 tokens)
+
+## Code Style
+
+- All code comments MUST be in English
+- Use `const` constructors wherever possible
+- Prefer `final` fields over mutable ones
+- Use `required` named parameters for non-optional values
+- All ThemeExtension classes must implement `copyWith` and `lerp`

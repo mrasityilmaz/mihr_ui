@@ -1,0 +1,103 @@
+---
+description: Changelog formatting and versioning rules for Mihr UI. Apply when editing the changelog or making user-facing changes to components, tokens, or theme files.
+globs:
+  - CHANGELOG.md
+  - lib/components/**
+  - lib/core/theme/**
+alwaysApply: false
+---
+
+# Mihr UI -- Changelog Management
+
+## Format
+
+Follow [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with
+[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## When to Update
+
+Update `CHANGELOG.md` whenever a user-facing change is made:
+
+- New feature, component, or token → **Added**
+- Behavior change to an existing API → **Changed**
+- Planned removal in a future release → **Deprecated**
+- Removed feature or API → **Removed**
+- Bug fix → **Fixed**
+- Security patch → **Security**
+
+Internal refactors, CI changes, and tooling updates do NOT go in the changelog
+unless they affect the public API.
+
+## Entry Template
+
+```markdown
+## [x.y.z] - YYYY-MM-DD
+
+### Added
+
+- **Category**: Brief description of the new feature.
+
+### Changed
+
+- **Category**: What changed and why (migration note if breaking).
+
+### Fixed
+
+- **Category**: What was broken and how it was fixed.
+```
+
+## Writing Rules
+
+1. **One bullet per change.** Group related sub-items under a single bullet.
+2. **Bold the category** at the start: `**Colors**:`, `**Buttons**:`,
+   `**Typography**:`, `**Theme**:`, `**Spacing**:`, etc.
+3. **Use backticks** for class names, method names, and token names.
+4. **Mention breaking changes** explicitly with `**BREAKING**:` prefix.
+5. **Link PR/issue numbers** when available: `([#42](url))`.
+6. **Keep entries concise** -- one to two sentences max.
+7. **Never remove old entries** -- only append new versions above `[Unreleased]`.
+
+## Version Bumping
+
+| Change type | Version bump | Example |
+|---|---|---|
+| Bug fix, docs | PATCH | 0.1.1 |
+| New feature (backward-compatible) | MINOR | 0.2.0 |
+| Breaking API change | MAJOR (or minor while < 1.0) | 0.2.0 |
+| Pre-release | Append `-dev.N` | 0.1.0-dev.2 |
+
+## Workflow
+
+1. Add entries under `## [Unreleased]` during development.
+2. When cutting a release, rename `[Unreleased]` to `[x.y.z] - YYYY-MM-DD`.
+3. Add a fresh empty `## [Unreleased]` section at the top.
+4. Update `version:` in `pubspec.yaml` to match.
+
+## Example
+
+```markdown
+## [Unreleased]
+
+## [0.2.0] - 2026-04-15
+
+### Added
+
+- **Inputs**: `MihrTextField` with label, hint, error, helper text, prefix/suffix
+  icons, and 4 size variants (sm/md/lg/xl).
+- **Colors**: `MihrColors.cyan` accent palette with 12 shades.
+
+### Changed
+
+- **BREAKING**: `MihrTheme.light()` now requires `brand` parameter.
+
+### Fixed
+
+- **Buttons**: `MihrDestructiveButton` hover state used wrong shade in dark mode.
+
+## [0.1.0-dev.1]
+
+### Added
+
+- Initial color system, typography, spacing, radius, shadows, gradients, theme,
+  and button components.
+```
