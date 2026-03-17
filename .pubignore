@@ -6,6 +6,7 @@ tool/
 .github/
 docs/
 build/
+coverage/
 example/android/
 example/ios/
 example/web/

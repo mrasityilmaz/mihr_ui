@@ -3,7 +3,7 @@ description: >-
   A complete Flutter UI kit with design tokens, semantic theme extensions,
   automatic light/dark mode, WCAG-compliant palette generation, and
   production-ready components.
-version: 0.1.0-dev.1
+version: 0.1.0-dev.2
 homepage: https://github.com/mrasityilmaz/mihr_ui
 repository: https://github.com/mrasityilmaz/mihr_ui
 issue_tracker: https://github.com/mrasityilmaz/mihr_ui/issues
