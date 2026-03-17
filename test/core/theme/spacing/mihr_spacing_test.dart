@@ -72,7 +72,8 @@ void main() {
   });
 
   group('MihrSpacing EdgeInsets horizontal helpers', () {
-    test('insetsHXl equals '
+    test(
+        'insetsHXl equals '
         'EdgeInsets.symmetric(horizontal: 16)', () {
       expect(
         MihrSpacing.insetsHXl,
@@ -80,7 +81,8 @@ void main() {
       );
     });
 
-    test('insetsHMd equals '
+    test(
+        'insetsHMd equals '
         'EdgeInsets.symmetric(horizontal: 8)', () {
       expect(
         MihrSpacing.insetsHMd,
@@ -88,7 +90,8 @@ void main() {
       );
     });
 
-    test('insetsHX3l equals '
+    test(
+        'insetsHX3l equals '
         'EdgeInsets.symmetric(horizontal: 24)', () {
       expect(
         MihrSpacing.insetsHX3l,
@@ -98,7 +101,8 @@ void main() {
   });
 
   group('MihrSpacing EdgeInsets vertical helpers', () {
-    test('insetsVXl equals '
+    test(
+        'insetsVXl equals '
         'EdgeInsets.symmetric(vertical: 16)', () {
       expect(
         MihrSpacing.insetsVXl,
@@ -106,7 +110,8 @@ void main() {
       );
     });
 
-    test('insetsVX3l equals '
+    test(
+        'insetsVX3l equals '
         'EdgeInsets.symmetric(vertical: 24)', () {
       expect(
         MihrSpacing.insetsVX3l,

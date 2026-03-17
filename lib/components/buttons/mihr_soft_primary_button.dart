@@ -39,8 +39,8 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.md,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.md,
+        _isSquare = false;
 
   /// Creates a small soft-primary button.
   const MihrSoftPrimaryButton.sm({
@@ -57,8 +57,8 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.sm,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.sm,
+        _isSquare = false;
 
   /// Creates a large soft-primary button.
   const MihrSoftPrimaryButton.lg({
@@ -75,8 +75,8 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.lg,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.lg,
+        _isSquare = false;
 
   /// Creates an extra-large soft-primary button.
   const MihrSoftPrimaryButton.xl({
@@ -93,8 +93,8 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.xl,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.xl,
+        _isSquare = false;
 
   /// Creates an icon-only soft-primary button (medium, square).
   const MihrSoftPrimaryButton.icon({
@@ -109,9 +109,9 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.md,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.md,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates a small icon-only soft-primary button.
   const MihrSoftPrimaryButton.iconSm({
@@ -126,9 +126,9 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.sm,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.sm,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates a large icon-only soft-primary button.
   const MihrSoftPrimaryButton.iconLg({
@@ -143,9 +143,9 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.lg,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.lg,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates an extra-large icon-only soft-primary button.
   const MihrSoftPrimaryButton.iconXl({
@@ -160,9 +160,9 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.xl,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.xl,
+        _isSquare = true,
+        super(child: icon);
 
   final MihrButtonSize _size;
   final bool _isSquare;

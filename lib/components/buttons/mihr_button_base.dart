@@ -188,14 +188,12 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
     final minSize = rs((s) => s?.minimumSize) ?? Size.zero;
     final maxSize = rs((s) => s?.maximumSize) ?? Size.infinite;
 
-    final tapTargetSize =
-        widgetStyle?.tapTargetSize ??
+    final tapTargetSize = widgetStyle?.tapTargetSize ??
         themeStyle?.tapTargetSize ??
         defaultStyle.tapTargetSize ??
         MaterialTapTargetSize.shrinkWrap;
 
-    final animDuration =
-        widgetStyle?.animationDuration ??
+    final animDuration = widgetStyle?.animationDuration ??
         themeStyle?.animationDuration ??
         defaultStyle.animationDuration ??
         const Duration(milliseconds: 100);
@@ -220,13 +218,13 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
 
     final effectiveMinSize = switch (tapTargetSize) {
       MaterialTapTargetSize.padded => Size(
-        math.max(constraints.minWidth, 48),
-        math.max(constraints.minHeight, 48),
-      ),
+          math.max(constraints.minWidth, 48),
+          math.max(constraints.minHeight, 48),
+        ),
       MaterialTapTargetSize.shrinkWrap => Size(
-        constraints.minWidth,
-        constraints.minHeight,
-      ),
+          constraints.minWidth,
+          constraints.minHeight,
+        ),
     };
 
     // -- shadows --
@@ -423,8 +421,8 @@ class _RenderInputPadding extends RenderShiftedBox {
   void performLayout() {
     size = _computeLayout(constraints, ChildLayoutHelper.layoutChild);
     if (child != null) {
-      (child!.parentData! as BoxParentData).offset = Alignment.center
-          .alongOffset(size - child!.size as Offset);
+      (child!.parentData! as BoxParentData).offset =
+          Alignment.center.alongOffset(size - child!.size as Offset);
     }
   }
 

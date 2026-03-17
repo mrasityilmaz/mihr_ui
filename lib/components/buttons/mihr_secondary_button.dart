@@ -29,8 +29,8 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.md,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.md,
+        _isSquare = false;
 
   /// Creates a small secondary button.
   const MihrSecondaryButton.sm({
@@ -47,8 +47,8 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.sm,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.sm,
+        _isSquare = false;
 
   /// Creates a large secondary button.
   const MihrSecondaryButton.lg({
@@ -65,8 +65,8 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.lg,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.lg,
+        _isSquare = false;
 
   /// Creates an extra-large secondary button.
   const MihrSecondaryButton.xl({
@@ -83,8 +83,8 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.xl,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.xl,
+        _isSquare = false;
 
   /// Creates an icon-only secondary button (medium, square).
   const MihrSecondaryButton.icon({
@@ -99,9 +99,9 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.md,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.md,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates a small icon-only secondary button.
   const MihrSecondaryButton.iconSm({
@@ -116,9 +116,9 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.sm,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.sm,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates a large icon-only secondary button.
   const MihrSecondaryButton.iconLg({
@@ -133,9 +133,9 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.lg,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.lg,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates an extra-large icon-only secondary button.
   const MihrSecondaryButton.iconXl({
@@ -150,9 +150,9 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.xl,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.xl,
+        _isSquare = true,
+        super(child: icon);
 
   final MihrButtonSize _size;
   final bool _isSquare;

@@ -77,10 +77,10 @@ class MihrButtonSizes {
     MihrButtonSizeData? md,
     MihrButtonSizeData? lg,
     MihrButtonSizeData? xl,
-  }) : sm = sm ?? _defaultSm,
-       md = md ?? _defaultMd,
-       lg = lg ?? _defaultLg,
-       xl = xl ?? _defaultXl;
+  })  : sm = sm ?? _defaultSm,
+        md = md ?? _defaultMd,
+        lg = lg ?? _defaultLg,
+        xl = xl ?? _defaultXl;
 
   /// Small button size preset (36px height).
   final MihrButtonSizeData sm;
@@ -96,11 +96,11 @@ class MihrButtonSizes {
 
   /// Resolves the [MihrButtonSizeData] for a given [size].
   MihrButtonSizeData forSize(MihrButtonSize size) => switch (size) {
-    MihrButtonSize.sm => sm,
-    MihrButtonSize.md => md,
-    MihrButtonSize.lg => lg,
-    MihrButtonSize.xl => xl,
-  };
+        MihrButtonSize.sm => sm,
+        MihrButtonSize.md => md,
+        MihrButtonSize.lg => lg,
+        MihrButtonSize.xl => xl,
+      };
 
   static final _defaultSm = MihrButtonSizeData(
     height: 36,
@@ -140,10 +140,10 @@ class MihrLinkButtonSizes {
     MihrButtonSizeData? md,
     MihrButtonSizeData? lg,
     MihrButtonSizeData? xl,
-  }) : sm = sm ?? _defaultSm,
-       md = md ?? _defaultMd,
-       lg = lg ?? _defaultLg,
-       xl = xl ?? _defaultXl;
+  })  : sm = sm ?? _defaultSm,
+        md = md ?? _defaultMd,
+        lg = lg ?? _defaultLg,
+        xl = xl ?? _defaultXl;
 
   /// Small link-button size preset (20px height).
   final MihrButtonSizeData sm;
@@ -159,11 +159,11 @@ class MihrLinkButtonSizes {
 
   /// Resolves the [MihrButtonSizeData] for a given [size].
   MihrButtonSizeData forSize(MihrButtonSize size) => switch (size) {
-    MihrButtonSize.sm => sm,
-    MihrButtonSize.md => md,
-    MihrButtonSize.lg => lg,
-    MihrButtonSize.xl => xl,
-  };
+        MihrButtonSize.sm => sm,
+        MihrButtonSize.md => md,
+        MihrButtonSize.lg => lg,
+        MihrButtonSize.xl => xl,
+      };
 
   static final _defaultSm = MihrButtonSizeData(
     height: 20,

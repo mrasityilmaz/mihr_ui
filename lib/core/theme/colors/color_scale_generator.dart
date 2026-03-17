@@ -181,9 +181,8 @@ class ColorScaleGenerator {
         ? hsl.lightness.clamp(_minAnchorLightness, _maxAnchorLightness)
         : hsl.lightness.clamp(_minAnchorLightness, 0.95);
     final baseHue = hsl.hue;
-    final baseSat = hsl.saturation < _minSaturation
-        ? _minSaturation
-        : hsl.saturation;
+    final baseSat =
+        hsl.saturation < _minSaturation ? _minSaturation : hsl.saturation;
 
     final headroom = 1.0 - anchorL;
     final legroom = anchorL;

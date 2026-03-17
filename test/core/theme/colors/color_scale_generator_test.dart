@@ -48,8 +48,7 @@ void main() {
           expect(
             currentL,
             greaterThanOrEqualTo(nextL),
-            reason:
-                'shade${keys[i]} (L=$currentL) should be >= '
+            reason: 'shade${keys[i]} (L=$currentL) should be >= '
                 'shade${keys[i + 1]} (L=$nextL)',
           );
         }
@@ -74,8 +73,7 @@ void main() {
           expect(
             _hueDiff(inputHue, shadeHue),
             lessThan(15.0),
-            reason:
-                'shade${entry.key} hue=$shadeHue '
+            reason: 'shade${entry.key} hue=$shadeHue '
                 'deviates too far from input hue=$inputHue',
           );
         }
@@ -116,8 +114,7 @@ void main() {
             expect(
               currentL,
               greaterThanOrEqualTo(nextL),
-              reason:
-                  '${entry.key}: shade${keys[i]} (L=$currentL) '
+              reason: '${entry.key}: shade${keys[i]} (L=$currentL) '
                   'should be >= shade${keys[i + 1]} (L=$nextL)',
             );
           }
