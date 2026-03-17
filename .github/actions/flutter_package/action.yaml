@@ -93,7 +93,7 @@ runs:
 
     - name: ⬆️ Upload Coverage to Codecov
       if: ${{ inputs.collect_coverage == 'true' }}
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       with:
         flags: ${{ steps.package.outputs.name }}
         token: ${{ inputs.codecov_token }}

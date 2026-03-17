@@ -21,4 +21,3 @@ jobs:
         uses: ./.github/actions/flutter_package
         with:
           min_coverage: "60"
-          coverage_excludes: "**/*.g.dart **/*.freezed.dart"
