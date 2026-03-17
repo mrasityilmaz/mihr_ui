@@ -21,8 +21,8 @@ class GrayVariants {
 
   /// Gray with blue undertone — professional, corporate feel.
   static const grayBlue = ColorScale(
-    shade25:  Color(0xFFFCFCFD),
-    shade50:  Color(0xFFF8F9FC),
+    shade25: Color(0xFFFCFCFD),
+    shade50: Color(0xFFF8F9FC),
     shade100: Color(0xFFEAECF5),
     shade200: Color(0xFFD5D9EB),
     shade300: Color(0xFFB3B8DB),
@@ -37,8 +37,8 @@ class GrayVariants {
 
   /// Gray with cool blue undertone — modern, tech feel.
   static const grayCool = ColorScale(
-    shade25:  Color(0xFFFCFCFD),
-    shade50:  Color(0xFFF9F9FB),
+    shade25: Color(0xFFFCFCFD),
+    shade50: Color(0xFFF9F9FB),
     shade100: Color(0xFFEFF1F5),
     shade200: Color(0xFFDCDFEA),
     shade300: Color(0xFFB9C0D4),
@@ -53,8 +53,8 @@ class GrayVariants {
 
   /// Gray slightly cool — balanced, contemporary feel.
   static const grayModern = ColorScale(
-    shade25:  Color(0xFFFCFCFD),
-    shade50:  Color(0xFFF8FAFC),
+    shade25: Color(0xFFFCFCFD),
+    shade50: Color(0xFFF8FAFC),
     shade100: Color(0xFFEEF2F6),
     shade200: Color(0xFFE3E8EF),
     shade300: Color(0xFFCDD5DF),
@@ -69,8 +69,8 @@ class GrayVariants {
 
   /// Pure neutral gray — no undertone, versatile.
   static const grayNeutral = ColorScale(
-    shade25:  Color(0xFFFCFCFD),
-    shade50:  Color(0xFFF9FAFB),
+    shade25: Color(0xFFFCFCFD),
+    shade50: Color(0xFFF9FAFB),
     shade100: Color(0xFFF3F4F6),
     shade200: Color(0xFFE5E7EB),
     shade300: Color(0xFFD2D6DB),
@@ -85,8 +85,8 @@ class GrayVariants {
 
   /// Gray with slight violet undertone — sleek, modern.
   static const grayIron = ColorScale(
-    shade25:  Color(0xFFFCFCFC),
-    shade50:  Color(0xFFFAFAFA),
+    shade25: Color(0xFFFCFCFC),
+    shade50: Color(0xFFFAFAFA),
     shade100: Color(0xFFF4F4F5),
     shade200: Color(0xFFE4E4E7),
     shade300: Color(0xFFD1D1D6),
@@ -101,8 +101,8 @@ class GrayVariants {
 
   /// True achromatic gray — completely neutral, no color cast.
   static const grayTrue = ColorScale(
-    shade25:  Color(0xFFFCFCFC),
-    shade50:  Color(0xFFF7F7F7),
+    shade25: Color(0xFFFCFCFC),
+    shade50: Color(0xFFF7F7F7),
     shade100: Color(0xFFF5F5F5),
     shade200: Color(0xFFE5E5E5),
     shade300: Color(0xFFD6D6D6),
@@ -117,8 +117,8 @@ class GrayVariants {
 
   /// Gray with warm brown/beige undertone — friendly, organic feel.
   static const grayWarm = ColorScale(
-    shade25:  Color(0xFFFDFDFC),
-    shade50:  Color(0xFFFAFAF9),
+    shade25: Color(0xFFFDFDFC),
+    shade50: Color(0xFFFAFAF9),
     shade100: Color(0xFFF5F5F4),
     shade200: Color(0xFFE7E5E4),
     shade300: Color(0xFFD7D3D0),

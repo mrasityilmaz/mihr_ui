@@ -13,7 +13,6 @@ import 'package:mihr_ui/core/theme/colors/mihr_colors.dart';
 /// Icon(Icons.check, color: fgColors.brandPrimary);
 /// ```
 class ForegroundColors extends ThemeExtension<ForegroundColors> {
-
   /// Creates a [ForegroundColors] with all semantic foreground tokens.
   const ForegroundColors({
     required this.primary,
@@ -104,6 +103,7 @@ class ForegroundColors extends ThemeExtension<ForegroundColors> {
       successSecondary: success.shade400,
     );
   }
+
   /// Highest contrast foreground — primary icons
   final Color primary;
 
@@ -235,14 +235,30 @@ class ForegroundColors extends ThemeExtension<ForegroundColors> {
       brandPrimary: Color.lerp(brandPrimary, other.brandPrimary, t)!,
       brandPrimaryAlt: Color.lerp(brandPrimaryAlt, other.brandPrimaryAlt, t)!,
       brandSecondary: Color.lerp(brandSecondary, other.brandSecondary, t)!,
-      brandSecondaryAlt: Color.lerp(brandSecondaryAlt, other.brandSecondaryAlt, t)!,
-      brandSecondaryHover: Color.lerp(brandSecondaryHover, other.brandSecondaryHover, t)!,
+      brandSecondaryAlt: Color.lerp(
+        brandSecondaryAlt,
+        other.brandSecondaryAlt,
+        t,
+      )!,
+      brandSecondaryHover: Color.lerp(
+        brandSecondaryHover,
+        other.brandSecondaryHover,
+        t,
+      )!,
       errorPrimary: Color.lerp(errorPrimary, other.errorPrimary, t)!,
       errorSecondary: Color.lerp(errorSecondary, other.errorSecondary, t)!,
       warningPrimary: Color.lerp(warningPrimary, other.warningPrimary, t)!,
-      warningSecondary: Color.lerp(warningSecondary, other.warningSecondary, t)!,
+      warningSecondary: Color.lerp(
+        warningSecondary,
+        other.warningSecondary,
+        t,
+      )!,
       successPrimary: Color.lerp(successPrimary, other.successPrimary, t)!,
-      successSecondary: Color.lerp(successSecondary, other.successSecondary, t)!,
+      successSecondary: Color.lerp(
+        successSecondary,
+        other.successSecondary,
+        t,
+      )!,
     );
   }
 }

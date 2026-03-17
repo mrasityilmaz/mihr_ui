@@ -15,7 +15,6 @@ import 'package:flutter/painting.dart';
 /// - 700, 800:  Dark accents, hover on dark
 /// - 900, 950:  High-contrast text, dark backgrounds
 class ColorScale {
-
   /// Creates a [ColorScale] with all 12 shades specified.
   const ColorScale({
     required this.shade25,
@@ -86,15 +85,26 @@ class ColorScale {
       900 => shade900,
       950 => shade950,
       _ => throw ArgumentError(
-          'Invalid shade: $shade. '
-          'Valid shades are: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950.',
-        ),
+        'Invalid shade: $shade. '
+        'Valid shades are: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950.',
+      ),
     };
   }
 
   /// All valid shade keys in ascending order.
   static const List<int> shadeKeys = [
-    25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
+    25,
+    50,
+    100,
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    800,
+    900,
+    950,
   ];
 
   /// Returns all shades as an ordered map from shade key to [Color].

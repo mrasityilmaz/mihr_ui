@@ -51,77 +51,55 @@ void main() {
 
   group('MihrRadius BorderRadius constants', () {
     test('borderNone is BorderRadius.zero', () {
-      expect(
-        MihrRadius.borderNone,
-        equals(BorderRadius.zero),
-      );
+      expect(MihrRadius.borderNone, equals(BorderRadius.zero));
     });
 
     test('borderMd produces BorderRadius.circular(8)', () {
       expect(
         MihrRadius.borderMd,
-        equals(
-          const BorderRadius.all(Radius.circular(8)),
-        ),
+        equals(const BorderRadius.all(Radius.circular(8))),
       );
     });
 
-    test(
-      'borderFull produces BorderRadius.circular(9999)',
-      () {
-        expect(
-          MihrRadius.borderFull,
-          equals(
-            const BorderRadius.all(Radius.circular(9999)),
-          ),
-        );
-      },
-    );
+    test('borderFull produces BorderRadius.circular(9999)', () {
+      expect(
+        MihrRadius.borderFull,
+        equals(const BorderRadius.all(Radius.circular(9999))),
+      );
+    });
 
     test('borderXs produces BorderRadius.circular(4)', () {
       expect(
         MihrRadius.borderXs,
-        equals(
-          const BorderRadius.all(Radius.circular(4)),
-        ),
+        equals(const BorderRadius.all(Radius.circular(4))),
       );
     });
 
     test('borderXl produces BorderRadius.circular(12)', () {
       expect(
         MihrRadius.borderXl,
-        equals(
-          const BorderRadius.all(Radius.circular(12)),
-        ),
+        equals(const BorderRadius.all(Radius.circular(12))),
       );
     });
 
     test('borderXxl produces BorderRadius.circular(16)', () {
       expect(
         MihrRadius.borderXxl,
-        equals(
-          const BorderRadius.all(Radius.circular(16)),
-        ),
+        equals(const BorderRadius.all(Radius.circular(16))),
       );
     });
 
-    test('borderXxxl produces BorderRadius.circular(20)',
-        () {
+    test('borderXxxl produces BorderRadius.circular(20)', () {
       expect(
         MihrRadius.borderXxxl,
-        equals(
-          const BorderRadius.all(Radius.circular(20)),
-        ),
+        equals(const BorderRadius.all(Radius.circular(20))),
       );
     });
 
-    test('borderXxxxl produces BorderRadius.circular(24)',
-        () {
+    test('borderXxxxl produces BorderRadius.circular(24)', () {
       expect(
         MihrRadius.borderXxxxl,
-        equals(
-          const BorderRadius.all(Radius.circular(24)),
-        ),
+        equals(const BorderRadius.all(Radius.circular(24))),
       );
     });
   });
@@ -130,33 +108,21 @@ void main() {
     test('topXxl has top-only 16px radius', () {
       expect(
         MihrRadius.topXxl,
-        equals(
-          const BorderRadius.vertical(
-            top: Radius.circular(16),
-          ),
-        ),
+        equals(const BorderRadius.vertical(top: Radius.circular(16))),
       );
     });
 
     test('topXxxl has top-only 20px radius', () {
       expect(
         MihrRadius.topXxxl,
-        equals(
-          const BorderRadius.vertical(
-            top: Radius.circular(20),
-          ),
-        ),
+        equals(const BorderRadius.vertical(top: Radius.circular(20))),
       );
     });
 
     test('topXxxxl has top-only 24px radius', () {
       expect(
         MihrRadius.topXxxxl,
-        equals(
-          const BorderRadius.vertical(
-            top: Radius.circular(24),
-          ),
-        ),
+        equals(const BorderRadius.vertical(top: Radius.circular(24))),
       );
     });
   });

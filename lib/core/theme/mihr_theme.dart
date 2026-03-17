@@ -122,8 +122,7 @@ class MihrTheme {
       surfaceTint: Colors.transparent,
     );
 
-    final baseTextTheme =
-        MihrTypography.textTheme(fontFamily: fontFamily);
+    final baseTextTheme = MihrTypography.textTheme(fontFamily: fontFamily);
     final textTheme = baseTextTheme.apply(
       bodyColor: g.shade900,
       displayColor: g.shade900,
@@ -227,11 +226,7 @@ class MihrTheme {
       ),
 
       // -- Divider --
-      dividerTheme: DividerThemeData(
-        color: g.shade200,
-        thickness: 1,
-        space: 1,
-      ),
+      dividerTheme: DividerThemeData(color: g.shade200, thickness: 1, space: 1),
 
       // -- Checkbox --
       checkboxTheme: CheckboxThemeData(
@@ -244,33 +239,27 @@ class MihrTheme {
           }
           return MihrColors.white;
         }),
-        checkColor:
-            const WidgetStatePropertyAll(MihrColors.white),
-        overlayColor:
-            WidgetStateProperty.resolveWith((states) {
+        checkColor: const WidgetStatePropertyAll(MihrColors.white),
+        overlayColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.focused)) {
             return b.shade100;
           }
           return null;
         }),
         side: BorderSide(color: g.shade300, width: 1.5),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
 
       // -- Switch --
       switchTheme: SwitchThemeData(
-        thumbColor:
-            const WidgetStatePropertyAll(MihrColors.white),
+        thumbColor: const WidgetStatePropertyAll(MihrColors.white),
         trackColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
             return b.shade600;
           }
           return g.shade100;
         }),
-        trackOutlineColor:
-            WidgetStateProperty.resolveWith((states) {
+        trackOutlineColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.focused)) {
             return b.shade500;
           }
@@ -279,8 +268,7 @@ class MihrTheme {
           }
           return g.shade300;
         }),
-        overlayColor:
-            WidgetStateProperty.resolveWith((states) {
+        overlayColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.focused)) {
             return b.shade100;
           }
@@ -296,8 +284,7 @@ class MihrTheme {
           }
           return g.shade300;
         }),
-        overlayColor:
-            WidgetStateProperty.resolveWith((states) {
+        overlayColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.focused)) {
             return b.shade100;
           }
@@ -335,8 +322,7 @@ class MihrTheme {
       // -- SnackBar --
       snackBarTheme: SnackBarThemeData(
         backgroundColor: g.shade950,
-        contentTextStyle:
-            const TextStyle(color: MihrColors.white),
+        contentTextStyle: const TextStyle(color: MihrColors.white),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_defaultRadius),
         ),
@@ -406,22 +392,36 @@ class MihrTheme {
 
       // -- Semantic extensions --
       extensions: [
-        TextColors.light(
-          brand: b, gray: g, error: e, warning: w, success: s,
-        ),
+        TextColors.light(brand: b, gray: g, error: e, warning: w, success: s),
         BackgroundColors.light(
-          brand: b, gray: g, error: e, warning: w, success: s,
+          brand: b,
+          gray: g,
+          error: e,
+          warning: w,
+          success: s,
         ),
         BorderColors.light(brand: b, gray: g, error: e),
         ForegroundColors.light(
-          brand: b, gray: g, error: e, warning: w, success: s,
+          brand: b,
+          gray: g,
+          error: e,
+          warning: w,
+          success: s,
         ),
         AlphaColors.light(),
         UtilityColors.light(
-          brand: b, gray: g, error: e, warning: w, success: s,
+          brand: b,
+          gray: g,
+          error: e,
+          warning: w,
+          success: s,
         ),
         ComponentColors.light(
-          brand: b, gray: g, error: e, warning: w, success: s,
+          brand: b,
+          gray: g,
+          error: e,
+          warning: w,
+          success: s,
         ),
         btnTheme,
       ],
@@ -484,8 +484,7 @@ class MihrTheme {
       surfaceTint: Colors.transparent,
     );
 
-    final baseTextTheme =
-        MihrTypography.textTheme(fontFamily: fontFamily);
+    final baseTextTheme = MihrTypography.textTheme(fontFamily: fontFamily);
     final textTheme = baseTextTheme.apply(
       bodyColor: g.shade50,
       displayColor: g.shade50,
@@ -588,11 +587,7 @@ class MihrTheme {
       ),
 
       // -- Divider --
-      dividerTheme: DividerThemeData(
-        color: g.shade800,
-        thickness: 1,
-        space: 1,
-      ),
+      dividerTheme: DividerThemeData(color: g.shade800, thickness: 1, space: 1),
 
       // -- Checkbox --
       checkboxTheme: CheckboxThemeData(
@@ -605,33 +600,27 @@ class MihrTheme {
           }
           return g.shade900;
         }),
-        checkColor:
-            const WidgetStatePropertyAll(MihrColors.white),
-        overlayColor:
-            WidgetStateProperty.resolveWith((states) {
+        checkColor: const WidgetStatePropertyAll(MihrColors.white),
+        overlayColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.focused)) {
             return b.shade800;
           }
           return null;
         }),
         side: BorderSide(color: g.shade700, width: 1.5),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
 
       // -- Switch --
       switchTheme: SwitchThemeData(
-        thumbColor:
-            const WidgetStatePropertyAll(MihrColors.white),
+        thumbColor: const WidgetStatePropertyAll(MihrColors.white),
         trackColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
             return b.shade600;
           }
           return g.shade800;
         }),
-        trackOutlineColor:
-            WidgetStateProperty.resolveWith((states) {
+        trackOutlineColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.focused)) {
             return b.shade400;
           }
@@ -640,8 +629,7 @@ class MihrTheme {
           }
           return Colors.transparent;
         }),
-        overlayColor:
-            WidgetStateProperty.resolveWith((states) {
+        overlayColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.focused)) {
             return b.shade800;
           }
@@ -657,8 +645,7 @@ class MihrTheme {
           }
           return g.shade700;
         }),
-        overlayColor:
-            WidgetStateProperty.resolveWith((states) {
+        overlayColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.focused)) {
             return b.shade800;
           }
@@ -766,22 +753,30 @@ class MihrTheme {
 
       // -- Semantic extensions --
       extensions: [
-        TextColors.dark(
-          gray: g, error: e, warning: w, success: s,
-        ),
+        TextColors.dark(gray: g, error: e, warning: w, success: s),
         BackgroundColors.dark(
-          brand: b, gray: g, error: e, warning: w, success: s,
+          brand: b,
+          gray: g,
+          error: e,
+          warning: w,
+          success: s,
         ),
         BorderColors.dark(brand: b, gray: g, error: e),
         ForegroundColors.dark(
-          brand: b, gray: g, error: e, warning: w, success: s,
+          brand: b,
+          gray: g,
+          error: e,
+          warning: w,
+          success: s,
         ),
         AlphaColors.dark(),
-        UtilityColors.dark(
-          brand: b, gray: g, error: e, warning: w, success: s,
-        ),
+        UtilityColors.dark(brand: b, gray: g, error: e, warning: w, success: s),
         ComponentColors.dark(
-          brand: b, gray: g, error: e, warning: w, success: s,
+          brand: b,
+          gray: g,
+          error: e,
+          warning: w,
+          success: s,
         ),
         btnTheme,
       ],
@@ -793,28 +788,24 @@ class MihrTheme {
 /// from [BuildContext].
 extension MihrThemeExtension on BuildContext {
   /// Semantic text color tokens (23 tokens).
-  TextColors get textColors =>
-      Theme.of(this).extension<TextColors>()!;
+  TextColors get textColors => Theme.of(this).extension<TextColors>()!;
 
   /// Semantic background color tokens (32 tokens).
   BackgroundColors get bgColors =>
       Theme.of(this).extension<BackgroundColors>()!;
 
   /// Semantic border color tokens (10 tokens).
-  BorderColors get borderColors =>
-      Theme.of(this).extension<BorderColors>()!;
+  BorderColors get borderColors => Theme.of(this).extension<BorderColors>()!;
 
   /// Semantic foreground/icon color tokens (21 tokens).
   ForegroundColors get fgColors =>
       Theme.of(this).extension<ForegroundColors>()!;
 
   /// White/black opacity tokens (20 tokens).
-  AlphaColors get alphaColors =>
-      Theme.of(this).extension<AlphaColors>()!;
+  AlphaColors get alphaColors => Theme.of(this).extension<AlphaColors>()!;
 
   /// Multi-color utility tokens for badges, tags, and charts.
-  UtilityColors get utilityColors =>
-      Theme.of(this).extension<UtilityColors>()!;
+  UtilityColors get utilityColors => Theme.of(this).extension<UtilityColors>()!;
 
   /// Component-specific color tokens (29 tokens).
   ComponentColors get componentColors =>

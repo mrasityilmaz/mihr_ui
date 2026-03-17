@@ -4,7 +4,6 @@ import 'package:mihr_ui/core/theme/colors/color_scale.dart';
 
 /// Result of a single WCAG contrast validation check.
 class ContrastCheck {
-
   /// Creates a [ContrastCheck] with all validation parameters.
   const ContrastCheck({
     required this.label,
@@ -51,7 +50,6 @@ class ContrastCheck {
 
 /// Aggregated WCAG contrast report for a generated [ColorScale].
 class ContrastReport {
-
   /// Creates a [ContrastReport] from a list of [ContrastCheck]s.
   const ContrastReport(this.checks);
 
@@ -62,11 +60,14 @@ class ContrastReport {
   bool get allPassed => checks.every((c) => c.passed);
 
   /// The subset of checks that failed their required contrast ratio.
-  List<ContrastCheck> get failures => checks.where((c) => !c.passed).toList(growable: false);
+  List<ContrastCheck> get failures =>
+      checks.where((c) => !c.passed).toList(growable: false);
 
   @override
   String toString() {
-    final buf = StringBuffer('ContrastReport (${allPassed ? "ALL PASS" : "${failures.length} FAILURES"})\n');
+    final buf = StringBuffer(
+      'ContrastReport (${allPassed ? "ALL PASS" : "${failures.length} FAILURES"})\n',
+    );
     for (final c in checks) {
       buf.writeln('  $c');
     }
@@ -119,7 +120,12 @@ class ColorScaleGenerator {
   };
 
   /// Fractional distances from shade 600 towards black for darker shades.
-  static const _darkFractions = <int, double>{700: 0.156, 800: 0.308, 900: 0.418, 950: 0.603};
+  static const _darkFractions = <int, double>{
+    700: 0.156,
+    800: 0.308,
+    900: 0.418,
+    950: 0.603,
+  };
 
   /// Saturation multipliers relative to the anchor shade's saturation.
   ///
@@ -165,14 +171,19 @@ class ColorScaleGenerator {
   ///
   /// Use the report to inspect which WCAG checks passed or failed.
   /// See [fromColor] for details on [clampLightness].
-  static (ColorScale, ContrastReport) fromColorWithReport(Color brandColor, {bool clampLightness = true}) {
+  static (ColorScale, ContrastReport) fromColorWithReport(
+    Color brandColor, {
+    bool clampLightness = true,
+  }) {
     final hsl = HSLColor.fromColor(brandColor);
 
     final anchorL = clampLightness
         ? hsl.lightness.clamp(_minAnchorLightness, _maxAnchorLightness)
         : hsl.lightness.clamp(_minAnchorLightness, 0.95);
     final baseHue = hsl.hue;
-    final baseSat = hsl.saturation < _minSaturation ? _minSaturation : hsl.saturation;
+    final baseSat = hsl.saturation < _minSaturation
+        ? _minSaturation
+        : hsl.saturation;
 
     final headroom = 1.0 - anchorL;
     final legroom = anchorL;
@@ -227,7 +238,10 @@ class ColorScaleGenerator {
   static ColorScale fromHex(String hex, {bool clampLightness = true}) {
     var cleaned = hex.replaceFirst('#', '').replaceFirst('0x', '');
     if (cleaned.length == 6) cleaned = 'FF$cleaned';
-    return fromColor(Color(int.parse(cleaned, radix: 16)), clampLightness: clampLightness);
+    return fromColor(
+      Color(int.parse(cleaned, radix: 16)),
+      clampLightness: clampLightness,
+    );
   }
 
   /// WCAG 2.2 relative luminance contrast ratio between two colors.
@@ -262,7 +276,10 @@ class ColorScaleGenerator {
     return ((baseHue + shift) % 360.0 + 360.0) % 360.0;
   }
 
-  static void _autoCorrectContrast(Map<int, Color> shades, {bool enforceShade600OnWhite = true}) {
+  static void _autoCorrectContrast(
+    Map<int, Color> shades, {
+    bool enforceShade600OnWhite = true,
+  }) {
     if (enforceShade600OnWhite) {
       // Rule 1: shade600 on white >= 4.5:1 (buttons, links)
       shades[600] = _ensureContrast(shades[600]!, _white, 4.5, darken: true);
@@ -278,7 +295,12 @@ class ColorScaleGenerator {
     shades[900] = _ensureContrast(shades[900]!, shades[25]!, 4.5, darken: true);
 
     // Rule 5: shade200 on shade900 >= 4.5:1 (light text on dark bg)
-    shades[200] = _ensureContrast(shades[200]!, shades[900]!, 4.5, darken: false);
+    shades[200] = _ensureContrast(
+      shades[200]!,
+      shades[900]!,
+      4.5,
+      darken: false,
+    );
 
     // Rule 6: shade50 on shade600 >= 3:1 (text on brand solid bg)
     shades[50] = _ensureContrast(shades[50]!, shades[600]!, 3, darken: false);
@@ -287,7 +309,12 @@ class ColorScaleGenerator {
     shades[300] = _ensureContrast(shades[300]!, shades[800]!, 3, darken: false);
 
     // Rule 8: shade400 on shade950 >= 4.5:1 (dark mode semantic text)
-    shades[400] = _ensureContrast(shades[400]!, shades[950]!, 4.5, darken: false);
+    shades[400] = _ensureContrast(
+      shades[400]!,
+      shades[950]!,
+      4.5,
+      darken: false,
+    );
 
     _enforceMonotonicity(shades);
   }
@@ -320,7 +347,12 @@ class ColorScaleGenerator {
   }
 
   /// Iteratively adjusts [fg] lightness until it achieves [minRatio] against [bg].
-  static Color _ensureContrast(Color fg, Color bg, double minRatio, {required bool darken}) {
+  static Color _ensureContrast(
+    Color fg,
+    Color bg,
+    double minRatio, {
+    required bool darken,
+  }) {
     if (contrastRatio(fg, bg) >= minRatio) return fg;
 
     var hsl = HSLColor.fromColor(fg);
@@ -328,7 +360,9 @@ class ColorScaleGenerator {
     const maxIterations = 160;
 
     for (var i = 0; i < maxIterations; i++) {
-      final newL = darken ? (hsl.lightness - step).clamp(0.0, 1.0) : (hsl.lightness + step).clamp(0.0, 1.0);
+      final newL = darken
+          ? (hsl.lightness - step).clamp(0.0, 1.0)
+          : (hsl.lightness + step).clamp(0.0, 1.0);
       hsl = hsl.withLightness(newL);
       if (contrastRatio(hsl.toColor(), bg) >= minRatio) return hsl.toColor();
     }
@@ -336,20 +370,73 @@ class ColorScaleGenerator {
     return hsl.toColor();
   }
 
-  static ContrastReport _buildReport(ColorScale scale, {bool includeRule1 = true}) {
+  static ContrastReport _buildReport(
+    ColorScale scale, {
+    bool includeRule1 = true,
+  }) {
     return ContrastReport([
-      if (includeRule1) _check('Interactive on white', '600', 'white', scale.shade600, _white, 4.5),
+      if (includeRule1)
+        _check(
+          'Interactive on white',
+          '600',
+          'white',
+          scale.shade600,
+          _white,
+          4.5,
+        ),
       _check('Hover on white', '700', 'white', scale.shade700, _white, 4.5),
       _check('Base accent on white', '500', 'white', scale.shade500, _white, 3),
-      _check('Primary text on light bg', '900', '25', scale.shade900, scale.shade25, 4.5),
-      _check('Light text on dark bg', '200', '900', scale.shade200, scale.shade900, 4.5),
-      _check('Text on brand solid', '50', '600', scale.shade50, scale.shade600, 3),
-      _check('Icon on dark bg', '300', '800', scale.shade300, scale.shade800, 3),
-      _check('Dark mode semantic text', '400', '950', scale.shade400, scale.shade950, 4.5),
+      _check(
+        'Primary text on light bg',
+        '900',
+        '25',
+        scale.shade900,
+        scale.shade25,
+        4.5,
+      ),
+      _check(
+        'Light text on dark bg',
+        '200',
+        '900',
+        scale.shade200,
+        scale.shade900,
+        4.5,
+      ),
+      _check(
+        'Text on brand solid',
+        '50',
+        '600',
+        scale.shade50,
+        scale.shade600,
+        3,
+      ),
+      _check(
+        'Icon on dark bg',
+        '300',
+        '800',
+        scale.shade300,
+        scale.shade800,
+        3,
+      ),
+      _check(
+        'Dark mode semantic text',
+        '400',
+        '950',
+        scale.shade400,
+        scale.shade950,
+        4.5,
+      ),
     ]);
   }
 
-  static ContrastCheck _check(String label, String fgShade, String bgShade, Color fg, Color bg, double requiredRatio) {
+  static ContrastCheck _check(
+    String label,
+    String fgShade,
+    String bgShade,
+    Color fg,
+    Color bg,
+    double requiredRatio,
+  ) {
     return ContrastCheck(
       label: label,
       foregroundShade: fgShade,

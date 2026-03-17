@@ -24,7 +24,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a medium destructive primary button.
   const MihrDestructiveButton({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -41,7 +43,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a small destructive primary button.
   const MihrDestructiveButton.sm({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -58,7 +62,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a large destructive primary button.
   const MihrDestructiveButton.lg({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -75,7 +81,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an extra-large destructive primary button.
   const MihrDestructiveButton.xl({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -92,7 +100,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an icon-only destructive primary button (medium, square).
   const MihrDestructiveButton.icon({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -108,7 +118,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a small icon-only destructive primary button.
   const MihrDestructiveButton.iconSm({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -124,7 +136,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a large icon-only destructive primary button.
   const MihrDestructiveButton.iconLg({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -140,7 +154,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an extra-large icon-only destructive primary button.
   const MihrDestructiveButton.iconXl({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -158,7 +174,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a medium destructive soft-primary button.
   const MihrDestructiveButton.softPrimary({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -175,7 +193,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a small destructive soft-primary button.
   const MihrDestructiveButton.softPrimarySm({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -192,7 +212,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a large destructive soft-primary button.
   const MihrDestructiveButton.softPrimaryLg({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -209,7 +231,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an extra-large destructive soft-primary button.
   const MihrDestructiveButton.softPrimaryXl({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -226,7 +250,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an icon-only destructive soft-primary button (medium, square).
   const MihrDestructiveButton.softPrimaryIcon({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -242,7 +268,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a small icon-only destructive soft-primary button.
   const MihrDestructiveButton.softPrimaryIconSm({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -258,7 +286,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a large icon-only destructive soft-primary button.
   const MihrDestructiveButton.softPrimaryIconLg({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -274,7 +304,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an extra-large icon-only destructive soft-primary button.
   const MihrDestructiveButton.softPrimaryIconXl({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -292,7 +324,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a medium destructive secondary button.
   const MihrDestructiveButton.secondary({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -309,7 +343,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a small destructive secondary button.
   const MihrDestructiveButton.secondarySm({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -326,7 +362,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a large destructive secondary button.
   const MihrDestructiveButton.secondaryLg({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -343,7 +381,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an extra-large destructive secondary button.
   const MihrDestructiveButton.secondaryXl({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -360,7 +400,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an icon-only destructive secondary button (medium, square).
   const MihrDestructiveButton.secondaryIcon({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -376,7 +418,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a small icon-only destructive secondary button.
   const MihrDestructiveButton.secondaryIconSm({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -392,7 +436,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a large icon-only destructive secondary button.
   const MihrDestructiveButton.secondaryIconLg({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -408,7 +454,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an extra-large icon-only destructive secondary button.
   const MihrDestructiveButton.secondaryIconXl({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -426,7 +474,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a medium destructive tertiary (ghost) button.
   const MihrDestructiveButton.tertiary({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -443,7 +493,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a small destructive tertiary button.
   const MihrDestructiveButton.tertiarySm({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -460,7 +512,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a large destructive tertiary button.
   const MihrDestructiveButton.tertiaryLg({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -477,7 +531,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an extra-large destructive tertiary button.
   const MihrDestructiveButton.tertiaryXl({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -494,7 +550,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an icon-only destructive tertiary button (medium, square).
   const MihrDestructiveButton.tertiaryIcon({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -510,7 +568,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a small icon-only destructive tertiary button.
   const MihrDestructiveButton.tertiaryIconSm({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -526,7 +586,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a large icon-only destructive tertiary button.
   const MihrDestructiveButton.tertiaryIconLg({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -542,7 +604,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an extra-large icon-only destructive tertiary button.
   const MihrDestructiveButton.tertiaryIconXl({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -560,7 +624,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a medium destructive link button.
   const MihrDestructiveButton.link({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -577,7 +643,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a small destructive link button.
   const MihrDestructiveButton.linkSm({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -594,7 +662,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates a large destructive link button.
   const MihrDestructiveButton.linkLg({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -611,7 +681,9 @@ class MihrDestructiveButton extends MihrButtonBase {
 
   /// Creates an extra-large destructive link button.
   const MihrDestructiveButton.linkXl({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -649,23 +721,31 @@ class MihrDestructiveButton extends MihrButtonBase {
     }
 
     final sizes = theme?.sizes ?? MihrButtonSizes();
-    final base = MihrButtonDefaults.baseStyle(sizeData: sizes.forSize(_size), shape: theme?.shape, isSquare: _isSquare);
+    final base = MihrButtonDefaults.baseStyle(
+      sizeData: sizes.forSize(_size),
+      shape: theme?.shape,
+      isSquare: _isSquare,
+    );
 
     final colors = switch (_hierarchy) {
       _Hierarchy.primary => MihrButtonDefaults.destructivePrimaryColors(
-          bg: bg, fg: fg),
-      _Hierarchy.softPrimary =>
-        MihrButtonDefaults.destructiveSoftPrimaryColors(
-          bg: bg,
-          fg: fg,
-          errorScale: context.utilityColors.error,
-        ),
-      _Hierarchy.secondary =>
-        MihrButtonDefaults.destructiveSecondaryColors(
-          bg: bg, fg: fg, border: border),
-      _Hierarchy.tertiary =>
-        MihrButtonDefaults.destructiveTertiaryColors(
-          bg: bg, fg: fg),
+        bg: bg,
+        fg: fg,
+      ),
+      _Hierarchy.softPrimary => MihrButtonDefaults.destructiveSoftPrimaryColors(
+        bg: bg,
+        fg: fg,
+        errorScale: context.utilityColors.error,
+      ),
+      _Hierarchy.secondary => MihrButtonDefaults.destructiveSecondaryColors(
+        bg: bg,
+        fg: fg,
+        border: border,
+      ),
+      _Hierarchy.tertiary => MihrButtonDefaults.destructiveTertiaryColors(
+        bg: bg,
+        fg: fg,
+      ),
       _Hierarchy.link => throw StateError('Unreachable'),
     };
 
@@ -683,5 +763,6 @@ class MihrDestructiveButton extends MihrButtonBase {
   }
 
   @override
-  ButtonStyle? themeStyleOf(BuildContext context) => MihrButtonThemeData.of(context)?.destructiveStyle;
+  ButtonStyle? themeStyleOf(BuildContext context) =>
+      MihrButtonThemeData.of(context)?.destructiveStyle;
 }

@@ -6,7 +6,9 @@ import 'package:mihr_ui/components/buttons/buttons.dart';
 import 'package:mihr_ui/core/theme/mihr_theme.dart';
 
 Widget _wrap(Widget child, {Brightness brightness = Brightness.light}) {
-  final theme = brightness == Brightness.light ? MihrTheme.light() : MihrTheme.dark();
+  final theme = brightness == Brightness.light
+      ? MihrTheme.light()
+      : MihrTheme.dark();
   return MaterialApp(
     theme: theme,
     home: Scaffold(body: Center(child: child)),
@@ -20,7 +22,9 @@ void main() {
 
   group('MihrPrimaryButton', () {
     testWidgets('renders text label', (tester) async {
-      await tester.pumpWidget(_wrap(MihrPrimaryButton(onPressed: () {}, child: const Text('Save'))));
+      await tester.pumpWidget(
+        _wrap(MihrPrimaryButton(onPressed: () {}, child: const Text('Save'))),
+      );
       await tester.pumpAndSettle();
 
       expect(find.text('Save'), findsOneWidget);
@@ -28,17 +32,25 @@ void main() {
     });
 
     testWidgets('disabled when onPressed is null', (tester) async {
-      await tester.pumpWidget(_wrap(const MihrPrimaryButton(onPressed: null, child: Text('Disabled'))));
+      await tester.pumpWidget(
+        _wrap(
+          const MihrPrimaryButton(onPressed: null, child: Text('Disabled')),
+        ),
+      );
       await tester.pumpAndSettle();
 
-      final flags = tester.getSemantics(find.byType(MihrPrimaryButton)).flagsCollection;
+      final flags = tester
+          .getSemantics(find.byType(MihrPrimaryButton))
+          .flagsCollection;
       expect(flags.isButton, isTrue);
       expect(flags.isEnabled, isNot(equals(Tristate.none)));
       expect(flags.isEnabled, equals(Tristate.isFalse));
     });
 
     testWidgets('.sm factory uses correct height', (tester) async {
-      await tester.pumpWidget(_wrap(MihrPrimaryButton.sm(onPressed: () {}, child: const Text('Sm'))));
+      await tester.pumpWidget(
+        _wrap(MihrPrimaryButton.sm(onPressed: () {}, child: const Text('Sm'))),
+      );
       await tester.pumpAndSettle();
 
       final box = tester.getSize(find.byType(MihrPrimaryButton));
@@ -46,7 +58,9 @@ void main() {
     });
 
     testWidgets('.lg factory uses correct height', (tester) async {
-      await tester.pumpWidget(_wrap(MihrPrimaryButton.lg(onPressed: () {}, child: const Text('Lg'))));
+      await tester.pumpWidget(
+        _wrap(MihrPrimaryButton.lg(onPressed: () {}, child: const Text('Lg'))),
+      );
       await tester.pumpAndSettle();
 
       final box = tester.getSize(find.byType(MihrPrimaryButton));
@@ -54,7 +68,9 @@ void main() {
     });
 
     testWidgets('.xl factory uses correct height', (tester) async {
-      await tester.pumpWidget(_wrap(MihrPrimaryButton.xl(onPressed: () {}, child: const Text('Xl'))));
+      await tester.pumpWidget(
+        _wrap(MihrPrimaryButton.xl(onPressed: () {}, child: const Text('Xl'))),
+      );
       await tester.pumpAndSettle();
 
       final box = tester.getSize(find.byType(MihrPrimaryButton));
@@ -62,7 +78,11 @@ void main() {
     });
 
     testWidgets('.icon creates square button', (tester) async {
-      await tester.pumpWidget(_wrap(MihrPrimaryButton.icon(onPressed: () {}, icon: const Icon(Icons.add))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrPrimaryButton.icon(onPressed: () {}, icon: const Icon(Icons.add)),
+        ),
+      );
       await tester.pumpAndSettle();
 
       final size = tester.getSize(find.byType(MihrPrimaryButton));
@@ -70,7 +90,14 @@ void main() {
     });
 
     testWidgets('.iconSm creates 36x36 square', (tester) async {
-      await tester.pumpWidget(_wrap(MihrPrimaryButton.iconSm(onPressed: () {}, icon: const Icon(Icons.add))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrPrimaryButton.iconSm(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+          ),
+        ),
+      );
       await tester.pumpAndSettle();
 
       final size = tester.getSize(find.byType(MihrPrimaryButton));
@@ -79,18 +106,31 @@ void main() {
     });
 
     testWidgets('has non-transparent background', (tester) async {
-      await tester.pumpWidget(_wrap(MihrPrimaryButton(onPressed: () {}, child: const Text('Primary'))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrPrimaryButton(onPressed: () {}, child: const Text('Primary')),
+        ),
+      );
       await tester.pumpAndSettle();
 
       final container = tester.widget<MihrButtonContainer>(
-        find.descendant(of: find.byType(MihrPrimaryButton), matching: find.byType(MihrButtonContainer)),
+        find.descendant(
+          of: find.byType(MihrPrimaryButton),
+          matching: find.byType(MihrButtonContainer),
+        ),
       );
       expect(container.color, isNot(Colors.transparent));
     });
 
     testWidgets('leadingIcon renders in Row', (tester) async {
       await tester.pumpWidget(
-        _wrap(MihrPrimaryButton(onPressed: () {}, leadingIcon: const Icon(Icons.check), child: const Text('Save'))),
+        _wrap(
+          MihrPrimaryButton(
+            onPressed: () {},
+            leadingIcon: const Icon(Icons.check),
+            child: const Text('Save'),
+          ),
+        ),
       );
       await tester.pumpAndSettle();
 
@@ -116,7 +156,9 @@ void main() {
         extensions: [
           ...baseTheme.extensions.values,
           const MihrButtonThemeData(
-            primaryStyle: ButtonStyle(backgroundColor: WidgetStatePropertyAll(Color(0xFFE91E63))),
+            primaryStyle: ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(Color(0xFFE91E63)),
+            ),
           ),
         ],
       );
@@ -126,7 +168,10 @@ void main() {
           theme: customTheme,
           home: Scaffold(
             body: Center(
-              child: MihrPrimaryButton(onPressed: () {}, child: const Text('Themed')),
+              child: MihrPrimaryButton(
+                onPressed: () {},
+                child: const Text('Themed'),
+              ),
             ),
           ),
         ),
@@ -134,7 +179,10 @@ void main() {
       await tester.pumpAndSettle();
 
       final container = tester.widget<MihrButtonContainer>(
-        find.descendant(of: find.byType(MihrPrimaryButton), matching: find.byType(MihrButtonContainer)),
+        find.descendant(
+          of: find.byType(MihrPrimaryButton),
+          matching: find.byType(MihrButtonContainer),
+        ),
       );
       expect(container.color, const Color(0xFFE91E63));
     });
@@ -146,19 +194,33 @@ void main() {
 
   group('MihrSecondaryButton', () {
     testWidgets('renders and has border', (tester) async {
-      await tester.pumpWidget(_wrap(MihrSecondaryButton(onPressed: () {}, child: const Text('Cancel'))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrSecondaryButton(onPressed: () {}, child: const Text('Cancel')),
+        ),
+      );
       await tester.pumpAndSettle();
 
       expect(find.text('Cancel'), findsOneWidget);
 
       final container = tester.widget<MihrButtonContainer>(
-        find.descendant(of: find.byType(MihrSecondaryButton), matching: find.byType(MihrButtonContainer)),
+        find.descendant(
+          of: find.byType(MihrSecondaryButton),
+          matching: find.byType(MihrButtonContainer),
+        ),
       );
       expect(container.side, isNot(BorderSide.none));
     });
 
     testWidgets('.icon creates square button', (tester) async {
-      await tester.pumpWidget(_wrap(MihrSecondaryButton.icon(onPressed: () {}, icon: const Icon(Icons.close))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrSecondaryButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.close),
+          ),
+        ),
+      );
       await tester.pumpAndSettle();
 
       final size = tester.getSize(find.byType(MihrSecondaryButton));
@@ -184,17 +246,29 @@ void main() {
 
   group('MihrTertiaryButton', () {
     testWidgets('default bg is transparent', (tester) async {
-      await tester.pumpWidget(_wrap(MihrTertiaryButton(onPressed: () {}, child: const Text('More'))));
+      await tester.pumpWidget(
+        _wrap(MihrTertiaryButton(onPressed: () {}, child: const Text('More'))),
+      );
       await tester.pumpAndSettle();
 
       final container = tester.widget<MihrButtonContainer>(
-        find.descendant(of: find.byType(MihrTertiaryButton), matching: find.byType(MihrButtonContainer)),
+        find.descendant(
+          of: find.byType(MihrTertiaryButton),
+          matching: find.byType(MihrButtonContainer),
+        ),
       );
       expect(container.color, Colors.transparent);
     });
 
     testWidgets('.iconLg creates 44x44 square', (tester) async {
-      await tester.pumpWidget(_wrap(MihrTertiaryButton.iconLg(onPressed: () {}, icon: const Icon(Icons.more_vert))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrTertiaryButton.iconLg(
+            onPressed: () {},
+            icon: const Icon(Icons.more_vert),
+          ),
+        ),
+      );
       await tester.pumpAndSettle();
 
       final size = tester.getSize(find.byType(MihrTertiaryButton));
@@ -209,26 +283,41 @@ void main() {
 
   group('MihrLinkButton', () {
     testWidgets('brand variant renders', (tester) async {
-      await tester.pumpWidget(_wrap(MihrLinkButton(onPressed: () {}, child: const Text('Learn more'))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrLinkButton(onPressed: () {}, child: const Text('Learn more')),
+        ),
+      );
       await tester.pumpAndSettle();
 
       expect(find.text('Learn more'), findsOneWidget);
 
       final container = tester.widget<MihrButtonContainer>(
-        find.descendant(of: find.byType(MihrLinkButton), matching: find.byType(MihrButtonContainer)),
+        find.descendant(
+          of: find.byType(MihrLinkButton),
+          matching: find.byType(MihrButtonContainer),
+        ),
       );
       expect(container.color, Colors.transparent);
     });
 
     testWidgets('.gray variant renders', (tester) async {
-      await tester.pumpWidget(_wrap(MihrLinkButton.gray(onPressed: () {}, child: const Text('View all'))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrLinkButton.gray(onPressed: () {}, child: const Text('View all')),
+        ),
+      );
       await tester.pumpAndSettle();
 
       expect(find.text('View all'), findsOneWidget);
     });
 
     testWidgets('.graySm variant renders', (tester) async {
-      await tester.pumpWidget(_wrap(MihrLinkButton.graySm(onPressed: () {}, child: const Text('View'))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrLinkButton.graySm(onPressed: () {}, child: const Text('View')),
+        ),
+      );
       await tester.pumpAndSettle();
 
       expect(find.text('View'), findsOneWidget);
@@ -253,19 +342,33 @@ void main() {
 
   group('MihrDestructiveButton', () {
     testWidgets('renders with non-transparent bg', (tester) async {
-      await tester.pumpWidget(_wrap(MihrDestructiveButton(onPressed: () {}, child: const Text('Delete'))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrDestructiveButton(onPressed: () {}, child: const Text('Delete')),
+        ),
+      );
       await tester.pumpAndSettle();
 
       expect(find.text('Delete'), findsOneWidget);
 
       final container = tester.widget<MihrButtonContainer>(
-        find.descendant(of: find.byType(MihrDestructiveButton), matching: find.byType(MihrButtonContainer)),
+        find.descendant(
+          of: find.byType(MihrDestructiveButton),
+          matching: find.byType(MihrButtonContainer),
+        ),
       );
       expect(container.color, isNot(Colors.transparent));
     });
 
     testWidgets('.icon creates square button', (tester) async {
-      await tester.pumpWidget(_wrap(MihrDestructiveButton.icon(onPressed: () {}, icon: const Icon(Icons.delete))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrDestructiveButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.delete),
+          ),
+        ),
+      );
       await tester.pumpAndSettle();
 
       final size = tester.getSize(find.byType(MihrDestructiveButton));
@@ -273,10 +376,16 @@ void main() {
     });
 
     testWidgets('disabled shows disabled bg', (tester) async {
-      await tester.pumpWidget(_wrap(const MihrDestructiveButton(onPressed: null, child: Text('Disabled'))));
+      await tester.pumpWidget(
+        _wrap(
+          const MihrDestructiveButton(onPressed: null, child: Text('Disabled')),
+        ),
+      );
       await tester.pumpAndSettle();
 
-      final flags = tester.getSemantics(find.byType(MihrDestructiveButton)).flagsCollection;
+      final flags = tester
+          .getSemantics(find.byType(MihrDestructiveButton))
+          .flagsCollection;
       expect(flags.isEnabled, isNot(equals(Tristate.none)));
       expect(flags.isEnabled, equals(Tristate.isFalse));
     });
@@ -284,7 +393,10 @@ void main() {
     testWidgets('dark mode renders without errors', (tester) async {
       await tester.pumpWidget(
         _wrap(
-          MihrDestructiveButton(onPressed: () {}, child: const Text('Dark Delete')),
+          MihrDestructiveButton(
+            onPressed: () {},
+            child: const Text('Dark Delete'),
+          ),
           brightness: Brightness.dark,
         ),
       );
@@ -301,7 +413,13 @@ void main() {
   group('Cross-cutting', () {
     testWidgets('tooltip wraps button', (tester) async {
       await tester.pumpWidget(
-        _wrap(MihrPrimaryButton(onPressed: () {}, tooltip: 'Save document', child: const Text('Save'))),
+        _wrap(
+          MihrPrimaryButton(
+            onPressed: () {},
+            tooltip: 'Save document',
+            child: const Text('Save'),
+          ),
+        ),
       );
       await tester.pumpAndSettle();
 
@@ -325,7 +443,14 @@ void main() {
 
     testWidgets('onPressed fires callback', (tester) async {
       var fired = false;
-      await tester.pumpWidget(_wrap(MihrPrimaryButton(onPressed: () => fired = true, child: const Text('Tap'))));
+      await tester.pumpWidget(
+        _wrap(
+          MihrPrimaryButton(
+            onPressed: () => fired = true,
+            child: const Text('Tap'),
+          ),
+        ),
+      );
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('Tap'));
@@ -334,7 +459,9 @@ void main() {
 
     testWidgets('disabled button does not fire', (tester) async {
       const fired = false;
-      await tester.pumpWidget(_wrap(const MihrPrimaryButton(onPressed: null, child: Text('No tap'))));
+      await tester.pumpWidget(
+        _wrap(const MihrPrimaryButton(onPressed: null, child: Text('No tap'))),
+      );
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('No tap'));

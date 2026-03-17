@@ -58,8 +58,7 @@ class MihrBreakpoints {
 
   /// Returns `true` when [width] is at least [tablet] (768px)
   /// but below [desktop].
-  static bool isTablet(double width) =>
-      width >= tablet && width < desktop;
+  static bool isTablet(double width) => width >= tablet && width < desktop;
 
   /// Returns `true` when [width] is below [tablet] (768px).
   static bool isMobile(double width) => width < tablet;
@@ -69,22 +68,13 @@ class MihrBreakpoints {
   // ---------------------------------------------------------------------------
 
   /// Desktop grid: 12 columns, 32px gutter.
-  static const GridConfig gridDesktop = GridConfig(
-    columns: 12,
-    gutter: 32,
-  );
+  static const GridConfig gridDesktop = GridConfig(columns: 12, gutter: 32);
 
   /// Tablet grid: 8 columns, 32px gutter.
-  static const GridConfig gridTablet = GridConfig(
-    columns: 8,
-    gutter: 32,
-  );
+  static const GridConfig gridTablet = GridConfig(columns: 8, gutter: 32);
 
   /// Mobile grid: 6 columns, 16px gutter.
-  static const GridConfig gridMobile = GridConfig(
-    columns: 6,
-    gutter: 16,
-  );
+  static const GridConfig gridMobile = GridConfig(columns: 6, gutter: 16);
 
   /// Returns the appropriate [GridConfig] for the given [width].
   static GridConfig gridFor(double width) {
@@ -97,10 +87,8 @@ class MihrBreakpoints {
 /// Immutable grid configuration holding column count and gutter size.
 class GridConfig {
   /// Creates a [GridConfig] with the given column count and gutter size.
-  const GridConfig({
-    required this.columns,
-    required this.gutter,
-  });
+  const GridConfig({required this.columns, required this.gutter});
+
   /// Number of columns in the grid.
   final int columns;
 

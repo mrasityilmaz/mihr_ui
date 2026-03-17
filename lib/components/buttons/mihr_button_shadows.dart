@@ -27,7 +27,11 @@ import 'package:flutter/painting.dart';
 @immutable
 class MihrButtonShadows {
   /// Creates a shadow configuration with the given layers.
-  const MihrButtonShadows({this.outer = const [], this.inner = const [], this.focusOuter = const []});
+  const MihrButtonShadows({
+    this.outer = const [],
+    this.inner = const [],
+    this.focusOuter = const [],
+  });
 
   /// Drop shadows rendered below the button surface.
   final List<BoxShadow> outer;
@@ -46,28 +50,13 @@ class MihrButtonShadows {
   /// bottom edge, giving buttons a slightly 3D / skeuomorphic feel.
   static const standard = MihrButtonShadows(
     outer: [
-      BoxShadow(
-        offset: Offset(0, 1),
-        blurRadius: 2,
-        color: Color(0x0D101828),
-      ),
+      BoxShadow(offset: Offset(0, 1), blurRadius: 2, color: Color(0x0D101828)),
     ],
     inner: [
-      BoxShadow(
-        offset: Offset(0, -2),
-        color: Color(0x0D101828),
-      ),
-      BoxShadow(
-        spreadRadius: 1,
-        color: Color(0x2E0A0D12),
-      ),
+      BoxShadow(offset: Offset(0, -2), color: Color(0x0D101828)),
+      BoxShadow(spreadRadius: 1, color: Color(0x2E0A0D12)),
     ],
-    focusOuter: [
-      BoxShadow(
-        spreadRadius: 4,
-        color: Color(0x3D7F56D9),
-      ),
-    ],
+    focusOuter: [BoxShadow(spreadRadius: 4, color: Color(0x3D7F56D9))],
   );
 
   /// No shadows at all — completely flat buttons.
@@ -75,7 +64,9 @@ class MihrButtonShadows {
 
   /// Light outer shadow only — no inner shadow.
   static const subtle = MihrButtonShadows(
-    outer: [BoxShadow(offset: Offset(0, 1), blurRadius: 2, color: Color(0x0D101828))],
+    outer: [
+      BoxShadow(offset: Offset(0, 1), blurRadius: 2, color: Color(0x0D101828)),
+    ],
   );
 
   /// Whether this configuration has any visible shadows.

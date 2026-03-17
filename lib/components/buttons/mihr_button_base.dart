@@ -29,7 +29,9 @@ import 'package:mihr_ui/core/theme/spacing/mihr_spacing.dart';
 abstract class MihrButtonBase extends StatefulWidget {
   /// Creates a Mihr button with the given callbacks and content.
   const MihrButtonBase({
-    required this.onPressed, required this.child, super.key,
+    required this.onPressed,
+    required this.child,
+    super.key,
     this.onLongPress,
     this.onHover,
     this.onFocusChange,
@@ -102,9 +104,11 @@ abstract class MihrButtonBase extends StatefulWidget {
 class _MihrButtonBaseState extends State<MihrButtonBase> {
   WidgetStatesController? _internalController;
 
-  WidgetStatesController get _controller => widget.statesController ?? _internalController!;
+  WidgetStatesController get _controller =>
+      widget.statesController ?? _internalController!;
 
-  bool get _isDisabled => widget.onPressed == null && widget.onLongPress == null;
+  bool get _isDisabled =>
+      widget.onPressed == null && widget.onLongPress == null;
 
   @override
   void initState() {
@@ -154,7 +158,8 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
     ButtonStyle? themeStyle,
     ButtonStyle defaultStyle,
   ) {
-    return (getter(widgetStyle) ?? getter(themeStyle) ?? getter(defaultStyle))?.resolve(states);
+    return (getter(widgetStyle) ?? getter(themeStyle) ?? getter(defaultStyle))
+        ?.resolve(states);
   }
 
   @override
@@ -214,8 +219,14 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
     }
 
     final effectiveMinSize = switch (tapTargetSize) {
-      MaterialTapTargetSize.padded => Size(math.max(constraints.minWidth, 48), math.max(constraints.minHeight, 48)),
-      MaterialTapTargetSize.shrinkWrap => Size(constraints.minWidth, constraints.minHeight),
+      MaterialTapTargetSize.padded => Size(
+        math.max(constraints.minWidth, 48),
+        math.max(constraints.minHeight, 48),
+      ),
+      MaterialTapTargetSize.shrinkWrap => Size(
+        constraints.minWidth,
+        constraints.minHeight,
+      ),
     };
 
     // -- shadows --
@@ -296,7 +307,12 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
 
 /// Lays out the button content with Mihr UI optical balance.
 class _ButtonContent extends StatelessWidget {
-  const _ButtonContent({required this.iconSize, required this.child, this.leadingIcon, this.trailingIcon});
+  const _ButtonContent({
+    required this.iconSize,
+    required this.child,
+    this.leadingIcon,
+    this.trailingIcon,
+  });
 
   final Widget? leadingIcon;
   final Widget? trailingIcon;
@@ -317,7 +333,9 @@ class _ButtonContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (leadingIcon != null) _iconFrame(leadingIcon!),
-        Flexible(child: Center(widthFactor: 1, heightFactor: 1, child: wrappedChild)),
+        Flexible(
+          child: Center(widthFactor: 1, heightFactor: 1, child: wrappedChild),
+        ),
         if (trailingIcon != null) _iconFrame(trailingIcon!),
       ],
     );
@@ -342,10 +360,14 @@ class _InputPadding extends SingleChildRenderObjectWidget {
   final Size minSize;
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderInputPadding(minSize);
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderInputPadding(minSize);
 
   @override
-  void updateRenderObject(BuildContext context, covariant _RenderInputPadding renderObject) {
+  void updateRenderObject(
+    BuildContext context,
+    covariant _RenderInputPadding renderObject,
+  ) {
     renderObject.minSize = minSize;
   }
 }
@@ -394,14 +416,15 @@ class _RenderInputPadding extends RenderShiftedBox {
   }
 
   @override
-  Size computeDryLayout(BoxConstraints constraints) => _computeLayout(constraints, ChildLayoutHelper.dryLayoutChild);
+  Size computeDryLayout(BoxConstraints constraints) =>
+      _computeLayout(constraints, ChildLayoutHelper.dryLayoutChild);
 
   @override
   void performLayout() {
     size = _computeLayout(constraints, ChildLayoutHelper.layoutChild);
     if (child != null) {
-      (child!.parentData! as BoxParentData).offset =
-          Alignment.center.alongOffset(size - child!.size as Offset);
+      (child!.parentData! as BoxParentData).offset = Alignment.center
+          .alongOffset(size - child!.size as Offset);
     }
   }
 

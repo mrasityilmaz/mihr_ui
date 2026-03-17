@@ -82,44 +82,40 @@ class MihrRadius {
   static const BorderRadius borderNone = BorderRadius.zero;
 
   /// 2px all corners.
-  static const BorderRadius borderXxs =
-      BorderRadius.all(Radius.circular(xxs));
+  static const BorderRadius borderXxs = BorderRadius.all(Radius.circular(xxs));
 
   /// 4px all corners.
-  static const BorderRadius borderXs =
-      BorderRadius.all(Radius.circular(xs));
+  static const BorderRadius borderXs = BorderRadius.all(Radius.circular(xs));
 
   /// 6px all corners.
-  static const BorderRadius borderSm =
-      BorderRadius.all(Radius.circular(sm));
+  static const BorderRadius borderSm = BorderRadius.all(Radius.circular(sm));
 
   /// 8px all corners — default for buttons, inputs.
-  static const BorderRadius borderMd =
-      BorderRadius.all(Radius.circular(md));
+  static const BorderRadius borderMd = BorderRadius.all(Radius.circular(md));
 
   /// 10px all corners.
-  static const BorderRadius borderLg =
-      BorderRadius.all(Radius.circular(lg));
+  static const BorderRadius borderLg = BorderRadius.all(Radius.circular(lg));
 
   /// 12px all corners — cards, dialogs.
-  static const BorderRadius borderXl =
-      BorderRadius.all(Radius.circular(xl));
+  static const BorderRadius borderXl = BorderRadius.all(Radius.circular(xl));
 
   /// 16px all corners — bottom sheets.
-  static const BorderRadius borderXxl =
-      BorderRadius.all(Radius.circular(xxl));
+  static const BorderRadius borderXxl = BorderRadius.all(Radius.circular(xxl));
 
   /// 20px all corners — modals.
-  static const BorderRadius borderXxxl =
-      BorderRadius.all(Radius.circular(xxxl));
+  static const BorderRadius borderXxxl = BorderRadius.all(
+    Radius.circular(xxxl),
+  );
 
   /// 24px all corners — hero cards.
-  static const BorderRadius borderXxxxl =
-      BorderRadius.all(Radius.circular(xxxxl));
+  static const BorderRadius borderXxxxl = BorderRadius.all(
+    Radius.circular(xxxxl),
+  );
 
   /// 9999px all corners — pill shape.
-  static const BorderRadius borderFull =
-      BorderRadius.all(Radius.circular(full));
+  static const BorderRadius borderFull = BorderRadius.all(
+    Radius.circular(full),
+  );
 
   // ---------------------------------------------------------------------------
   // TOP-ONLY RADIUS — for bottom sheets, modals

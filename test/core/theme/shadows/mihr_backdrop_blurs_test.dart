@@ -64,48 +64,31 @@ void main() {
 
   group('BackdropBlurStyle.imageFilter', () {
     test('sm imageFilter does not throw', () {
-      expect(
-        () => MihrBackdropBlurs.sm.imageFilter,
-        returnsNormally,
-      );
-      expect(
-        MihrBackdropBlurs.sm.imageFilter,
-        isA<ImageFilter>(),
-      );
+      expect(() => MihrBackdropBlurs.sm.imageFilter, returnsNormally);
+      expect(MihrBackdropBlurs.sm.imageFilter, isA<ImageFilter>());
     });
 
     test('md imageFilter does not throw', () {
-      expect(
-        () => MihrBackdropBlurs.md.imageFilter,
-        returnsNormally,
-      );
+      expect(() => MihrBackdropBlurs.md.imageFilter, returnsNormally);
     });
 
     test('lg imageFilter does not throw', () {
-      expect(
-        () => MihrBackdropBlurs.lg.imageFilter,
-        returnsNormally,
-      );
+      expect(() => MihrBackdropBlurs.lg.imageFilter, returnsNormally);
     });
 
     test('xl imageFilter does not throw', () {
-      expect(
-        () => MihrBackdropBlurs.xl.imageFilter,
-        returnsNormally,
-      );
+      expect(() => MihrBackdropBlurs.xl.imageFilter, returnsNormally);
     });
   });
 
   group('BackdropBlurStyle.overlay()', () {
     test('returns light overlay for Brightness.light', () {
-      final color =
-          MihrBackdropBlurs.md.overlay(Brightness.light);
+      final color = MihrBackdropBlurs.md.overlay(Brightness.light);
       expect(color, equals(MihrBackdropBlurs.md.lightOverlay));
     });
 
     test('returns dark overlay for Brightness.dark', () {
-      final color =
-          MihrBackdropBlurs.md.overlay(Brightness.dark);
+      final color = MihrBackdropBlurs.md.overlay(Brightness.dark);
       expect(color, equals(MihrBackdropBlurs.md.darkOverlay));
     });
 

@@ -183,7 +183,9 @@ class MihrLinkButton extends MihrButtonBase {
       hoverDecorationColor: hoverFg,
       shape: theme?.shape,
     );
-    final colors = _isGray ? MihrButtonDefaults.linkGrayColors(fg: fg) : MihrButtonDefaults.linkBrandColors(fg: fg);
+    final colors = _isGray
+        ? MihrButtonDefaults.linkGrayColors(fg: fg)
+        : MihrButtonDefaults.linkBrandColors(fg: fg);
 
     return base.merge(colors);
   }
@@ -192,5 +194,6 @@ class MihrLinkButton extends MihrButtonBase {
   MihrButtonShadows shadowsOf(BuildContext context) => MihrButtonShadows.flat;
 
   @override
-  ButtonStyle? themeStyleOf(BuildContext context) => MihrButtonThemeData.of(context)?.linkStyle;
+  ButtonStyle? themeStyleOf(BuildContext context) =>
+      MihrButtonThemeData.of(context)?.linkStyle;
 }

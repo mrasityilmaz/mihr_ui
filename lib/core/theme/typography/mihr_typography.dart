@@ -140,8 +140,17 @@ class MihrTypography {
 
   /// All 11 [TypeStyle] instances in size-descending order.
   static final List<TypeStyle> allStyles = [
-    display2xl, displayXl, displayLg, displayMd, displaySm, displayXs,
-    textXl, textLg, textMd, textSm, textXs,
+    display2xl,
+    displayXl,
+    displayLg,
+    displayMd,
+    displaySm,
+    displayXs,
+    textXl,
+    textLg,
+    textMd,
+    textSm,
+    textXs,
   ];
 
   // ─── Material TextTheme bridge ───────────────────────────────────

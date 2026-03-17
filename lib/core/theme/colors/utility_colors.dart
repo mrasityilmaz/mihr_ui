@@ -19,7 +19,6 @@ import 'package:mihr_ui/core/theme/colors/utility_scale.dart';
 /// Container(color: util.blue.shade100); // light blue bg, inverts in dark
 /// ```
 class UtilityColors extends ThemeExtension<UtilityColors> {
-
   /// Creates a [UtilityColors] with all color family scales.
   const UtilityColors({
     required this.gray,
@@ -104,6 +103,7 @@ class UtilityColors extends ThemeExtension<UtilityColors> {
       yellow: UtilityScale.inverted(AccentColors.yellow),
     );
   }
+
   /// Gray utility scale (extended to shade 900).
   final UtilityScale gray;
 

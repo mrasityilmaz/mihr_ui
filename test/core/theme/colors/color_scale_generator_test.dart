@@ -36,10 +36,7 @@ void main() {
           (inputHsl.lightness - generatedHsl.lightness).abs(),
           lessThan(0.10),
         );
-        expect(
-          _hueDiff(inputHsl.hue, generatedHsl.hue),
-          lessThan(5.0),
-        );
+        expect(_hueDiff(inputHsl.hue, generatedHsl.hue), lessThan(5.0));
       });
 
       test('lightness decreases monotonically from shade25 to shade950', () {
@@ -51,7 +48,8 @@ void main() {
           expect(
             currentL,
             greaterThanOrEqualTo(nextL),
-            reason: 'shade${keys[i]} (L=$currentL) should be >= '
+            reason:
+                'shade${keys[i]} (L=$currentL) should be >= '
                 'shade${keys[i + 1]} (L=$nextL)',
           );
         }
@@ -76,7 +74,8 @@ void main() {
           expect(
             _hueDiff(inputHue, shadeHue),
             lessThan(15.0),
-            reason: 'shade${entry.key} hue=$shadeHue '
+            reason:
+                'shade${entry.key} hue=$shadeHue '
                 'deviates too far from input hue=$inputHue',
           );
         }
@@ -117,7 +116,8 @@ void main() {
             expect(
               currentL,
               greaterThanOrEqualTo(nextL),
-              reason: '${entry.key}: shade${keys[i]} (L=$currentL) '
+              reason:
+                  '${entry.key}: shade${keys[i]} (L=$currentL) '
                   'should be >= shade${keys[i + 1]} (L=$nextL)',
             );
           }
@@ -227,79 +227,58 @@ void main() {
     group('semantic token compatibility', () {
       test('generated palette works with TextColors.light()', () {
         final palette = ColorScaleGenerator.fromHex('#E63946');
-        expect(
-          () => TextColors.light(brand: palette),
-          returnsNormally,
-        );
+        expect(() => TextColors.light(brand: palette), returnsNormally);
       });
 
       test('generated palette works with TextColors.dark()', () {
-        expect(
-          TextColors.dark,
-          returnsNormally,
-        );
+        expect(TextColors.dark, returnsNormally);
       });
 
       test('generated palette works with BackgroundColors.light()', () {
         final palette = ColorScaleGenerator.fromHex('#E63946');
-        expect(
-          () => BackgroundColors.light(brand: palette),
-          returnsNormally,
-        );
+        expect(() => BackgroundColors.light(brand: palette), returnsNormally);
       });
 
       test('generated palette works with BackgroundColors.dark()', () {
         final palette = ColorScaleGenerator.fromHex('#E63946');
-        expect(
-          () => BackgroundColors.dark(brand: palette),
-          returnsNormally,
-        );
+        expect(() => BackgroundColors.dark(brand: palette), returnsNormally);
       });
 
       test('generated palette works with BorderColors.light()', () {
         final palette = ColorScaleGenerator.fromHex('#E63946');
-        expect(
-          () => BorderColors.light(brand: palette),
-          returnsNormally,
-        );
+        expect(() => BorderColors.light(brand: palette), returnsNormally);
       });
 
       test('generated palette works with ForegroundColors.light()', () {
         final palette = ColorScaleGenerator.fromHex('#E63946');
-        expect(
-          () => ForegroundColors.light(brand: palette),
-          returnsNormally,
-        );
+        expect(() => ForegroundColors.light(brand: palette), returnsNormally);
       });
 
       test('generated palette works with ComponentColors.light()', () {
         final palette = ColorScaleGenerator.fromHex('#E63946');
-        expect(
-          () => ComponentColors.light(brand: palette),
-          returnsNormally,
-        );
+        expect(() => ComponentColors.light(brand: palette), returnsNormally);
       });
 
       test('generated palette works with UtilityColors.light()', () {
         final palette = ColorScaleGenerator.fromHex('#E63946');
-        expect(
-          () => UtilityColors.light(brand: palette),
-          returnsNormally,
-        );
+        expect(() => UtilityColors.light(brand: palette), returnsNormally);
       });
 
-      test('generated palette produces correct text contrast in light mode', () {
-        final palette = ColorScaleGenerator.fromHex('#E63946');
-        final textColors = TextColors.light(brand: palette);
-        expect(
-          ColorScaleGenerator.meetsWcagAA(
-            textColors.brandPrimary,
-            const Color(0xFFFFFFFF),
-          ),
-          isTrue,
-          reason: 'brandPrimary text (shade900) must meet AA on white',
-        );
-      });
+      test(
+        'generated palette produces correct text contrast in light mode',
+        () {
+          final palette = ColorScaleGenerator.fromHex('#E63946');
+          final textColors = TextColors.light(brand: palette);
+          expect(
+            ColorScaleGenerator.meetsWcagAA(
+              textColors.brandPrimary,
+              const Color(0xFFFFFFFF),
+            ),
+            isTrue,
+            reason: 'brandPrimary text (shade900) must meet AA on white',
+          );
+        },
+      );
 
       test('generated palette produces correct button contrast', () {
         final palette = ColorScaleGenerator.fromHex('#2563EB');

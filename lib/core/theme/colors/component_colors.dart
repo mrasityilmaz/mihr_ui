@@ -15,7 +15,6 @@ import 'package:mihr_ui/core/theme/colors/mihr_colors.dart';
 /// Container(color: comp.avatarBg);
 /// ```
 class ComponentColors extends ThemeExtension<ComponentColors> {
-
   /// Creates a [ComponentColors] with all component-specific tokens.
   const ComponentColors({
     required this.avatarBg,
@@ -130,6 +129,7 @@ class ComponentColors extends ThemeExtension<ComponentColors> {
       textEditorIconFgActive: MihrColors.white,
     );
   }
+
   /// Avatar default background fill.
   final Color avatarBg;
 
@@ -253,17 +253,28 @@ class ComponentColors extends ThemeExtension<ComponentColors> {
     return ComponentColors(
       avatarBg: avatarBg ?? this.avatarBg,
       avatarContrastBorder: avatarContrastBorder ?? this.avatarContrastBorder,
-      avatarProfilePhotoBorder: avatarProfilePhotoBorder ?? this.avatarProfilePhotoBorder,
-      avatarStylesBgNeutral: avatarStylesBgNeutral ?? this.avatarStylesBgNeutral,
+      avatarProfilePhotoBorder:
+          avatarProfilePhotoBorder ?? this.avatarProfilePhotoBorder,
+      avatarStylesBgNeutral:
+          avatarStylesBgNeutral ?? this.avatarStylesBgNeutral,
       buttonPrimaryIcon: buttonPrimaryIcon ?? this.buttonPrimaryIcon,
-      buttonPrimaryIconHover: buttonPrimaryIconHover ?? this.buttonPrimaryIconHover,
-      buttonDestructivePrimaryIcon: buttonDestructivePrimaryIcon ?? this.buttonDestructivePrimaryIcon,
-      buttonDestructivePrimaryIconHover: buttonDestructivePrimaryIconHover ?? this.buttonDestructivePrimaryIconHover,
-      featuredIconLightFgBrand: featuredIconLightFgBrand ?? this.featuredIconLightFgBrand,
-      featuredIconLightFgError: featuredIconLightFgError ?? this.featuredIconLightFgError,
-      featuredIconLightFgGray: featuredIconLightFgGray ?? this.featuredIconLightFgGray,
-      featuredIconLightFgSuccess: featuredIconLightFgSuccess ?? this.featuredIconLightFgSuccess,
-      featuredIconLightFgWarning: featuredIconLightFgWarning ?? this.featuredIconLightFgWarning,
+      buttonPrimaryIconHover:
+          buttonPrimaryIconHover ?? this.buttonPrimaryIconHover,
+      buttonDestructivePrimaryIcon:
+          buttonDestructivePrimaryIcon ?? this.buttonDestructivePrimaryIcon,
+      buttonDestructivePrimaryIconHover:
+          buttonDestructivePrimaryIconHover ??
+          this.buttonDestructivePrimaryIconHover,
+      featuredIconLightFgBrand:
+          featuredIconLightFgBrand ?? this.featuredIconLightFgBrand,
+      featuredIconLightFgError:
+          featuredIconLightFgError ?? this.featuredIconLightFgError,
+      featuredIconLightFgGray:
+          featuredIconLightFgGray ?? this.featuredIconLightFgGray,
+      featuredIconLightFgSuccess:
+          featuredIconLightFgSuccess ?? this.featuredIconLightFgSuccess,
+      featuredIconLightFgWarning:
+          featuredIconLightFgWarning ?? this.featuredIconLightFgWarning,
       focusRing: focusRing ?? this.focusRing,
       focusRingError: focusRingError ?? this.focusRingError,
       footerButtonFg: footerButtonFg ?? this.footerButtonFg,
@@ -274,12 +285,17 @@ class ComponentColors extends ThemeExtension<ComponentColors> {
       sliderHandleBg: sliderHandleBg ?? this.sliderHandleBg,
       sliderHandleBorder: sliderHandleBorder ?? this.sliderHandleBorder,
       toggleBorder: toggleBorder ?? this.toggleBorder,
-      toggleButtonFgDisabled: toggleButtonFgDisabled ?? this.toggleButtonFgDisabled,
-      toggleSlimBorderPressedHover: toggleSlimBorderPressedHover ?? this.toggleSlimBorderPressedHover,
-      toggleSlimBorderPressed: toggleSlimBorderPressed ?? this.toggleSlimBorderPressed,
-      tooltipSupportingText: tooltipSupportingText ?? this.tooltipSupportingText,
+      toggleButtonFgDisabled:
+          toggleButtonFgDisabled ?? this.toggleButtonFgDisabled,
+      toggleSlimBorderPressedHover:
+          toggleSlimBorderPressedHover ?? this.toggleSlimBorderPressedHover,
+      toggleSlimBorderPressed:
+          toggleSlimBorderPressed ?? this.toggleSlimBorderPressed,
+      tooltipSupportingText:
+          tooltipSupportingText ?? this.tooltipSupportingText,
       textEditorIconFg: textEditorIconFg ?? this.textEditorIconFg,
-      textEditorIconFgActive: textEditorIconFgActive ?? this.textEditorIconFgActive,
+      textEditorIconFgActive:
+          textEditorIconFgActive ?? this.textEditorIconFgActive,
     );
   }
 
@@ -289,38 +305,122 @@ class ComponentColors extends ThemeExtension<ComponentColors> {
     if (other is! ComponentColors) return this;
     return ComponentColors(
       avatarBg: Color.lerp(avatarBg, other.avatarBg, t)!,
-      avatarContrastBorder: Color.lerp(avatarContrastBorder, other.avatarContrastBorder, t)!,
-      avatarProfilePhotoBorder: Color.lerp(avatarProfilePhotoBorder, other.avatarProfilePhotoBorder, t)!,
-      avatarStylesBgNeutral: Color.lerp(avatarStylesBgNeutral, other.avatarStylesBgNeutral, t)!,
-      buttonPrimaryIcon: Color.lerp(buttonPrimaryIcon, other.buttonPrimaryIcon, t)!,
-      buttonPrimaryIconHover: Color.lerp(buttonPrimaryIconHover, other.buttonPrimaryIconHover, t)!,
-      buttonDestructivePrimaryIcon: Color.lerp(buttonDestructivePrimaryIcon, other.buttonDestructivePrimaryIcon, t)!,
+      avatarContrastBorder: Color.lerp(
+        avatarContrastBorder,
+        other.avatarContrastBorder,
+        t,
+      )!,
+      avatarProfilePhotoBorder: Color.lerp(
+        avatarProfilePhotoBorder,
+        other.avatarProfilePhotoBorder,
+        t,
+      )!,
+      avatarStylesBgNeutral: Color.lerp(
+        avatarStylesBgNeutral,
+        other.avatarStylesBgNeutral,
+        t,
+      )!,
+      buttonPrimaryIcon: Color.lerp(
+        buttonPrimaryIcon,
+        other.buttonPrimaryIcon,
+        t,
+      )!,
+      buttonPrimaryIconHover: Color.lerp(
+        buttonPrimaryIconHover,
+        other.buttonPrimaryIconHover,
+        t,
+      )!,
+      buttonDestructivePrimaryIcon: Color.lerp(
+        buttonDestructivePrimaryIcon,
+        other.buttonDestructivePrimaryIcon,
+        t,
+      )!,
       buttonDestructivePrimaryIconHover: Color.lerp(
         buttonDestructivePrimaryIconHover,
         other.buttonDestructivePrimaryIconHover,
         t,
       )!,
-      featuredIconLightFgBrand: Color.lerp(featuredIconLightFgBrand, other.featuredIconLightFgBrand, t)!,
-      featuredIconLightFgError: Color.lerp(featuredIconLightFgError, other.featuredIconLightFgError, t)!,
-      featuredIconLightFgGray: Color.lerp(featuredIconLightFgGray, other.featuredIconLightFgGray, t)!,
-      featuredIconLightFgSuccess: Color.lerp(featuredIconLightFgSuccess, other.featuredIconLightFgSuccess, t)!,
-      featuredIconLightFgWarning: Color.lerp(featuredIconLightFgWarning, other.featuredIconLightFgWarning, t)!,
+      featuredIconLightFgBrand: Color.lerp(
+        featuredIconLightFgBrand,
+        other.featuredIconLightFgBrand,
+        t,
+      )!,
+      featuredIconLightFgError: Color.lerp(
+        featuredIconLightFgError,
+        other.featuredIconLightFgError,
+        t,
+      )!,
+      featuredIconLightFgGray: Color.lerp(
+        featuredIconLightFgGray,
+        other.featuredIconLightFgGray,
+        t,
+      )!,
+      featuredIconLightFgSuccess: Color.lerp(
+        featuredIconLightFgSuccess,
+        other.featuredIconLightFgSuccess,
+        t,
+      )!,
+      featuredIconLightFgWarning: Color.lerp(
+        featuredIconLightFgWarning,
+        other.featuredIconLightFgWarning,
+        t,
+      )!,
       focusRing: Color.lerp(focusRing, other.focusRing, t)!,
       focusRingError: Color.lerp(focusRingError, other.focusRingError, t)!,
       footerButtonFg: Color.lerp(footerButtonFg, other.footerButtonFg, t)!,
-      footerButtonFgHover: Color.lerp(footerButtonFgHover, other.footerButtonFgHover, t)!,
+      footerButtonFgHover: Color.lerp(
+        footerButtonFgHover,
+        other.footerButtonFgHover,
+        t,
+      )!,
       iconFgBrand: Color.lerp(iconFgBrand, other.iconFgBrand, t)!,
-      iconFgBrandOnBrand: Color.lerp(iconFgBrandOnBrand, other.iconFgBrandOnBrand, t)!,
-      screenMockupBorder: Color.lerp(screenMockupBorder, other.screenMockupBorder, t)!,
+      iconFgBrandOnBrand: Color.lerp(
+        iconFgBrandOnBrand,
+        other.iconFgBrandOnBrand,
+        t,
+      )!,
+      screenMockupBorder: Color.lerp(
+        screenMockupBorder,
+        other.screenMockupBorder,
+        t,
+      )!,
       sliderHandleBg: Color.lerp(sliderHandleBg, other.sliderHandleBg, t)!,
-      sliderHandleBorder: Color.lerp(sliderHandleBorder, other.sliderHandleBorder, t)!,
+      sliderHandleBorder: Color.lerp(
+        sliderHandleBorder,
+        other.sliderHandleBorder,
+        t,
+      )!,
       toggleBorder: Color.lerp(toggleBorder, other.toggleBorder, t)!,
-      toggleButtonFgDisabled: Color.lerp(toggleButtonFgDisabled, other.toggleButtonFgDisabled, t)!,
-      toggleSlimBorderPressedHover: Color.lerp(toggleSlimBorderPressedHover, other.toggleSlimBorderPressedHover, t)!,
-      toggleSlimBorderPressed: Color.lerp(toggleSlimBorderPressed, other.toggleSlimBorderPressed, t)!,
-      tooltipSupportingText: Color.lerp(tooltipSupportingText, other.tooltipSupportingText, t)!,
-      textEditorIconFg: Color.lerp(textEditorIconFg, other.textEditorIconFg, t)!,
-      textEditorIconFgActive: Color.lerp(textEditorIconFgActive, other.textEditorIconFgActive, t)!,
+      toggleButtonFgDisabled: Color.lerp(
+        toggleButtonFgDisabled,
+        other.toggleButtonFgDisabled,
+        t,
+      )!,
+      toggleSlimBorderPressedHover: Color.lerp(
+        toggleSlimBorderPressedHover,
+        other.toggleSlimBorderPressedHover,
+        t,
+      )!,
+      toggleSlimBorderPressed: Color.lerp(
+        toggleSlimBorderPressed,
+        other.toggleSlimBorderPressed,
+        t,
+      )!,
+      tooltipSupportingText: Color.lerp(
+        tooltipSupportingText,
+        other.tooltipSupportingText,
+        t,
+      )!,
+      textEditorIconFg: Color.lerp(
+        textEditorIconFg,
+        other.textEditorIconFg,
+        t,
+      )!,
+      textEditorIconFgActive: Color.lerp(
+        textEditorIconFgActive,
+        other.textEditorIconFgActive,
+        t,
+      )!,
     );
   }
 }

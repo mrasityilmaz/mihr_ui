@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_shadows.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart';
-import 'package:mihr_ui/mihr_ui.dart' show MihrDestructiveButton, MihrLinkButton, MihrPrimaryButton, MihrSecondaryButton, MihrTertiaryButton, MihrTheme;
+import 'package:mihr_ui/mihr_ui.dart'
+    show
+        MihrDestructiveButton,
+        MihrLinkButton,
+        MihrPrimaryButton,
+        MihrSecondaryButton,
+        MihrTertiaryButton,
+        MihrTheme;
 
 /// Unified theme configuration for all Mihr button variants.
 ///
@@ -102,24 +109,20 @@ class MihrButtonThemeData extends ThemeExtension<MihrButtonThemeData> {
     ButtonStyle? tertiaryStyle,
     ButtonStyle? linkStyle,
     ButtonStyle? destructiveStyle,
-  }) =>
-      MihrButtonThemeData(
-        shape: shape ?? this.shape,
-        shadows: shadows ?? this.shadows,
-        sizes: sizes ?? this.sizes,
-        linkSizes: linkSizes ?? this.linkSizes,
-        primaryStyle: primaryStyle ?? this.primaryStyle,
-        secondaryStyle: secondaryStyle ?? this.secondaryStyle,
-        tertiaryStyle: tertiaryStyle ?? this.tertiaryStyle,
-        linkStyle: linkStyle ?? this.linkStyle,
-        destructiveStyle: destructiveStyle ?? this.destructiveStyle,
-      );
+  }) => MihrButtonThemeData(
+    shape: shape ?? this.shape,
+    shadows: shadows ?? this.shadows,
+    sizes: sizes ?? this.sizes,
+    linkSizes: linkSizes ?? this.linkSizes,
+    primaryStyle: primaryStyle ?? this.primaryStyle,
+    secondaryStyle: secondaryStyle ?? this.secondaryStyle,
+    tertiaryStyle: tertiaryStyle ?? this.tertiaryStyle,
+    linkStyle: linkStyle ?? this.linkStyle,
+    destructiveStyle: destructiveStyle ?? this.destructiveStyle,
+  );
 
   @override
-  MihrButtonThemeData lerp(
-    covariant MihrButtonThemeData? other,
-    double t,
-  ) {
+  MihrButtonThemeData lerp(covariant MihrButtonThemeData? other, double t) {
     if (other == null) return this;
     return MihrButtonThemeData(
       shape: OutlinedBorder.lerp(shape, other.shape, t),
@@ -127,13 +130,14 @@ class MihrButtonThemeData extends ThemeExtension<MihrButtonThemeData> {
       sizes: t < 0.5 ? sizes : other.sizes,
       linkSizes: t < 0.5 ? linkSizes : other.linkSizes,
       primaryStyle: ButtonStyle.lerp(primaryStyle, other.primaryStyle, t),
-      secondaryStyle:
-          ButtonStyle.lerp(secondaryStyle, other.secondaryStyle, t),
-      tertiaryStyle:
-          ButtonStyle.lerp(tertiaryStyle, other.tertiaryStyle, t),
+      secondaryStyle: ButtonStyle.lerp(secondaryStyle, other.secondaryStyle, t),
+      tertiaryStyle: ButtonStyle.lerp(tertiaryStyle, other.tertiaryStyle, t),
       linkStyle: ButtonStyle.lerp(linkStyle, other.linkStyle, t),
-      destructiveStyle:
-          ButtonStyle.lerp(destructiveStyle, other.destructiveStyle, t),
+      destructiveStyle: ButtonStyle.lerp(
+        destructiveStyle,
+        other.destructiveStyle,
+        t,
+      ),
     );
   }
 }

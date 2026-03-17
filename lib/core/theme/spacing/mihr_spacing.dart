@@ -232,80 +232,62 @@ class MihrSpacing {
   // ---------------------------------------------------------------------------
 
   /// Horizontal: 2px.
-  static const EdgeInsets insetsHXxs =
-      EdgeInsets.symmetric(horizontal: xxs);
+  static const EdgeInsets insetsHXxs = EdgeInsets.symmetric(horizontal: xxs);
 
   /// Horizontal: 4px.
-  static const EdgeInsets insetsHXs =
-      EdgeInsets.symmetric(horizontal: xs);
+  static const EdgeInsets insetsHXs = EdgeInsets.symmetric(horizontal: xs);
 
   /// Horizontal: 6px.
-  static const EdgeInsets insetsHSm =
-      EdgeInsets.symmetric(horizontal: sm);
+  static const EdgeInsets insetsHSm = EdgeInsets.symmetric(horizontal: sm);
 
   /// Horizontal: 8px.
-  static const EdgeInsets insetsHMd =
-      EdgeInsets.symmetric(horizontal: md);
+  static const EdgeInsets insetsHMd = EdgeInsets.symmetric(horizontal: md);
 
   /// Horizontal: 12px.
-  static const EdgeInsets insetsHLg =
-      EdgeInsets.symmetric(horizontal: lg);
+  static const EdgeInsets insetsHLg = EdgeInsets.symmetric(horizontal: lg);
 
   /// Horizontal: 16px.
-  static const EdgeInsets insetsHXl =
-      EdgeInsets.symmetric(horizontal: xl);
+  static const EdgeInsets insetsHXl = EdgeInsets.symmetric(horizontal: xl);
 
   /// Horizontal: 20px.
-  static const EdgeInsets insetsHX2l =
-      EdgeInsets.symmetric(horizontal: x2l);
+  static const EdgeInsets insetsHX2l = EdgeInsets.symmetric(horizontal: x2l);
 
   /// Horizontal: 24px.
-  static const EdgeInsets insetsHX3l =
-      EdgeInsets.symmetric(horizontal: x3l);
+  static const EdgeInsets insetsHX3l = EdgeInsets.symmetric(horizontal: x3l);
 
   /// Horizontal: 32px.
-  static const EdgeInsets insetsHX4l =
-      EdgeInsets.symmetric(horizontal: x4l);
+  static const EdgeInsets insetsHX4l = EdgeInsets.symmetric(horizontal: x4l);
 
   // ---------------------------------------------------------------------------
   // EDGE INSETS HELPERS — vertical only
   // ---------------------------------------------------------------------------
 
   /// Vertical: 2px.
-  static const EdgeInsets insetsVXxs =
-      EdgeInsets.symmetric(vertical: xxs);
+  static const EdgeInsets insetsVXxs = EdgeInsets.symmetric(vertical: xxs);
 
   /// Vertical: 4px.
-  static const EdgeInsets insetsVXs =
-      EdgeInsets.symmetric(vertical: xs);
+  static const EdgeInsets insetsVXs = EdgeInsets.symmetric(vertical: xs);
 
   /// Vertical: 6px.
-  static const EdgeInsets insetsVSm =
-      EdgeInsets.symmetric(vertical: sm);
+  static const EdgeInsets insetsVSm = EdgeInsets.symmetric(vertical: sm);
 
   /// Vertical: 8px.
-  static const EdgeInsets insetsVMd =
-      EdgeInsets.symmetric(vertical: md);
+  static const EdgeInsets insetsVMd = EdgeInsets.symmetric(vertical: md);
 
   /// Vertical: 12px.
-  static const EdgeInsets insetsVLg =
-      EdgeInsets.symmetric(vertical: lg);
+  static const EdgeInsets insetsVLg = EdgeInsets.symmetric(vertical: lg);
 
   /// Vertical: 16px.
-  static const EdgeInsets insetsVXl =
-      EdgeInsets.symmetric(vertical: xl);
+  static const EdgeInsets insetsVXl = EdgeInsets.symmetric(vertical: xl);
 
   /// Vertical: 20px.
-  static const EdgeInsets insetsVX2l =
-      EdgeInsets.symmetric(vertical: x2l);
+  static const EdgeInsets insetsVX2l = EdgeInsets.symmetric(vertical: x2l);
 
   /// Vertical: 24px.
-  static const EdgeInsets insetsVX3l =
-      EdgeInsets.symmetric(vertical: x3l);
+  static const EdgeInsets insetsVX3l = EdgeInsets.symmetric(vertical: x3l);
 
   /// Vertical: 32px.
-  static const EdgeInsets insetsVX4l =
-      EdgeInsets.symmetric(vertical: x4l);
+  static const EdgeInsets insetsVX4l = EdgeInsets.symmetric(vertical: x4l);
 
   // ---------------------------------------------------------------------------
   // GAP HELPERS — for Row / Column / Wrap spacing

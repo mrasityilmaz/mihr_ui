@@ -68,74 +68,43 @@ void main() {
   });
 
   group('MihrWidths BoxConstraints helpers', () {
-    test(
-      'constraintsContainer has maxWidth 1280',
-      () {
-        expect(
-          MihrWidths.constraintsContainer,
-          equals(
-            const BoxConstraints(maxWidth: 1280),
-          ),
-        );
-      },
-    );
+    test('constraintsContainer has maxWidth 1280', () {
+      expect(
+        MihrWidths.constraintsContainer,
+        equals(const BoxConstraints(maxWidth: 1280)),
+      );
+    });
 
-    test(
-      'constraintsParagraph has maxWidth 720',
-      () {
-        expect(
-          MihrWidths.constraintsParagraph,
-          equals(
-            const BoxConstraints(maxWidth: 720),
-          ),
-        );
-      },
-    );
+    test('constraintsParagraph has maxWidth 720', () {
+      expect(
+        MihrWidths.constraintsParagraph,
+        equals(const BoxConstraints(maxWidth: 720)),
+      );
+    });
 
-    test(
-      'constraintsXxs has maxWidth 320',
-      () {
-        expect(
-          MihrWidths.constraintsXxs,
-          equals(
-            const BoxConstraints(maxWidth: 320),
-          ),
-        );
-      },
-    );
+    test('constraintsXxs has maxWidth 320', () {
+      expect(
+        MihrWidths.constraintsXxs,
+        equals(const BoxConstraints(maxWidth: 320)),
+      );
+    });
 
-    test(
-      'constraintsSm has maxWidth 480',
-      () {
-        expect(
-          MihrWidths.constraintsSm,
-          equals(
-            const BoxConstraints(maxWidth: 480),
-          ),
-        );
-      },
-    );
+    test('constraintsSm has maxWidth 480', () {
+      expect(
+        MihrWidths.constraintsSm,
+        equals(const BoxConstraints(maxWidth: 480)),
+      );
+    });
 
-    test(
-      'constraintsX3l has maxWidth 1280',
-      () {
-        expect(
-          MihrWidths.constraintsX3l,
-          equals(
-            const BoxConstraints(maxWidth: 1280),
-          ),
-        );
-      },
-    );
+    test('constraintsX3l has maxWidth 1280', () {
+      expect(
+        MihrWidths.constraintsX3l,
+        equals(const BoxConstraints(maxWidth: 1280)),
+      );
+    });
 
-    test(
-      'constraintsContainer minWidth is 0',
-      () {
-        expect(
-          MihrWidths.constraintsContainer.minWidth,
-          equals(0),
-        );
-      },
-    );
+    test('constraintsContainer minWidth is 0', () {
+      expect(MihrWidths.constraintsContainer.minWidth, equals(0));
+    });
   });
 }

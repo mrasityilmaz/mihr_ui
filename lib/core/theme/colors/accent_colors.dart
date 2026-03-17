@@ -17,8 +17,8 @@ class AccentColors {
 
   /// Moss green — muted, earthy green for natural or organic accents.
   static const moss = ColorScale(
-    shade25:  Color(0xFFFAFDF7),
-    shade50:  Color(0xFFF5FBEE),
+    shade25: Color(0xFFFAFDF7),
+    shade50: Color(0xFFF5FBEE),
     shade100: Color(0xFFE6F4D7),
     shade200: Color(0xFFCEEAB0),
     shade300: Color(0xFFACDC79),
@@ -33,8 +33,8 @@ class AccentColors {
 
   /// Light green — bright, vivid green for fresh highlights.
   static const greenLight = ColorScale(
-    shade25:  Color(0xFFFAFEF5),
-    shade50:  Color(0xFFF3FEE7),
+    shade25: Color(0xFFFAFEF5),
+    shade50: Color(0xFFF3FEE7),
     shade100: Color(0xFFE3FBCC),
     shade200: Color(0xFFD0F8AB),
     shade300: Color(0xFFA6EF67),
@@ -49,8 +49,8 @@ class AccentColors {
 
   /// Green — standard green for positive/success accents.
   static const green = ColorScale(
-    shade25:  Color(0xFFF6FEF9),
-    shade50:  Color(0xFFEDFCF2),
+    shade25: Color(0xFFF6FEF9),
+    shade50: Color(0xFFEDFCF2),
     shade100: Color(0xFFD3F8DF),
     shade200: Color(0xFFAAF0C4),
     shade300: Color(0xFF73E2A3),
@@ -65,8 +65,8 @@ class AccentColors {
 
   /// Teal — blue-green for calm, trustworthy accents.
   static const teal = ColorScale(
-    shade25:  Color(0xFFF6FEFC),
-    shade50:  Color(0xFFF0FDF9),
+    shade25: Color(0xFFF6FEFC),
+    shade50: Color(0xFFF0FDF9),
     shade100: Color(0xFFCCFBEF),
     shade200: Color(0xFF99F6E0),
     shade300: Color(0xFF5FE9D0),
@@ -85,8 +85,8 @@ class AccentColors {
 
   /// Cyan — bright aqua for informational and tech-forward accents.
   static const cyan = ColorScale(
-    shade25:  Color(0xFFF5FEFF),
-    shade50:  Color(0xFFECFDFF),
+    shade25: Color(0xFFF5FEFF),
+    shade50: Color(0xFFECFDFF),
     shade100: Color(0xFFCFF9FE),
     shade200: Color(0xFFA5F0FC),
     shade300: Color(0xFF67E3F9),
@@ -101,8 +101,8 @@ class AccentColors {
 
   /// Light blue — sky-toned for soft informational highlights.
   static const blueLight = ColorScale(
-    shade25:  Color(0xFFF5FBFF),
-    shade50:  Color(0xFFF0F9FF),
+    shade25: Color(0xFFF5FBFF),
+    shade50: Color(0xFFF0F9FF),
     shade100: Color(0xFFE0F2FE),
     shade200: Color(0xFFB9E6FE),
     shade300: Color(0xFF7CD4FD),
@@ -117,8 +117,8 @@ class AccentColors {
 
   /// Blue — standard blue for links, info badges, and selections.
   static const blue = ColorScale(
-    shade25:  Color(0xFFF5FAFF),
-    shade50:  Color(0xFFEFF8FF),
+    shade25: Color(0xFFF5FAFF),
+    shade50: Color(0xFFEFF8FF),
     shade100: Color(0xFFD1E9FF),
     shade200: Color(0xFFB2DDFF),
     shade300: Color(0xFF84CAFF),
@@ -133,8 +133,8 @@ class AccentColors {
 
   /// Dark blue — deep, saturated blue for bold accents.
   static const blueDark = ColorScale(
-    shade25:  Color(0xFFF5F8FF),
-    shade50:  Color(0xFFEFF4FF),
+    shade25: Color(0xFFF5F8FF),
+    shade50: Color(0xFFEFF4FF),
     shade100: Color(0xFFD1E0FF),
     shade200: Color(0xFFB2CCFF),
     shade300: Color(0xFF84ADFF),
@@ -153,8 +153,8 @@ class AccentColors {
 
   /// Indigo — deep blue-violet for premium and featured accents.
   static const indigo = ColorScale(
-    shade25:  Color(0xFFF5F8FF),
-    shade50:  Color(0xFFEEF4FF),
+    shade25: Color(0xFFF5F8FF),
+    shade50: Color(0xFFEEF4FF),
     shade100: Color(0xFFE0EAFF),
     shade200: Color(0xFFC7D7FE),
     shade300: Color(0xFFA4BCFD),
@@ -169,8 +169,8 @@ class AccentColors {
 
   /// Violet — rich purple for creative and expressive accents.
   static const violet = ColorScale(
-    shade25:  Color(0xFFFBFAFF),
-    shade50:  Color(0xFFF5F3FF),
+    shade25: Color(0xFFFBFAFF),
+    shade50: Color(0xFFF5F3FF),
     shade100: Color(0xFFECE9FE),
     shade200: Color(0xFFDDD6FE),
     shade300: Color(0xFFC3B5FD),
@@ -185,8 +185,8 @@ class AccentColors {
 
   /// Purple — vivid purple similar to brand, for supplementary use.
   static const purple = ColorScale(
-    shade25:  Color(0xFFFAFAFF),
-    shade50:  Color(0xFFF4F3FF),
+    shade25: Color(0xFFFAFAFF),
+    shade50: Color(0xFFF4F3FF),
     shade100: Color(0xFFEBE9FE),
     shade200: Color(0xFFD9D6FE),
     shade300: Color(0xFFBDB4FE),
@@ -205,8 +205,8 @@ class AccentColors {
 
   /// Fuchsia — magenta-pink for bold, attention-grabbing accents.
   static const fuchsia = ColorScale(
-    shade25:  Color(0xFFFEFAFF),
-    shade50:  Color(0xFFFDF4FF),
+    shade25: Color(0xFFFEFAFF),
+    shade50: Color(0xFFFDF4FF),
     shade100: Color(0xFFFBE8FF),
     shade200: Color(0xFFF6D0FE),
     shade300: Color(0xFFEEAAFD),
@@ -221,8 +221,8 @@ class AccentColors {
 
   /// Pink — warm pink for playful and expressive accents.
   static const pink = ColorScale(
-    shade25:  Color(0xFFFEF6FB),
-    shade50:  Color(0xFFFDF2FA),
+    shade25: Color(0xFFFEF6FB),
+    shade50: Color(0xFFFDF2FA),
     shade100: Color(0xFFFCE7F6),
     shade200: Color(0xFFFCCEEE),
     shade300: Color(0xFFFAA7E0),
@@ -237,8 +237,8 @@ class AccentColors {
 
   /// Rose — soft red-pink for romantic or notification accents.
   static const rose = ColorScale(
-    shade25:  Color(0xFFFFF5F6),
-    shade50:  Color(0xFFFFF1F3),
+    shade25: Color(0xFFFFF5F6),
+    shade50: Color(0xFFFFF1F3),
     shade100: Color(0xFFFFE4E8),
     shade200: Color(0xFFFECDD6),
     shade300: Color(0xFFFEA3B4),
@@ -257,8 +257,8 @@ class AccentColors {
 
   /// Dark orange — fiery, saturated orange for urgent accents.
   static const orangeDark = ColorScale(
-    shade25:  Color(0xFFFFF9F5),
-    shade50:  Color(0xFFFFF4ED),
+    shade25: Color(0xFFFFF9F5),
+    shade50: Color(0xFFFFF4ED),
     shade100: Color(0xFFFFE6D5),
     shade200: Color(0xFFFFD6AE),
     shade300: Color(0xFFFF9C66),
@@ -273,8 +273,8 @@ class AccentColors {
 
   /// Orange — warm orange for attention and decorative accents.
   static const orange = ColorScale(
-    shade25:  Color(0xFFFEFAF5),
-    shade50:  Color(0xFFFEF6EE),
+    shade25: Color(0xFFFEFAF5),
+    shade50: Color(0xFFFEF6EE),
     shade100: Color(0xFFFDEAD7),
     shade200: Color(0xFFF9DBAF),
     shade300: Color(0xFFF7B27A),
@@ -289,8 +289,8 @@ class AccentColors {
 
   /// Yellow — bright gold for highlights, badges, and star ratings.
   static const yellow = ColorScale(
-    shade25:  Color(0xFFFEFDF0),
-    shade50:  Color(0xFFFEFBE8),
+    shade25: Color(0xFFFEFDF0),
+    shade50: Color(0xFFFEFBE8),
     shade100: Color(0xFFFEF7C3),
     shade200: Color(0xFFFEEE95),
     shade300: Color(0xFFFDE272),

@@ -111,42 +111,36 @@ class MihrWidths {
   // ---------------------------------------------------------------------------
 
   /// Max-width constraint: 320px.
-  static const BoxConstraints constraintsXxs =
-      BoxConstraints(maxWidth: xxs);
+  static const BoxConstraints constraintsXxs = BoxConstraints(maxWidth: xxs);
 
   /// Max-width constraint: 384px.
-  static const BoxConstraints constraintsXs =
-      BoxConstraints(maxWidth: xs);
+  static const BoxConstraints constraintsXs = BoxConstraints(maxWidth: xs);
 
   /// Max-width constraint: 480px.
-  static const BoxConstraints constraintsSm =
-      BoxConstraints(maxWidth: sm);
+  static const BoxConstraints constraintsSm = BoxConstraints(maxWidth: sm);
 
   /// Max-width constraint: 560px.
-  static const BoxConstraints constraintsMd =
-      BoxConstraints(maxWidth: md);
+  static const BoxConstraints constraintsMd = BoxConstraints(maxWidth: md);
 
   /// Max-width constraint: 640px.
-  static const BoxConstraints constraintsLg =
-      BoxConstraints(maxWidth: lg);
+  static const BoxConstraints constraintsLg = BoxConstraints(maxWidth: lg);
 
   /// Max-width constraint: 768px.
-  static const BoxConstraints constraintsXl =
-      BoxConstraints(maxWidth: xl);
+  static const BoxConstraints constraintsXl = BoxConstraints(maxWidth: xl);
 
   /// Max-width constraint: 1024px.
-  static const BoxConstraints constraintsX2l =
-      BoxConstraints(maxWidth: x2l);
+  static const BoxConstraints constraintsX2l = BoxConstraints(maxWidth: x2l);
 
   /// Max-width constraint: 1280px.
-  static const BoxConstraints constraintsX3l =
-      BoxConstraints(maxWidth: x3l);
+  static const BoxConstraints constraintsX3l = BoxConstraints(maxWidth: x3l);
 
   /// Max-width constraint: 1280px — standard desktop container.
-  static const BoxConstraints constraintsContainer =
-      BoxConstraints(maxWidth: containerMaxWidth);
+  static const BoxConstraints constraintsContainer = BoxConstraints(
+    maxWidth: containerMaxWidth,
+  );
 
   /// Max-width constraint: 720px — paragraph readability.
-  static const BoxConstraints constraintsParagraph =
-      BoxConstraints(maxWidth: paragraphMaxWidth);
+  static const BoxConstraints constraintsParagraph = BoxConstraints(
+    maxWidth: paragraphMaxWidth,
+  );
 }

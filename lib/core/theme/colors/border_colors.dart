@@ -13,7 +13,6 @@ import 'package:mihr_ui/core/theme/colors/mihr_colors.dart';
 /// Container(decoration: BoxDecoration(border: Border.all(color: borderColors.primary)));
 /// ```
 class BorderColors extends ThemeExtension<BorderColors> {
-
   /// Creates a [BorderColors] with all semantic border tokens.
   const BorderColors({
     required this.primary,
@@ -67,6 +66,7 @@ class BorderColors extends ThemeExtension<BorderColors> {
       errorSubtle: error.shade500,
     );
   }
+
   /// High contrast borders — inputs, button groups, checkboxes
   final Color primary;
 

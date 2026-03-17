@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mihr_ui/core/theme/colors/color_scale.dart';
-import 'package:mihr_ui/core/theme/colors/utility_colors.dart' show UtilityColors;
+import 'package:mihr_ui/core/theme/colors/utility_colors.dart'
+    show UtilityColors;
 import 'package:mihr_ui/mihr_ui.dart' show UtilityColors;
 
 /// A dark-mode-aware color subset used by [UtilityColors].
@@ -12,7 +13,6 @@ import 'package:mihr_ui/mihr_ui.dart' show UtilityColors;
 /// In dark mode, the shade positions are inverted so that
 /// "shade50" (lightest) maps to the base palette's darkest values.
 class UtilityScale {
-
   /// Creates a [UtilityScale] with 8 core shades and optional extended.
   const UtilityScale({
     required this.shade50,
@@ -106,6 +106,7 @@ class UtilityScale {
       shade900: brand.shade100,
     );
   }
+
   /// Lightest utility shade.
   final Color shade50;
 
@@ -150,19 +151,15 @@ class UtilityScale {
       800 => shade800 ?? shade700,
       900 => shade900 ?? shade700,
       _ => throw ArgumentError(
-          'Invalid utility shade: $shade. '
-          'Valid shades: 50, 100, 200, 300, 400, 500, 600, 700'
-          '${shade800 != null ? ", 800, 900" : ""}.',
-        ),
+        'Invalid utility shade: $shade. '
+        'Valid shades: 50, 100, 200, 300, 400, 500, 600, 700'
+        '${shade800 != null ? ", 800, 900" : ""}.',
+      ),
     };
   }
 
   /// Linearly interpolates between two [UtilityScale] instances.
-  static UtilityScale? lerpScale(
-    UtilityScale? a,
-    UtilityScale? b,
-    double t,
-  ) {
+  static UtilityScale? lerpScale(UtilityScale? a, UtilityScale? b, double t) {
     if (a == null && b == null) return null;
     final effectiveA = a ?? b;
     final effectiveB = b ?? a;

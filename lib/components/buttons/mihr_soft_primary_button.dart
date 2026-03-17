@@ -5,7 +5,8 @@ import 'package:mihr_ui/components/buttons/mihr_button_shadows.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_theme.dart';
 import 'package:mihr_ui/core/theme/mihr_theme.dart';
-import 'package:mihr_ui/mihr_ui.dart' show MihrPrimaryButton, MihrTertiaryButton, UtilityColors;
+import 'package:mihr_ui/mihr_ui.dart'
+    show MihrPrimaryButton, MihrTertiaryButton, UtilityColors;
 
 /// Soft brand-fill button — tinted brand bg with brand text.
 ///
@@ -25,7 +26,9 @@ import 'package:mihr_ui/mihr_ui.dart' show MihrPrimaryButton, MihrTertiaryButton
 class MihrSoftPrimaryButton extends MihrButtonBase {
   /// Creates a medium soft-primary button.
   const MihrSoftPrimaryButton({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -36,12 +39,14 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  })  : _size = MihrButtonSize.md,
-        _isSquare = false;
+  }) : _size = MihrButtonSize.md,
+       _isSquare = false;
 
   /// Creates a small soft-primary button.
   const MihrSoftPrimaryButton.sm({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -52,12 +57,14 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  })  : _size = MihrButtonSize.sm,
-        _isSquare = false;
+  }) : _size = MihrButtonSize.sm,
+       _isSquare = false;
 
   /// Creates a large soft-primary button.
   const MihrSoftPrimaryButton.lg({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -68,12 +75,14 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  })  : _size = MihrButtonSize.lg,
-        _isSquare = false;
+  }) : _size = MihrButtonSize.lg,
+       _isSquare = false;
 
   /// Creates an extra-large soft-primary button.
   const MihrSoftPrimaryButton.xl({
-    required super.onPressed, required super.child, super.key,
+    required super.onPressed,
+    required super.child,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -84,12 +93,14 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  })  : _size = MihrButtonSize.xl,
-        _isSquare = false;
+  }) : _size = MihrButtonSize.xl,
+       _isSquare = false;
 
   /// Creates an icon-only soft-primary button (medium, square).
   const MihrSoftPrimaryButton.icon({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -98,13 +109,15 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  })  : _size = MihrButtonSize.md,
-        _isSquare = true,
-        super(child: icon);
+  }) : _size = MihrButtonSize.md,
+       _isSquare = true,
+       super(child: icon);
 
   /// Creates a small icon-only soft-primary button.
   const MihrSoftPrimaryButton.iconSm({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -113,13 +126,15 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  })  : _size = MihrButtonSize.sm,
-        _isSquare = true,
-        super(child: icon);
+  }) : _size = MihrButtonSize.sm,
+       _isSquare = true,
+       super(child: icon);
 
   /// Creates a large icon-only soft-primary button.
   const MihrSoftPrimaryButton.iconLg({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -128,13 +143,15 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  })  : _size = MihrButtonSize.lg,
-        _isSquare = true,
-        super(child: icon);
+  }) : _size = MihrButtonSize.lg,
+       _isSquare = true,
+       super(child: icon);
 
   /// Creates an extra-large icon-only soft-primary button.
   const MihrSoftPrimaryButton.iconXl({
-    required super.onPressed, required Widget icon, super.key,
+    required super.onPressed,
+    required Widget icon,
+    super.key,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -143,9 +160,9 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  })  : _size = MihrButtonSize.xl,
-        _isSquare = true,
-        super(child: icon);
+  }) : _size = MihrButtonSize.xl,
+       _isSquare = true,
+       super(child: icon);
 
   final MihrButtonSize _size;
   final bool _isSquare;
@@ -170,8 +187,7 @@ class MihrSoftPrimaryButton extends MihrButtonBase {
   }
 
   @override
-  MihrButtonShadows shadowsOf(BuildContext context) =>
-      MihrButtonShadows.flat;
+  MihrButtonShadows shadowsOf(BuildContext context) => MihrButtonShadows.flat;
 
   @override
   ButtonStyle? themeStyleOf(BuildContext context) =>

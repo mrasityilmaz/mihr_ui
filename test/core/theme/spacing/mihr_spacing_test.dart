@@ -55,101 +55,64 @@ void main() {
 
   group('MihrSpacing EdgeInsets all-sides helpers', () {
     test('insetsNone is EdgeInsets.zero', () {
-      expect(
-        MihrSpacing.insetsNone,
-        equals(EdgeInsets.zero),
-      );
+      expect(MihrSpacing.insetsNone, equals(EdgeInsets.zero));
     });
 
     test('insetsXl equals EdgeInsets.all(16)', () {
-      expect(
-        MihrSpacing.insetsXl,
-        equals(const EdgeInsets.all(16)),
-      );
+      expect(MihrSpacing.insetsXl, equals(const EdgeInsets.all(16)));
     });
 
     test('insetsX3l equals EdgeInsets.all(24)', () {
-      expect(
-        MihrSpacing.insetsX3l,
-        equals(const EdgeInsets.all(24)),
-      );
+      expect(MihrSpacing.insetsX3l, equals(const EdgeInsets.all(24)));
     });
 
     test('insetsMd equals EdgeInsets.all(8)', () {
-      expect(
-        MihrSpacing.insetsMd,
-        equals(const EdgeInsets.all(8)),
-      );
+      expect(MihrSpacing.insetsMd, equals(const EdgeInsets.all(8)));
     });
   });
 
   group('MihrSpacing EdgeInsets horizontal helpers', () {
-    test(
-      'insetsHXl equals '
-      'EdgeInsets.symmetric(horizontal: 16)',
-      () {
-        expect(
-          MihrSpacing.insetsHXl,
-          equals(
-            const EdgeInsets.symmetric(horizontal: 16),
-          ),
-        );
-      },
-    );
+    test('insetsHXl equals '
+        'EdgeInsets.symmetric(horizontal: 16)', () {
+      expect(
+        MihrSpacing.insetsHXl,
+        equals(const EdgeInsets.symmetric(horizontal: 16)),
+      );
+    });
 
-    test(
-      'insetsHMd equals '
-      'EdgeInsets.symmetric(horizontal: 8)',
-      () {
-        expect(
-          MihrSpacing.insetsHMd,
-          equals(
-            const EdgeInsets.symmetric(horizontal: 8),
-          ),
-        );
-      },
-    );
+    test('insetsHMd equals '
+        'EdgeInsets.symmetric(horizontal: 8)', () {
+      expect(
+        MihrSpacing.insetsHMd,
+        equals(const EdgeInsets.symmetric(horizontal: 8)),
+      );
+    });
 
-    test(
-      'insetsHX3l equals '
-      'EdgeInsets.symmetric(horizontal: 24)',
-      () {
-        expect(
-          MihrSpacing.insetsHX3l,
-          equals(
-            const EdgeInsets.symmetric(horizontal: 24),
-          ),
-        );
-      },
-    );
+    test('insetsHX3l equals '
+        'EdgeInsets.symmetric(horizontal: 24)', () {
+      expect(
+        MihrSpacing.insetsHX3l,
+        equals(const EdgeInsets.symmetric(horizontal: 24)),
+      );
+    });
   });
 
   group('MihrSpacing EdgeInsets vertical helpers', () {
-    test(
-      'insetsVXl equals '
-      'EdgeInsets.symmetric(vertical: 16)',
-      () {
-        expect(
-          MihrSpacing.insetsVXl,
-          equals(
-            const EdgeInsets.symmetric(vertical: 16),
-          ),
-        );
-      },
-    );
+    test('insetsVXl equals '
+        'EdgeInsets.symmetric(vertical: 16)', () {
+      expect(
+        MihrSpacing.insetsVXl,
+        equals(const EdgeInsets.symmetric(vertical: 16)),
+      );
+    });
 
-    test(
-      'insetsVX3l equals '
-      'EdgeInsets.symmetric(vertical: 24)',
-      () {
-        expect(
-          MihrSpacing.insetsVX3l,
-          equals(
-            const EdgeInsets.symmetric(vertical: 24),
-          ),
-        );
-      },
-    );
+    test('insetsVX3l equals '
+        'EdgeInsets.symmetric(vertical: 24)', () {
+      expect(
+        MihrSpacing.insetsVX3l,
+        equals(const EdgeInsets.symmetric(vertical: 24)),
+      );
+    });
   });
 
   group('MihrSpacing vertical gap helpers', () {

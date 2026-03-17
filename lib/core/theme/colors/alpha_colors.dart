@@ -18,7 +18,6 @@ import 'package:mihr_ui/core/theme/colors/mihr_colors.dart';
 /// Container(color: alphaColors.white50); // 50% white overlay
 /// ```
 class AlphaColors extends ThemeExtension<AlphaColors> {
-
   /// Creates an [AlphaColors] with all white/black opacity tokens.
   const AlphaColors({
     required this.white10,
@@ -99,6 +98,7 @@ class AlphaColors extends ThemeExtension<AlphaColors> {
       black100: darkBlack,
     );
   }
+
   /// White at 10% opacity.
   final Color white10;
 

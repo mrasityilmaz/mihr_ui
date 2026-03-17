@@ -9,117 +9,72 @@ void main() {
     });
 
     test('display2xl has fontSize 72', () {
-      expect(
-        MihrTypography.display2xl.regular.fontSize,
-        equals(72),
-      );
+      expect(MihrTypography.display2xl.regular.fontSize, equals(72));
     });
 
     test('displayXl has fontSize 60', () {
-      expect(
-        MihrTypography.displayXl.regular.fontSize,
-        equals(60),
-      );
+      expect(MihrTypography.displayXl.regular.fontSize, equals(60));
     });
 
     test('displayLg has fontSize 48', () {
-      expect(
-        MihrTypography.displayLg.regular.fontSize,
-        equals(48),
-      );
+      expect(MihrTypography.displayLg.regular.fontSize, equals(48));
     });
 
     test('displayMd has fontSize 36', () {
-      expect(
-        MihrTypography.displayMd.regular.fontSize,
-        equals(36),
-      );
+      expect(MihrTypography.displayMd.regular.fontSize, equals(36));
     });
 
     test('displaySm has fontSize 30', () {
-      expect(
-        MihrTypography.displaySm.regular.fontSize,
-        equals(30),
-      );
+      expect(MihrTypography.displaySm.regular.fontSize, equals(30));
     });
 
     test('displayXs has fontSize 24', () {
-      expect(
-        MihrTypography.displayXs.regular.fontSize,
-        equals(24),
-      );
+      expect(MihrTypography.displayXs.regular.fontSize, equals(24));
     });
 
     test('textXl has fontSize 20', () {
-      expect(
-        MihrTypography.textXl.regular.fontSize,
-        equals(20),
-      );
+      expect(MihrTypography.textXl.regular.fontSize, equals(20));
     });
 
     test('textLg has fontSize 18', () {
-      expect(
-        MihrTypography.textLg.regular.fontSize,
-        equals(18),
-      );
+      expect(MihrTypography.textLg.regular.fontSize, equals(18));
     });
 
     test('textMd has fontSize 16', () {
-      expect(
-        MihrTypography.textMd.regular.fontSize,
-        equals(16),
-      );
+      expect(MihrTypography.textMd.regular.fontSize, equals(16));
     });
 
     test('textSm has fontSize 14', () {
-      expect(
-        MihrTypography.textSm.regular.fontSize,
-        equals(14),
-      );
+      expect(MihrTypography.textSm.regular.fontSize, equals(14));
     });
 
     test('textXs has fontSize 12', () {
-      expect(
-        MihrTypography.textXs.regular.fontSize,
-        equals(12),
-      );
+      expect(MihrTypography.textXs.regular.fontSize, equals(12));
     });
   });
 
   group('TypeStyle weight variants', () {
     test('each TypeStyle has regular (w400)', () {
       for (final style in MihrTypography.allStyles) {
-        expect(
-          style.regular.fontWeight,
-          equals(FontWeight.w400),
-        );
+        expect(style.regular.fontWeight, equals(FontWeight.w400));
       }
     });
 
     test('each TypeStyle has medium (w500)', () {
       for (final style in MihrTypography.allStyles) {
-        expect(
-          style.medium.fontWeight,
-          equals(FontWeight.w500),
-        );
+        expect(style.medium.fontWeight, equals(FontWeight.w500));
       }
     });
 
     test('each TypeStyle has semibold (w600)', () {
       for (final style in MihrTypography.allStyles) {
-        expect(
-          style.semibold.fontWeight,
-          equals(FontWeight.w600),
-        );
+        expect(style.semibold.fontWeight, equals(FontWeight.w600));
       }
     });
 
     test('each TypeStyle has bold (w700)', () {
       for (final style in MihrTypography.allStyles) {
-        expect(
-          style.bold.fontWeight,
-          equals(FontWeight.w700),
-        );
+        expect(style.bold.fontWeight, equals(FontWeight.w700));
       }
     });
   });
@@ -137,14 +92,8 @@ void main() {
     for (final (name, style, fontSize) in displayStyles) {
       test('$name has -2% letter spacing', () {
         final expected = fontSize * -0.02;
-        expect(
-          style.regular.letterSpacing,
-          closeTo(expected, 0.001),
-        );
-        expect(
-          style.bold.letterSpacing,
-          closeTo(expected, 0.001),
-        );
+        expect(style.regular.letterSpacing, closeTo(expected, 0.001));
+        expect(style.bold.letterSpacing, closeTo(expected, 0.001));
       });
     }
   });
@@ -202,21 +151,16 @@ void main() {
       expect(textTheme.bodyMedium!.fontSize, equals(14));
     });
 
-    test('headlineLarge maps to displayMd semibold (36px)',
-        () {
+    test('headlineLarge maps to displayMd semibold (36px)', () {
       final textTheme = MihrTypography.textTheme();
       expect(textTheme.headlineLarge!.fontSize, equals(36));
-      expect(
-        textTheme.headlineLarge!.fontWeight,
-        equals(FontWeight.w600),
-      );
+      expect(textTheme.headlineLarge!.fontWeight, equals(FontWeight.w600));
     });
   });
 
   group('TypeStyle.withFontFamily()', () {
     test('changes font family on all weight variants', () {
-      final custom =
-          MihrTypography.textMd.withFontFamily('DM Sans');
+      final custom = MihrTypography.textMd.withFontFamily('DM Sans');
 
       expect(custom.regular.fontFamily, equals('DM Sans'));
       expect(custom.medium.fontFamily, equals('DM Sans'));
@@ -225,53 +169,33 @@ void main() {
     });
 
     test('preserves fontSize after font family change', () {
-      final custom =
-          MihrTypography.displayLg.withFontFamily('Roboto');
+      final custom = MihrTypography.displayLg.withFontFamily('Roboto');
 
       expect(custom.regular.fontSize, equals(48));
       expect(custom.bold.fontSize, equals(48));
     });
 
-    test('preserves letter spacing after font family change',
-        () {
-      final custom =
-          MihrTypography.displayMd.withFontFamily('Poppins');
+    test('preserves letter spacing after font family change', () {
+      final custom = MihrTypography.displayMd.withFontFamily('Poppins');
       const expected = 36.0 * -0.02;
 
-      expect(
-        custom.regular.letterSpacing,
-        closeTo(expected, 0.001),
-      );
+      expect(custom.regular.letterSpacing, closeTo(expected, 0.001));
     });
   });
 
-  group('MihrTypography.textTheme() with custom fontFamily',
-      () {
+  group('MihrTypography.textTheme() with custom fontFamily', () {
     test('propagates fontFamily to all slots', () {
-      final textTheme =
-          MihrTypography.textTheme(fontFamily: 'DM Sans');
+      final textTheme = MihrTypography.textTheme(fontFamily: 'DM Sans');
 
-      expect(
-        textTheme.displayLarge!.fontFamily,
-        equals('DM Sans'),
-      );
-      expect(
-        textTheme.bodyMedium!.fontFamily,
-        equals('DM Sans'),
-      );
-      expect(
-        textTheme.labelSmall!.fontFamily,
-        equals('DM Sans'),
-      );
+      expect(textTheme.displayLarge!.fontFamily, equals('DM Sans'));
+      expect(textTheme.bodyMedium!.fontFamily, equals('DM Sans'));
+      expect(textTheme.labelSmall!.fontFamily, equals('DM Sans'));
     });
   });
 
   group('MihrTypography.defaultFontFamily', () {
     test('is Inter', () {
-      expect(
-        MihrTypography.defaultFontFamily,
-        equals('Inter'),
-      );
+      expect(MihrTypography.defaultFontFamily, equals('Inter'));
     });
   });
 }

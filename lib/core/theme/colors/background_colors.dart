@@ -13,7 +13,6 @@ import 'package:mihr_ui/core/theme/colors/mihr_colors.dart';
 /// Container(color: bgColors.primary);
 /// ```
 class BackgroundColors extends ThemeExtension<BackgroundColors> {
-
   /// Creates a [BackgroundColors] with all semantic background tokens.
   const BackgroundColors({
     required this.primary,
@@ -137,6 +136,7 @@ class BackgroundColors extends ThemeExtension<BackgroundColors> {
       successSolid: success.shade600,
     );
   }
+
   /// Primary background — white in light, near-black in dark
   final Color primary;
 
@@ -331,16 +331,28 @@ class BackgroundColors extends ThemeExtension<BackgroundColors> {
       brandSolid: Color.lerp(brandSolid, other.brandSolid, t)!,
       brandSolidHover: Color.lerp(brandSolidHover, other.brandSolidHover, t)!,
       brandSection: Color.lerp(brandSection, other.brandSection, t)!,
-      brandSectionSubtle: Color.lerp(brandSectionSubtle, other.brandSectionSubtle, t)!,
+      brandSectionSubtle: Color.lerp(
+        brandSectionSubtle,
+        other.brandSectionSubtle,
+        t,
+      )!,
       errorPrimary: Color.lerp(errorPrimary, other.errorPrimary, t)!,
       errorSecondary: Color.lerp(errorSecondary, other.errorSecondary, t)!,
       errorSolid: Color.lerp(errorSolid, other.errorSolid, t)!,
       errorSolidHover: Color.lerp(errorSolidHover, other.errorSolidHover, t)!,
       warningPrimary: Color.lerp(warningPrimary, other.warningPrimary, t)!,
-      warningSecondary: Color.lerp(warningSecondary, other.warningSecondary, t)!,
+      warningSecondary: Color.lerp(
+        warningSecondary,
+        other.warningSecondary,
+        t,
+      )!,
       warningSolid: Color.lerp(warningSolid, other.warningSolid, t)!,
       successPrimary: Color.lerp(successPrimary, other.successPrimary, t)!,
-      successSecondary: Color.lerp(successSecondary, other.successSecondary, t)!,
+      successSecondary: Color.lerp(
+        successSecondary,
+        other.successSecondary,
+        t,
+      )!,
       successSolid: Color.lerp(successSolid, other.successSolid, t)!,
     );
   }

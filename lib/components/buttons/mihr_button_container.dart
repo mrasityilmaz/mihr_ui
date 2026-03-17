@@ -14,7 +14,13 @@ import 'package:mihr_ui/components/buttons/mihr_button_shadows.dart';
 class MihrButtonContainer extends StatelessWidget {
   /// Creates a button container with the given surface and shadow config.
   const MihrButtonContainer({
-    required this.color, required this.shape, required this.shadows, required this.isFocused, required this.animationDuration, required this.child, super.key,
+    required this.color,
+    required this.shape,
+    required this.shadows,
+    required this.isFocused,
+    required this.animationDuration,
+    required this.child,
+    super.key,
     this.side = BorderSide.none,
   });
 
@@ -41,7 +47,10 @@ class MihrButtonContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final outerShadows = [...shadows.outer, if (isFocused) ...shadows.focusOuter];
+    final outerShadows = [
+      ...shadows.outer,
+      if (isFocused) ...shadows.focusOuter,
+    ];
 
     final hasInnerShadows = shadows.inner.isNotEmpty;
     final effectiveShape = shape.copyWith(side: side);
@@ -50,7 +59,10 @@ class MihrButtonContainer extends StatelessWidget {
 
     if (hasInnerShadows) {
       result = CustomPaint(
-        foregroundPainter: _InnerShadowPainter(shape: effectiveShape, shadows: shadows.inner),
+        foregroundPainter: _InnerShadowPainter(
+          shape: effectiveShape,
+          shadows: shadows.inner,
+        ),
         child: result,
       );
     }
@@ -66,7 +78,10 @@ class MihrButtonContainer extends StatelessWidget {
 
     if (outerShadows.isNotEmpty) {
       result = DecoratedBox(
-        decoration: ShapeDecoration(shape: effectiveShape, shadows: outerShadows),
+        decoration: ShapeDecoration(
+          shape: effectiveShape,
+          shadows: outerShadows,
+        ),
         child: result,
       );
     }
@@ -96,7 +111,12 @@ class _InnerShadowPainter extends CustomPainter {
     }
   }
 
-  void _paintInnerShadow(Canvas canvas, Path clipPath, Rect rect, BoxShadow shadow) {
+  void _paintInnerShadow(
+    Canvas canvas,
+    Path clipPath,
+    Rect rect,
+    BoxShadow shadow,
+  ) {
     canvas
       ..save()
       ..clipPath(clipPath);
@@ -115,7 +135,9 @@ class _InnerShadowPainter extends CustomPainter {
         layerBounds,
         Paint()
           ..color = shadow.color
-          ..maskFilter = shadow.blurRadius > 0 ? MaskFilter.blur(ui.BlurStyle.normal, shadow.blurSigma) : null,
+          ..maskFilter = shadow.blurRadius > 0
+              ? MaskFilter.blur(ui.BlurStyle.normal, shadow.blurSigma)
+              : null,
       )
       ..drawPath(cutout, Paint()..blendMode = BlendMode.dstOut)
       ..restore()
@@ -148,5 +170,6 @@ class _InnerShadowPainter extends CustomPainter {
       Radius.elliptical(math.max(0, r.x - inset), math.max(0, r.y - inset));
 
   @override
-  bool shouldRepaint(_InnerShadowPainter oldDelegate) => shape != oldDelegate.shape || shadows != oldDelegate.shadows;
+  bool shouldRepaint(_InnerShadowPainter oldDelegate) =>
+      shape != oldDelegate.shape || shadows != oldDelegate.shadows;
 }

@@ -29,57 +29,36 @@ void main() {
 
     test('registers BackgroundColors extension', () {
       expect(theme.extension<BackgroundColors>(), isNotNull);
-      expect(
-        theme.extension<BackgroundColors>(),
-        isA<BackgroundColors>(),
-      );
+      expect(theme.extension<BackgroundColors>(), isA<BackgroundColors>());
     });
 
     test('registers BorderColors extension', () {
       expect(theme.extension<BorderColors>(), isNotNull);
-      expect(
-        theme.extension<BorderColors>(),
-        isA<BorderColors>(),
-      );
+      expect(theme.extension<BorderColors>(), isA<BorderColors>());
     });
 
     test('registers ForegroundColors extension', () {
       expect(theme.extension<ForegroundColors>(), isNotNull);
-      expect(
-        theme.extension<ForegroundColors>(),
-        isA<ForegroundColors>(),
-      );
+      expect(theme.extension<ForegroundColors>(), isA<ForegroundColors>());
     });
 
     test('registers AlphaColors extension', () {
       expect(theme.extension<AlphaColors>(), isNotNull);
-      expect(
-        theme.extension<AlphaColors>(),
-        isA<AlphaColors>(),
-      );
+      expect(theme.extension<AlphaColors>(), isA<AlphaColors>());
     });
 
     test('registers UtilityColors extension', () {
       expect(theme.extension<UtilityColors>(), isNotNull);
-      expect(
-        theme.extension<UtilityColors>(),
-        isA<UtilityColors>(),
-      );
+      expect(theme.extension<UtilityColors>(), isA<UtilityColors>());
     });
 
     test('registers ComponentColors extension', () {
       expect(theme.extension<ComponentColors>(), isNotNull);
-      expect(
-        theme.extension<ComponentColors>(),
-        isA<ComponentColors>(),
-      );
+      expect(theme.extension<ComponentColors>(), isA<ComponentColors>());
     });
 
     test('registers MihrButtonThemeData extension', () {
-      expect(
-        theme.extension<MihrButtonThemeData>(),
-        isNotNull,
-      );
+      expect(theme.extension<MihrButtonThemeData>(), isNotNull);
       expect(
         theme.extension<MihrButtonThemeData>(),
         isA<MihrButtonThemeData>(),
@@ -135,10 +114,7 @@ void main() {
     });
 
     test('registers MihrButtonThemeData extension', () {
-      expect(
-        theme.extension<MihrButtonThemeData>(),
-        isNotNull,
-      );
+      expect(theme.extension<MihrButtonThemeData>(), isNotNull);
     });
   });
 
@@ -147,20 +123,14 @@ void main() {
       final customBrand = ColorScaleGenerator.fromHex('#E63946');
       final theme = MihrTheme.light(brand: customBrand);
 
-      expect(
-        theme.colorScheme.primary,
-        equals(customBrand.shade600),
-      );
+      expect(theme.colorScheme.primary, equals(customBrand.shade600));
     });
 
     test('dark theme propagates custom brand to ColorScheme', () {
       final customBrand = ColorScaleGenerator.fromHex('#E63946');
       final theme = MihrTheme.dark(brand: customBrand);
 
-      expect(
-        theme.colorScheme.primary,
-        equals(customBrand.shade500),
-      );
+      expect(theme.colorScheme.primary, equals(customBrand.shade500));
     });
 
     test('custom brand reaches TextColors extension', () {
@@ -183,45 +153,27 @@ void main() {
   group('MihrTheme fontFamily parameter', () {
     test('light theme defaults to Inter in TextTheme', () {
       final theme = MihrTheme.light();
-      expect(
-        theme.textTheme.bodyMedium?.fontFamily,
-        equals('Inter'),
-      );
+      expect(theme.textTheme.bodyMedium?.fontFamily, equals('Inter'));
     });
 
     test('dark theme defaults to Inter in TextTheme', () {
       final theme = MihrTheme.dark();
-      expect(
-        theme.textTheme.bodyMedium?.fontFamily,
-        equals('Inter'),
-      );
+      expect(theme.textTheme.bodyMedium?.fontFamily, equals('Inter'));
     });
 
     test('light theme applies custom fontFamily', () {
       final theme = MihrTheme.light(fontFamily: 'DM Sans');
-      expect(
-        theme.textTheme.bodyMedium?.fontFamily,
-        equals('DM Sans'),
-      );
+      expect(theme.textTheme.bodyMedium?.fontFamily, equals('DM Sans'));
     });
 
     test('dark theme applies custom fontFamily', () {
       final theme = MihrTheme.dark(fontFamily: 'Roboto');
-      expect(
-        theme.textTheme.bodyMedium?.fontFamily,
-        equals('Roboto'),
-      );
+      expect(theme.textTheme.bodyMedium?.fontFamily, equals('Roboto'));
     });
 
-    test(
-      'custom fontFamily propagates to display styles',
-      () {
-        final theme = MihrTheme.light(fontFamily: 'DM Sans');
-        expect(
-          theme.textTheme.displayLarge?.fontFamily,
-          equals('DM Sans'),
-        );
-      },
-    );
+    test('custom fontFamily propagates to display styles', () {
+      final theme = MihrTheme.light(fontFamily: 'DM Sans');
+      expect(theme.textTheme.displayLarge?.fontFamily, equals('DM Sans'));
+    });
   });
 }

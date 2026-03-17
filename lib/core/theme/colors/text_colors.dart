@@ -14,7 +14,6 @@ import 'package:mihr_ui/core/theme/colors/mihr_colors.dart';
 /// Text('Hello', style: TextStyle(color: textColors.primary));
 /// ```
 class TextColors extends ThemeExtension<TextColors> {
-
   /// Creates a [TextColors] with all semantic text color tokens specified.
   const TextColors({
     required this.primary,
@@ -114,6 +113,7 @@ class TextColors extends ThemeExtension<TextColors> {
       successPrimary: success.shade400,
     );
   }
+
   /// Primary text — page headings, high emphasis content
   final Color primary;
 
@@ -250,26 +250,43 @@ class TextColors extends ThemeExtension<TextColors> {
       quaternary: Color.lerp(quaternary, other.quaternary, t)!,
       disabled: Color.lerp(disabled, other.disabled, t)!,
       placeholder: Color.lerp(placeholder, other.placeholder, t)!,
-      placeholderSubtle:
-          Color.lerp(placeholderSubtle, other.placeholderSubtle, t)!,
+      placeholderSubtle: Color.lerp(
+        placeholderSubtle,
+        other.placeholderSubtle,
+        t,
+      )!,
       white: Color.lerp(white, other.white, t)!,
       primaryOnBrand: Color.lerp(primaryOnBrand, other.primaryOnBrand, t)!,
-      secondaryOnBrand:
-          Color.lerp(secondaryOnBrand, other.secondaryOnBrand, t)!,
-      tertiaryOnBrand:
-          Color.lerp(tertiaryOnBrand, other.tertiaryOnBrand, t)!,
-      quaternaryOnBrand:
-          Color.lerp(quaternaryOnBrand, other.quaternaryOnBrand, t)!,
+      secondaryOnBrand: Color.lerp(
+        secondaryOnBrand,
+        other.secondaryOnBrand,
+        t,
+      )!,
+      tertiaryOnBrand: Color.lerp(tertiaryOnBrand, other.tertiaryOnBrand, t)!,
+      quaternaryOnBrand: Color.lerp(
+        quaternaryOnBrand,
+        other.quaternaryOnBrand,
+        t,
+      )!,
       brandPrimary: Color.lerp(brandPrimary, other.brandPrimary, t)!,
       brandSecondary: Color.lerp(brandSecondary, other.brandSecondary, t)!,
-      brandSecondaryHover:
-          Color.lerp(brandSecondaryHover, other.brandSecondaryHover, t)!,
+      brandSecondaryHover: Color.lerp(
+        brandSecondaryHover,
+        other.brandSecondaryHover,
+        t,
+      )!,
       brandTertiary: Color.lerp(brandTertiary, other.brandTertiary, t)!,
-      brandTertiaryAlt:
-          Color.lerp(brandTertiaryAlt, other.brandTertiaryAlt, t)!,
+      brandTertiaryAlt: Color.lerp(
+        brandTertiaryAlt,
+        other.brandTertiaryAlt,
+        t,
+      )!,
       errorPrimary: Color.lerp(errorPrimary, other.errorPrimary, t)!,
-      errorPrimaryHover:
-          Color.lerp(errorPrimaryHover, other.errorPrimaryHover, t)!,
+      errorPrimaryHover: Color.lerp(
+        errorPrimaryHover,
+        other.errorPrimaryHover,
+        t,
+      )!,
       warningPrimary: Color.lerp(warningPrimary, other.warningPrimary, t)!,
       successPrimary: Color.lerp(successPrimary, other.successPrimary, t)!,
     );

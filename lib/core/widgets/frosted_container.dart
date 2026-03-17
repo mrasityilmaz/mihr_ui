@@ -38,13 +38,16 @@ import 'package:mihr_ui/core/theme/shadows/mihr_backdrop_blurs.dart';
 class FrostedContainer extends StatelessWidget {
   /// Creates a frosted-glass container with the given [blur] and [child].
   const FrostedContainer({
-    required this.blur, required this.child, super.key,
+    required this.blur,
+    required this.child,
+    super.key,
     this.borderRadius = MihrRadius.borderXl,
     this.border,
     this.decoration,
     this.overlayColor,
     this.padding,
   });
+
   /// The backdrop blur preset to apply.
   final BackdropBlurStyle blur;
 
