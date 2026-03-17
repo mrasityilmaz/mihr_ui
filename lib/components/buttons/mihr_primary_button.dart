@@ -40,8 +40,8 @@ class MihrPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.md,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.md,
+        _isSquare = false;
 
   /// Creates a small primary button.
   const MihrPrimaryButton.sm({
@@ -58,8 +58,8 @@ class MihrPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.sm,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.sm,
+        _isSquare = false;
 
   /// Creates a large primary button.
   const MihrPrimaryButton.lg({
@@ -76,8 +76,8 @@ class MihrPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.lg,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.lg,
+        _isSquare = false;
 
   /// Creates an extra-large primary button.
   const MihrPrimaryButton.xl({
@@ -94,8 +94,8 @@ class MihrPrimaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.xl,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.xl,
+        _isSquare = false;
 
   /// Creates an icon-only primary button (medium, square).
   const MihrPrimaryButton.icon({
@@ -110,9 +110,9 @@ class MihrPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.md,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.md,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates a small icon-only primary button.
   const MihrPrimaryButton.iconSm({
@@ -127,9 +127,9 @@ class MihrPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.sm,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.sm,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates a large icon-only primary button.
   const MihrPrimaryButton.iconLg({
@@ -144,9 +144,9 @@ class MihrPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.lg,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.lg,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates an extra-large icon-only primary button.
   const MihrPrimaryButton.iconXl({
@@ -161,9 +161,9 @@ class MihrPrimaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.xl,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.xl,
+        _isSquare = true,
+        super(child: icon);
 
   final MihrButtonSize _size;
   final bool _isSquare;

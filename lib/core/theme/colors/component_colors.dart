@@ -262,8 +262,7 @@ class ComponentColors extends ThemeExtension<ComponentColors> {
           buttonPrimaryIconHover ?? this.buttonPrimaryIconHover,
       buttonDestructivePrimaryIcon:
           buttonDestructivePrimaryIcon ?? this.buttonDestructivePrimaryIcon,
-      buttonDestructivePrimaryIconHover:
-          buttonDestructivePrimaryIconHover ??
+      buttonDestructivePrimaryIconHover: buttonDestructivePrimaryIconHover ??
           this.buttonDestructivePrimaryIconHover,
       featuredIconLightFgBrand:
           featuredIconLightFgBrand ?? this.featuredIconLightFgBrand,

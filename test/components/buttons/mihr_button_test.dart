@@ -6,9 +6,8 @@ import 'package:mihr_ui/components/buttons/buttons.dart';
 import 'package:mihr_ui/core/theme/mihr_theme.dart';
 
 Widget _wrap(Widget child, {Brightness brightness = Brightness.light}) {
-  final theme = brightness == Brightness.light
-      ? MihrTheme.light()
-      : MihrTheme.dark();
+  final theme =
+      brightness == Brightness.light ? MihrTheme.light() : MihrTheme.dark();
   return MaterialApp(
     theme: theme,
     home: Scaffold(body: Center(child: child)),
@@ -39,9 +38,8 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final flags = tester
-          .getSemantics(find.byType(MihrPrimaryButton))
-          .flagsCollection;
+      final flags =
+          tester.getSemantics(find.byType(MihrPrimaryButton)).flagsCollection;
       expect(flags.isButton, isTrue);
       expect(flags.isEnabled, isNot(equals(Tristate.none)));
       expect(flags.isEnabled, equals(Tristate.isFalse));

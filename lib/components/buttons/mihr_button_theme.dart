@@ -109,17 +109,18 @@ class MihrButtonThemeData extends ThemeExtension<MihrButtonThemeData> {
     ButtonStyle? tertiaryStyle,
     ButtonStyle? linkStyle,
     ButtonStyle? destructiveStyle,
-  }) => MihrButtonThemeData(
-    shape: shape ?? this.shape,
-    shadows: shadows ?? this.shadows,
-    sizes: sizes ?? this.sizes,
-    linkSizes: linkSizes ?? this.linkSizes,
-    primaryStyle: primaryStyle ?? this.primaryStyle,
-    secondaryStyle: secondaryStyle ?? this.secondaryStyle,
-    tertiaryStyle: tertiaryStyle ?? this.tertiaryStyle,
-    linkStyle: linkStyle ?? this.linkStyle,
-    destructiveStyle: destructiveStyle ?? this.destructiveStyle,
-  );
+  }) =>
+      MihrButtonThemeData(
+        shape: shape ?? this.shape,
+        shadows: shadows ?? this.shadows,
+        sizes: sizes ?? this.sizes,
+        linkSizes: linkSizes ?? this.linkSizes,
+        primaryStyle: primaryStyle ?? this.primaryStyle,
+        secondaryStyle: secondaryStyle ?? this.secondaryStyle,
+        tertiaryStyle: tertiaryStyle ?? this.tertiaryStyle,
+        linkStyle: linkStyle ?? this.linkStyle,
+        destructiveStyle: destructiveStyle ?? this.destructiveStyle,
+      );
 
   @override
   MihrButtonThemeData lerp(covariant MihrButtonThemeData? other, double t) {

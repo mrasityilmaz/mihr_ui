@@ -35,8 +35,7 @@ class MihrButtonDefaults {
     OutlinedBorder? shape,
     bool isSquare = false,
   }) {
-    final effectiveShape =
-        shape ??
+    final effectiveShape = shape ??
         const RoundedRectangleBorder(borderRadius: MihrRadius.borderMd);
 
     if (isSquare) {
@@ -96,8 +95,7 @@ class MihrButtonDefaults {
     required Color hoverDecorationColor,
     OutlinedBorder? shape,
   }) {
-    final effectiveShape =
-        shape ??
+    final effectiveShape = shape ??
         const RoundedRectangleBorder(borderRadius: MihrRadius.borderXs);
 
     return ButtonStyle(
@@ -140,24 +138,26 @@ class MihrButtonDefaults {
   static ButtonStyle primaryColors({
     required BackgroundColors bg,
     required ForegroundColors fg,
-  }) => ButtonStyle(
-    backgroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return bg.disabled;
-      if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
-        return bg.brandSolidHover;
-      }
-      return bg.brandSolid;
-    }),
-    foregroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return fg.disabled;
-      return fg.white;
-    }),
-    elevation: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return 0.0;
-      return 1.0;
-    }),
-    shadowColor: const WidgetStatePropertyAll(Color(0x0D101828)),
-  );
+  }) =>
+      ButtonStyle(
+        backgroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return bg.disabled;
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
+            return bg.brandSolidHover;
+          }
+          return bg.brandSolid;
+        }),
+        foregroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return fg.disabled;
+          return fg.white;
+        }),
+        elevation: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return 0.0;
+          return 1.0;
+        }),
+        shadowColor: const WidgetStatePropertyAll(Color(0x0D101828)),
+      );
 
   /// Soft primary — tinted brand bg with brand text, no border.
   ///
@@ -195,53 +195,59 @@ class MihrButtonDefaults {
     required BackgroundColors bg,
     required ForegroundColors fg,
     required BorderColors border,
-  }) => ButtonStyle(
-    backgroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return bg.primary;
-      if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
-        return bg.primaryHover;
-      }
-      return bg.primary;
-    }),
-    foregroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return fg.disabled;
-      if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
-        return fg.secondaryHover;
-      }
-      return fg.secondary;
-    }),
-    side: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) {
-        return BorderSide(color: border.disabledSubtle);
-      }
-      return BorderSide(color: border.primary);
-    }),
-    elevation: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return 0.0;
-      return 1.0;
-    }),
-    shadowColor: const WidgetStatePropertyAll(Color(0x0D101828)),
-  );
+  }) =>
+      ButtonStyle(
+        backgroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return bg.primary;
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
+            return bg.primaryHover;
+          }
+          return bg.primary;
+        }),
+        foregroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return fg.disabled;
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
+            return fg.secondaryHover;
+          }
+          return fg.secondary;
+        }),
+        side: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) {
+            return BorderSide(color: border.disabledSubtle);
+          }
+          return BorderSide(color: border.primary);
+        }),
+        elevation: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return 0.0;
+          return 1.0;
+        }),
+        shadowColor: const WidgetStatePropertyAll(Color(0x0D101828)),
+      );
 
   /// Tertiary button colors — ghost, transparent background.
   static ButtonStyle tertiaryColors({
     required BackgroundColors bg,
     required ForegroundColors fg,
-  }) => ButtonStyle(
-    backgroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
-        return bg.primaryHover;
-      }
-      return Colors.transparent;
-    }),
-    foregroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return fg.disabled;
-      if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
-        return fg.secondaryHover;
-      }
-      return fg.secondary;
-    }),
-  );
+  }) =>
+      ButtonStyle(
+        backgroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
+            return bg.primaryHover;
+          }
+          return Colors.transparent;
+        }),
+        foregroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return fg.disabled;
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
+            return fg.secondaryHover;
+          }
+          return fg.secondary;
+        }),
+      );
 
   /// Link button colors — brand-colored text, no background.
   static ButtonStyle linkBrandColors({required ForegroundColors fg}) =>
@@ -277,57 +283,62 @@ class MihrButtonDefaults {
   static ButtonStyle destructivePrimaryColors({
     required BackgroundColors bg,
     required ForegroundColors fg,
-  }) => ButtonStyle(
-    backgroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return bg.disabled;
-      if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
-        return bg.errorSolidHover;
-      }
-      return bg.errorSolid;
-    }),
-    foregroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return fg.disabled;
-      return fg.white;
-    }),
-    elevation: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return 0.0;
-      return 1.0;
-    }),
-    shadowColor: const WidgetStatePropertyAll(Color(0x0D101828)),
-  );
+  }) =>
+      ButtonStyle(
+        backgroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return bg.disabled;
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
+            return bg.errorSolidHover;
+          }
+          return bg.errorSolid;
+        }),
+        foregroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return fg.disabled;
+          return fg.white;
+        }),
+        elevation: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return 0.0;
+          return 1.0;
+        }),
+        shadowColor: const WidgetStatePropertyAll(Color(0x0D101828)),
+      );
 
   /// Destructive secondary — outlined with error border.
   static ButtonStyle destructiveSecondaryColors({
     required BackgroundColors bg,
     required ForegroundColors fg,
     required BorderColors border,
-  }) => ButtonStyle(
-    backgroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return bg.primary;
-      if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
-        return bg.errorPrimary;
-      }
-      return bg.primary;
-    }),
-    foregroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return fg.disabled;
-      if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
-        return fg.errorSecondary;
-      }
-      return fg.errorPrimary;
-    }),
-    side: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) {
-        return BorderSide(color: border.disabledSubtle);
-      }
-      return BorderSide(color: border.error);
-    }),
-    elevation: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return 0.0;
-      return 1.0;
-    }),
-    shadowColor: const WidgetStatePropertyAll(Color(0x0D101828)),
-  );
+  }) =>
+      ButtonStyle(
+        backgroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return bg.primary;
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
+            return bg.errorPrimary;
+          }
+          return bg.primary;
+        }),
+        foregroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return fg.disabled;
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
+            return fg.errorSecondary;
+          }
+          return fg.errorPrimary;
+        }),
+        side: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) {
+            return BorderSide(color: border.disabledSubtle);
+          }
+          return BorderSide(color: border.error);
+        }),
+        elevation: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return 0.0;
+          return 1.0;
+        }),
+        shadowColor: const WidgetStatePropertyAll(Color(0x0D101828)),
+      );
 
   /// Destructive soft primary — tinted error bg with error text.
   ///
@@ -362,21 +373,24 @@ class MihrButtonDefaults {
   static ButtonStyle destructiveTertiaryColors({
     required BackgroundColors bg,
     required ForegroundColors fg,
-  }) => ButtonStyle(
-    backgroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
-        return bg.errorPrimary;
-      }
-      return Colors.transparent;
-    }),
-    foregroundColor: WidgetStateProperty.resolveWith((s) {
-      if (s.contains(WidgetState.disabled)) return fg.disabled;
-      if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
-        return fg.errorSecondary;
-      }
-      return fg.errorPrimary;
-    }),
-  );
+  }) =>
+      ButtonStyle(
+        backgroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
+            return bg.errorPrimary;
+          }
+          return Colors.transparent;
+        }),
+        foregroundColor: WidgetStateProperty.resolveWith((s) {
+          if (s.contains(WidgetState.disabled)) return fg.disabled;
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
+            return fg.errorSecondary;
+          }
+          return fg.errorPrimary;
+        }),
+      );
 
   /// Destructive link — text-only with error color.
   static ButtonStyle destructiveLinkColors({required ForegroundColors fg}) =>

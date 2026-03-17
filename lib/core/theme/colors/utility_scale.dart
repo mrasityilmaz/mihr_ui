@@ -151,10 +151,10 @@ class UtilityScale {
       800 => shade800 ?? shade700,
       900 => shade900 ?? shade700,
       _ => throw ArgumentError(
-        'Invalid utility shade: $shade. '
-        'Valid shades: 50, 100, 200, 300, 400, 500, 600, 700'
-        '${shade800 != null ? ", 800, 900" : ""}.',
-      ),
+          'Invalid utility shade: $shade. '
+          'Valid shades: 50, 100, 200, 300, 400, 500, 600, 700'
+          '${shade800 != null ? ", 800, 900" : ""}.',
+        ),
     };
   }
 

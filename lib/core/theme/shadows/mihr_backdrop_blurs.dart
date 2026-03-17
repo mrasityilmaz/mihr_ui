@@ -65,8 +65,8 @@ class MihrBackdropBlurs {
 /// A single backdrop blur preset with overlay colors and blur value.
 class BackdropBlurStyle {
   const BackdropBlurStyle._({required this.sigma, required this.blurPx})
-    : lightOverlay = const Color(0x99FFFFFF),
-      darkOverlay = const Color(0x99000000);
+      : lightOverlay = const Color(0x99FFFFFF),
+        darkOverlay = const Color(0x99000000);
 
   /// Creates a custom [BackdropBlurStyle] with overridden overlay colors.
   const BackdropBlurStyle.custom({

@@ -9,8 +9,8 @@ repository: https://github.com/mrasityilmaz/mihr_ui
 issue_tracker: https://github.com/mrasityilmaz/mihr_ui/issues
 
 environment:
-  sdk: ^3.10.7
-  flutter: ">=3.29.0"
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
 
 dependencies:
   flutter:

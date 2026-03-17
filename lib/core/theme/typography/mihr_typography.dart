@@ -92,49 +92,49 @@ class MihrTypography {
 
   /// Display 2xl — 72px / 90px / -2% tracking.
   /// Hero sections, splash screens, marketing headlines.
-  static final display2xl = _build(72, 90, _tracking(72));
+  static final TypeStyle display2xl = _build(72, 90, _tracking(72));
 
   /// Display xl — 60px / 72px / -2% tracking.
   /// Page-level headings, large section titles.
-  static final displayXl = _build(60, 72, _tracking(60));
+  static final TypeStyle displayXl = _build(60, 72, _tracking(60));
 
   /// Display lg — 48px / 60px / -2% tracking.
   /// Section headings, feature titles.
-  static final displayLg = _build(48, 60, _tracking(48));
+  static final TypeStyle displayLg = _build(48, 60, _tracking(48));
 
   /// Display md — 36px / 44px / -2% tracking.
   /// Subsection headings, card titles on landing pages.
-  static final displayMd = _build(36, 44, _tracking(36));
+  static final TypeStyle displayMd = _build(36, 44, _tracking(36));
 
   /// Display sm — 30px / 38px / -2% tracking.
   /// Dialog titles, prominent subsection labels.
-  static final displaySm = _build(30, 38, _tracking(30));
+  static final TypeStyle displaySm = _build(30, 38, _tracking(30));
 
   /// Display xs — 24px / 32px / -2% tracking.
   /// Small headings, widget titles.
-  static final displayXs = _build(24, 32, _tracking(24));
+  static final TypeStyle displayXs = _build(24, 32, _tracking(24));
 
   // ─── Text styles (body, labels, no tracking) ─────────────────────
 
   /// Text xl — 20px / 30px.
   /// Large body text, lead paragraphs, emphasized descriptions.
-  static final textXl = _build(20, 30);
+  static final TypeStyle textXl = _build(20, 30);
 
   /// Text lg — 18px / 28px.
   /// Secondary body text, form labels, list items.
-  static final textLg = _build(18, 28);
+  static final TypeStyle textLg = _build(18, 28);
 
   /// Text md — 16px / 24px.
   /// Default body text, paragraph content, input values.
-  static final textMd = _build(16, 24);
+  static final TypeStyle textMd = _build(16, 24);
 
   /// Text sm — 14px / 20px.
   /// Supporting text, table content, secondary labels.
-  static final textSm = _build(14, 20);
+  static final TypeStyle textSm = _build(14, 20);
 
   /// Text xs — 12px / 18px.
   /// Captions, badges, timestamps, helper text.
-  static final textXs = _build(12, 18);
+  static final TypeStyle textXs = _build(12, 18);
 
   // ─── All TypeStyle instances for iteration ───────────────────────
 

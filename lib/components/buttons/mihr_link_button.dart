@@ -38,8 +38,8 @@ class MihrLinkButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.md,
-       _isGray = false;
+  })  : _size = MihrButtonSize.md,
+        _isGray = false;
 
   /// Creates a small brand-colored link button.
   const MihrLinkButton.sm({
@@ -56,8 +56,8 @@ class MihrLinkButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.sm,
-       _isGray = false;
+  })  : _size = MihrButtonSize.sm,
+        _isGray = false;
 
   /// Creates a large brand-colored link button.
   const MihrLinkButton.lg({
@@ -74,8 +74,8 @@ class MihrLinkButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.lg,
-       _isGray = false;
+  })  : _size = MihrButtonSize.lg,
+        _isGray = false;
 
   /// Creates an extra-large brand-colored link button.
   const MihrLinkButton.xl({
@@ -92,8 +92,8 @@ class MihrLinkButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.xl,
-       _isGray = false;
+  })  : _size = MihrButtonSize.xl,
+        _isGray = false;
 
   /// Creates a medium gray link button.
   const MihrLinkButton.gray({
@@ -110,8 +110,8 @@ class MihrLinkButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.md,
-       _isGray = true;
+  })  : _size = MihrButtonSize.md,
+        _isGray = true;
 
   /// Creates a small gray link button.
   const MihrLinkButton.graySm({
@@ -128,8 +128,8 @@ class MihrLinkButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.sm,
-       _isGray = true;
+  })  : _size = MihrButtonSize.sm,
+        _isGray = true;
 
   /// Creates a large gray link button.
   const MihrLinkButton.grayLg({
@@ -146,8 +146,8 @@ class MihrLinkButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.lg,
-       _isGray = true;
+  })  : _size = MihrButtonSize.lg,
+        _isGray = true;
 
   /// Creates an extra-large gray link button.
   const MihrLinkButton.grayXl({
@@ -164,8 +164,8 @@ class MihrLinkButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.xl,
-       _isGray = true;
+  })  : _size = MihrButtonSize.xl,
+        _isGray = true;
 
   final MihrButtonSize _size;
   final bool _isGray;

@@ -30,8 +30,8 @@ class MihrTertiaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.md,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.md,
+        _isSquare = false;
 
   /// Creates a small tertiary button.
   const MihrTertiaryButton.sm({
@@ -48,8 +48,8 @@ class MihrTertiaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.sm,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.sm,
+        _isSquare = false;
 
   /// Creates a large tertiary button.
   const MihrTertiaryButton.lg({
@@ -66,8 +66,8 @@ class MihrTertiaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.lg,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.lg,
+        _isSquare = false;
 
   /// Creates an extra-large tertiary button.
   const MihrTertiaryButton.xl({
@@ -84,8 +84,8 @@ class MihrTertiaryButton extends MihrButtonBase {
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  }) : _size = MihrButtonSize.xl,
-       _isSquare = false;
+  })  : _size = MihrButtonSize.xl,
+        _isSquare = false;
 
   /// Creates an icon-only tertiary button (medium, square).
   const MihrTertiaryButton.icon({
@@ -100,9 +100,9 @@ class MihrTertiaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.md,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.md,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates a small icon-only tertiary button.
   const MihrTertiaryButton.iconSm({
@@ -117,9 +117,9 @@ class MihrTertiaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.sm,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.sm,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates a large icon-only tertiary button.
   const MihrTertiaryButton.iconLg({
@@ -134,9 +134,9 @@ class MihrTertiaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.lg,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.lg,
+        _isSquare = true,
+        super(child: icon);
 
   /// Creates an extra-large icon-only tertiary button.
   const MihrTertiaryButton.iconXl({
@@ -151,9 +151,9 @@ class MihrTertiaryButton extends MihrButtonBase {
     super.autofocus,
     super.statesController,
     super.tooltip,
-  }) : _size = MihrButtonSize.xl,
-       _isSquare = true,
-       super(child: icon);
+  })  : _size = MihrButtonSize.xl,
+        _isSquare = true,
+        super(child: icon);
 
   final MihrButtonSize _size;
   final bool _isSquare;
