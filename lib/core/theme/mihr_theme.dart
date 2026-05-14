@@ -93,8 +93,7 @@ class MihrTheme {
     MihrThemeConfig config = const MihrThemeConfig(),
     @Deprecated('Use MihrThemeConfig.brand. Removed in 0.2.0.')
     ColorScale? brand,
-    @Deprecated('Use MihrThemeConfig.gray. Removed in 0.2.0.')
-    ColorScale? gray,
+    @Deprecated('Use MihrThemeConfig.gray. Removed in 0.2.0.') ColorScale? gray,
     @Deprecated('Use MihrThemeConfig.error. Removed in 0.2.0.')
     ColorScale? error,
     @Deprecated('Use MihrThemeConfig.warning. Removed in 0.2.0.')
@@ -130,8 +129,7 @@ class MihrTheme {
     MihrThemeConfig config = const MihrThemeConfig(),
     @Deprecated('Use MihrThemeConfig.brand. Removed in 0.2.0.')
     ColorScale? brand,
-    @Deprecated('Use MihrThemeConfig.gray. Removed in 0.2.0.')
-    ColorScale? gray,
+    @Deprecated('Use MihrThemeConfig.gray. Removed in 0.2.0.') ColorScale? gray,
     @Deprecated('Use MihrThemeConfig.error. Removed in 0.2.0.')
     ColorScale? error,
     @Deprecated('Use MihrThemeConfig.warning. Removed in 0.2.0.')
@@ -204,8 +202,8 @@ class MihrTheme {
     final w = config.warning ?? MihrColors.warning;
     final s = config.success ?? MihrColors.success;
 
-    final typo = config.typography ??
-        MihrTypography.fromFontFamily(config.fontFamily);
+    final typo =
+        config.typography ?? MihrTypography.fromFontFamily(config.fontFamily);
 
     final base = isDark
         ? _buildDark(config: config, typo: typo, b: b, g: g, e: e, w: w, s: s)
@@ -863,8 +861,7 @@ extension MihrThemeExtension on BuildContext {
       Theme.of(this).extension<ComponentColors>()!;
 
   /// Typography theme with font-family-resolved [TypeStyle] instances.
-  MihrTypography get typography =>
-      Theme.of(this).extension<MihrTypography>()!;
+  MihrTypography get typography => Theme.of(this).extension<MihrTypography>()!;
 
   /// Mihr button theme overrides, or `null` if none registered.
   MihrButtonThemeData? get mihrButtonTheme =>

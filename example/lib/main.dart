@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
     final config = MihrThemeConfig(
       brand: AccentColors.indigo,
       buttonTheme: MihrButtonThemeData(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       materialOverrides: (base) => base.copyWith(
         scaffoldBackgroundColor: base.bgColors.secondary,

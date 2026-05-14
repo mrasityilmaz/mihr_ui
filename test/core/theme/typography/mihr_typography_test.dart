@@ -163,8 +163,7 @@ void main() {
     });
 
     test('with custom fontFamily propagates to all slots', () {
-      final textTheme =
-          MihrTypography.textTheme(fontFamily: 'DM Sans');
+      final textTheme = MihrTypography.textTheme(fontFamily: 'DM Sans');
 
       expect(
         textTheme.displayLarge!.fontFamily,
@@ -211,10 +210,8 @@ void main() {
 
   group('MihrTypography.fromFontFamily()', () {
     test('returns cached instance for default font', () {
-      final a =
-          MihrTypography.fromFontFamily(MihrTypography.defaultFontFamily);
-      final b =
-          MihrTypography.fromFontFamily(MihrTypography.defaultFontFamily);
+      final a = MihrTypography.fromFontFamily(MihrTypography.defaultFontFamily);
+      final b = MihrTypography.fromFontFamily(MihrTypography.defaultFontFamily);
       expect(identical(a, b), isTrue);
     });
 

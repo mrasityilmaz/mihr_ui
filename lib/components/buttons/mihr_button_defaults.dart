@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart' show MihrButtonSize;
+import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart'
+    show MihrButtonSize;
 import 'package:mihr_ui/core/theme/colors/background_colors.dart';
 import 'package:mihr_ui/core/theme/colors/border_colors.dart';
 import 'package:mihr_ui/core/theme/colors/foreground_colors.dart';
@@ -35,7 +36,8 @@ class MihrButtonDefaults {
     OutlinedBorder? shape,
     bool isSquare = false,
   }) {
-    final effectiveShape = shape ?? const RoundedRectangleBorder(borderRadius: MihrRadius.borderMd);
+    final effectiveShape = shape ??
+        const RoundedRectangleBorder(borderRadius: MihrRadius.borderMd);
     final ts = TextStyle(
       fontSize: size.fontSize,
       fontWeight: FontWeight.w600,
@@ -58,7 +60,9 @@ class MihrButtonDefaults {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         animationDuration: const Duration(milliseconds: 100),
         mouseCursor: WidgetStateProperty.resolveWith(
-          (s) => s.contains(WidgetState.disabled) ? SystemMouseCursors.basic : SystemMouseCursors.click,
+          (s) => s.contains(WidgetState.disabled)
+              ? SystemMouseCursors.basic
+              : SystemMouseCursors.click,
         ),
       );
     }
@@ -81,7 +85,9 @@ class MihrButtonDefaults {
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       animationDuration: const Duration(milliseconds: 100),
       mouseCursor: WidgetStateProperty.resolveWith(
-        (s) => s.contains(WidgetState.disabled) ? SystemMouseCursors.basic : SystemMouseCursors.click,
+        (s) => s.contains(WidgetState.disabled)
+            ? SystemMouseCursors.basic
+            : SystemMouseCursors.click,
       ),
     );
   }
@@ -93,7 +99,8 @@ class MihrButtonDefaults {
     required Color hoverDecorationColor,
     OutlinedBorder? shape,
   }) {
-    final effectiveShape = shape ?? const RoundedRectangleBorder(borderRadius: MihrRadius.borderXs);
+    final effectiveShape = shape ??
+        const RoundedRectangleBorder(borderRadius: MihrRadius.borderXs);
     final ts = TextStyle(
       fontSize: size.fontSize,
       fontWeight: FontWeight.w600,
@@ -108,7 +115,8 @@ class MihrButtonDefaults {
         Size(double.infinity, size.linkHeight),
       ),
       textStyle: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.hovered) || states.contains(WidgetState.pressed)) {
+        if (states.contains(WidgetState.hovered) ||
+            states.contains(WidgetState.pressed)) {
           return ts.copyWith(
             decoration: TextDecoration.underline,
             decorationColor: hoverDecorationColor,
@@ -125,7 +133,9 @@ class MihrButtonDefaults {
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       animationDuration: const Duration(milliseconds: 100),
       mouseCursor: WidgetStateProperty.resolveWith(
-        (s) => s.contains(WidgetState.disabled) ? SystemMouseCursors.basic : SystemMouseCursors.click,
+        (s) => s.contains(WidgetState.disabled)
+            ? SystemMouseCursors.basic
+            : SystemMouseCursors.click,
       ),
     );
   }
@@ -142,7 +152,8 @@ class MihrButtonDefaults {
       ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return bg.disabled;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return bg.brandSolidHover;
           }
           return bg.brandSolid;
@@ -172,14 +183,16 @@ class MihrButtonDefaults {
     return ButtonStyle(
       backgroundColor: WidgetStateProperty.resolveWith((s) {
         if (s.contains(WidgetState.disabled)) return bg.disabled;
-        if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+        if (s.contains(WidgetState.hovered) ||
+            s.contains(WidgetState.pressed)) {
           return Color.lerp(bg.primary, accent, 0.18)!;
         }
         return Color.lerp(bg.primary, accent, 0.10)!;
       }),
       foregroundColor: WidgetStateProperty.resolveWith((s) {
         if (s.contains(WidgetState.disabled)) return fg.disabled;
-        if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+        if (s.contains(WidgetState.hovered) ||
+            s.contains(WidgetState.pressed)) {
           return fg.brandSecondaryHover;
         }
         return fg.brandPrimary;
@@ -196,14 +209,16 @@ class MihrButtonDefaults {
       ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return bg.primary;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return bg.primaryHover;
           }
           return bg.primary;
         }),
         foregroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return fg.disabled;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return fg.secondaryHover;
           }
           return fg.secondary;
@@ -234,14 +249,16 @@ class MihrButtonDefaults {
   }) =>
       ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith((s) {
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return bg.primaryHover;
           }
           return Colors.transparent;
         }),
         foregroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return fg.disabled;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return fg.secondaryHover;
           }
           return fg.secondary;
@@ -249,11 +266,13 @@ class MihrButtonDefaults {
       );
 
   /// Link button colors — brand-colored text, no background.
-  static ButtonStyle linkBrandColors({required ForegroundColors fg}) => ButtonStyle(
+  static ButtonStyle linkBrandColors({required ForegroundColors fg}) =>
+      ButtonStyle(
         backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
         foregroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return fg.disabled;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return fg.brandSecondaryHover;
           }
           return fg.brandPrimary;
@@ -261,11 +280,13 @@ class MihrButtonDefaults {
       );
 
   /// Link button colors — gray text variant.
-  static ButtonStyle linkGrayColors({required ForegroundColors fg}) => ButtonStyle(
+  static ButtonStyle linkGrayColors({required ForegroundColors fg}) =>
+      ButtonStyle(
         backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
         foregroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return fg.disabled;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return fg.secondaryHover;
           }
           return fg.secondary;
@@ -282,7 +303,8 @@ class MihrButtonDefaults {
       ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return bg.disabled;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return bg.errorSolidHover;
           }
           return bg.errorSolid;
@@ -307,14 +329,16 @@ class MihrButtonDefaults {
       ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return bg.primary;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return bg.errorPrimary;
           }
           return bg.primary;
         }),
         foregroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return fg.disabled;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return fg.errorSecondary;
           }
           return fg.errorPrimary;
@@ -344,14 +368,16 @@ class MihrButtonDefaults {
     return ButtonStyle(
       backgroundColor: WidgetStateProperty.resolveWith((s) {
         if (s.contains(WidgetState.disabled)) return bg.disabled;
-        if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+        if (s.contains(WidgetState.hovered) ||
+            s.contains(WidgetState.pressed)) {
           return Color.lerp(bg.primary, accent, 0.18)!;
         }
         return Color.lerp(bg.primary, accent, 0.10)!;
       }),
       foregroundColor: WidgetStateProperty.resolveWith((s) {
         if (s.contains(WidgetState.disabled)) return fg.disabled;
-        if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+        if (s.contains(WidgetState.hovered) ||
+            s.contains(WidgetState.pressed)) {
           return fg.errorSecondary;
         }
         return fg.errorPrimary;
@@ -366,14 +392,16 @@ class MihrButtonDefaults {
   }) =>
       ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith((s) {
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return bg.errorPrimary;
           }
           return Colors.transparent;
         }),
         foregroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return fg.disabled;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return fg.errorSecondary;
           }
           return fg.errorPrimary;
@@ -381,11 +409,13 @@ class MihrButtonDefaults {
       );
 
   /// Destructive link — text-only with error color.
-  static ButtonStyle destructiveLinkColors({required ForegroundColors fg}) => ButtonStyle(
+  static ButtonStyle destructiveLinkColors({required ForegroundColors fg}) =>
+      ButtonStyle(
         backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
         foregroundColor: WidgetStateProperty.resolveWith((s) {
           if (s.contains(WidgetState.disabled)) return fg.disabled;
-          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+          if (s.contains(WidgetState.hovered) ||
+              s.contains(WidgetState.pressed)) {
             return fg.errorSecondary;
           }
           return fg.errorPrimary;

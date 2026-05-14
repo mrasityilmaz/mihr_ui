@@ -267,8 +267,8 @@ void main() {
       expect(find.text('Dark'), findsOneWidget);
     });
 
-    testWidgets(
-        'hover bg equals bg.primaryHover (not same as resting bg)', (tester) async {
+    testWidgets('hover bg equals bg.primaryHover (not same as resting bg)',
+        (tester) async {
       final theme = MihrTheme.light();
 
       final hovered = await _resolvedHoverColor(
@@ -288,7 +288,8 @@ void main() {
       );
     });
 
-    testWidgets('hover bg differs from resting bg in dark mode', (tester) async {
+    testWidgets('hover bg differs from resting bg in dark mode',
+        (tester) async {
       final theme = MihrTheme.dark();
 
       final hovered = await _resolvedHoverColor(
@@ -556,8 +557,7 @@ void main() {
       expect(
         hovered,
         theme.bgColors.errorPrimary,
-        reason:
-            'destructive ghost button hover must use bg.errorPrimary tint',
+        reason: 'destructive ghost button hover must use bg.errorPrimary tint',
       );
     });
 

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_base.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_defaults.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_shadows.dart';
-import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart' show MihrButtonSize;
+import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart'
+    show MihrButtonSize;
 import 'package:mihr_ui/components/buttons/mihr_button_theme.dart';
 import 'package:mihr_ui/core/theme/mihr_theme.dart';
 
@@ -189,5 +190,6 @@ class MihrTertiaryButton extends MihrButtonBase {
   MihrButtonShadows shadowsOf(BuildContext context) => MihrButtonShadows.flat;
 
   @override
-  ButtonStyle? themeStyleOf(BuildContext context) => MihrButtonThemeData.of(context)?.tertiaryStyle;
+  ButtonStyle? themeStyleOf(BuildContext context) =>
+      MihrButtonThemeData.of(context)?.tertiaryStyle;
 }

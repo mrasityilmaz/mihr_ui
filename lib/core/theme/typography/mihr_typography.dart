@@ -199,11 +199,13 @@ class MihrTypography extends ThemeExtension<MihrTypography> {
   /// final typo = MihrTypography.of(context);
   /// Text('Hello', style: typo.textMd.semibold);
   /// ```
-  static MihrTypography of(BuildContext context) => Theme.of(context).extension<MihrTypography>()!;
+  static MihrTypography of(BuildContext context) =>
+      Theme.of(context).extension<MihrTypography>()!;
 
   /// Returns the theme-resolved typography, or `null` if no
   /// [MihrTypography] is registered in the current theme.
-  static MihrTypography? maybeOf(BuildContext context) => Theme.of(context).extension<MihrTypography>();
+  static MihrTypography? maybeOf(BuildContext context) =>
+      Theme.of(context).extension<MihrTypography>();
 
   // ─── Material TextTheme bridge ────────────────────────────────────
 
@@ -229,7 +231,9 @@ class MihrTypography extends ThemeExtension<MihrTypography> {
   ///
   /// Pass [fontFamily] to generate for a different typeface.
   static TextTheme textTheme({String fontFamily = defaultFontFamily}) {
-    final source = fontFamily == defaultFontFamily ? _inter : MihrTypography.fromFontFamily(fontFamily);
+    final source = fontFamily == defaultFontFamily
+        ? _inter
+        : MihrTypography.fromFontFamily(fontFamily);
 
     return source.toTextTheme();
   }
@@ -304,7 +308,8 @@ class MihrTypography extends ThemeExtension<MihrTypography> {
 
   static const double _displayTrackingPercent = -0.02;
 
-  static double _tracking(double fontSize) => fontSize * _displayTrackingPercent;
+  static double _tracking(double fontSize) =>
+      fontSize * _displayTrackingPercent;
 
   static TypeStyle _build(
     double fontSize,

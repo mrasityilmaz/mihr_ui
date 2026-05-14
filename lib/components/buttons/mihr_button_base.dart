@@ -51,7 +51,8 @@ class MihrButtonData extends InheritedWidget {
   final Color backgroundColor;
 
   /// Returns the nearest [MihrButtonData], or `null`.
-  static MihrButtonData? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<MihrButtonData>();
+  static MihrButtonData? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<MihrButtonData>();
 
   /// Returns the nearest [MihrButtonData].
   static MihrButtonData of(BuildContext context) => maybeOf(context)!;
@@ -183,9 +184,11 @@ abstract class MihrButtonBase extends StatefulWidget {
 class _MihrButtonBaseState extends State<MihrButtonBase> {
   WidgetStatesController? _internalController;
 
-  WidgetStatesController get _controller => widget.statesController ?? _internalController!;
+  WidgetStatesController get _controller =>
+      widget.statesController ?? _internalController!;
 
-  bool get _isDisabled => widget.onPressed == null && widget.onLongPress == null;
+  bool get _isDisabled =>
+      widget.onPressed == null && widget.onLongPress == null;
 
   @override
   void initState() {
@@ -235,7 +238,8 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
     ButtonStyle? themeStyle,
     ButtonStyle defaultStyle,
   ) {
-    return (getter(widgetStyle) ?? getter(themeStyle) ?? getter(defaultStyle))?.resolve(states);
+    return (getter(widgetStyle) ?? getter(themeStyle) ?? getter(defaultStyle))
+        ?.resolve(states);
   }
 
   @override
@@ -265,7 +269,8 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
     final resolvedTextStyle = rs((s) => s?.textStyle);
     final typoTheme = MihrTypography.maybeOf(context);
     final textStyle = typoTheme != null
-        ? (resolvedTextStyle ?? const TextStyle()).copyWith(fontFamily: typoTheme.fontFamily)
+        ? (resolvedTextStyle ?? const TextStyle())
+            .copyWith(fontFamily: typoTheme.fontFamily)
         : resolvedTextStyle;
     final mouseCursor = rs((s) => s?.mouseCursor) ?? SystemMouseCursors.click;
     final resolvedIconSize = rs((s) => s?.iconSize) ?? 20.0;
@@ -476,7 +481,8 @@ class _InputPadding extends SingleChildRenderObjectWidget {
   final Size minSize;
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderInputPadding(minSize);
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderInputPadding(minSize);
 
   @override
   void updateRenderObject(
@@ -531,13 +537,15 @@ class _RenderInputPadding extends RenderShiftedBox {
   }
 
   @override
-  Size computeDryLayout(BoxConstraints constraints) => _computeLayout(constraints, ChildLayoutHelper.dryLayoutChild);
+  Size computeDryLayout(BoxConstraints constraints) =>
+      _computeLayout(constraints, ChildLayoutHelper.dryLayoutChild);
 
   @override
   void performLayout() {
     size = _computeLayout(constraints, ChildLayoutHelper.layoutChild);
     if (child != null) {
-      (child!.parentData! as BoxParentData).offset = Alignment.center.alongOffset(size - child!.size as Offset);
+      (child!.parentData! as BoxParentData).offset =
+          Alignment.center.alongOffset(size - child!.size as Offset);
     }
   }
 

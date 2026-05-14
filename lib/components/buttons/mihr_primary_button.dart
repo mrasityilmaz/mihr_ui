@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_base.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_defaults.dart';
-import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart' show MihrButtonSize;
+import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart'
+    show MihrButtonSize;
 import 'package:mihr_ui/components/buttons/mihr_button_theme.dart';
 import 'package:mihr_ui/core/theme/mihr_theme.dart';
 
@@ -196,5 +197,6 @@ class MihrPrimaryButton extends MihrButtonBase {
   }
 
   @override
-  ButtonStyle? themeStyleOf(BuildContext context) => MihrButtonThemeData.of(context)?.primaryStyle;
+  ButtonStyle? themeStyleOf(BuildContext context) =>
+      MihrButtonThemeData.of(context)?.primaryStyle;
 }
