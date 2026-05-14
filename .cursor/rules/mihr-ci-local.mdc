@@ -1,0 +1,80 @@
+---
+description: Local CI checklist — run these exact commands before every push/PR to avoid CI failures
+globs: ["**/*.dart", "pubspec.yaml", "pubspec.lock", "analysis_options.yaml"]
+alwaysApply: false
+---
+
+# Local CI Checklist
+
+Run ALL steps below (in order) before pushing any commit. These mirror `.github/actions/flutter_package/action.yaml` exactly.
+
+## 1 — Install dependencies (root + example)
+
+```bash
+flutter pub get
+cd example && flutter pub get && cd ..
+```
+
+> Always run `flutter pub get` in **both** directories. The `example/` project has its own `pubspec.lock` and `.dart_tool/package_config.json`. A stale `package_config.json` in `example/` will make `dart format` crash with a `PathNotFoundException` for a cached package that no longer exists locally.
+
+## 2 — Format (root, covers example via recursive walk)
+
+```bash
+dart format --set-exit-if-changed .
+```
+
+Exit code 1 means files changed → commit the formatted output and retry.
+
+> **Scope matters.** `dart format .` walks the entire tree from the current directory. Always run it from the **repo root**, not from a sub-folder.
+
+## 3 — Analyze (root lib + test only)
+
+```bash
+dart analyze --fatal-infos --fatal-warnings lib test
+```
+
+> **Scope matters.** CI targets `lib test` (not `.` and not `example/`). Running `dart analyze` inside `example/` or without the directory arguments will silently miss infos/warnings in the main package.
+
+Common things caught here that are missed when using the wrong scope:
+- `unnecessary_import` in test files (e.g. importing a symbol already re-exported by a barrel)
+- Unused variables / dead code
+- Missing `const`
+
+## 4 — Tests
+
+```bash
+flutter test --no-pub --test-randomize-ordering-seed random
+```
+
+## 5 — Quick pub score check (optional but recommended before tagging)
+
+```bash
+dart pub global activate pana
+pana . --no-warning
+```
+
+Score must be 130/130. Any loss means a missing `dartdoc`, bad `example/`, or broken `pubspec.yaml`.
+
+---
+
+## Dependency alignment rule
+
+`example/pubspec.yaml` dev-dependencies **must** match the version constraints in the root `pubspec.yaml`. Specifically:
+
+```yaml
+# root pubspec.yaml           example/pubspec.yaml
+very_good_analysis: ^10.0.0   very_good_analysis: ^10.0.0  ✓
+very_good_analysis: ^10.0.0   very_good_analysis: ^7.0.0   ✗  (will break dart format locally)
+```
+
+When bumping an analysis/linter dep in the root, bump the same dep in `example/pubspec.yaml` in the same commit.
+
+---
+
+## Commit gate — checklist before `git push`
+
+- [ ] `flutter pub get` passed (root)
+- [ ] `flutter pub get` passed (example)
+- [ ] `dart format --set-exit-if-changed .` → 0 changed
+- [ ] `dart analyze --fatal-infos --fatal-warnings lib test` → No issues found
+- [ ] `flutter test` → All tests passed
