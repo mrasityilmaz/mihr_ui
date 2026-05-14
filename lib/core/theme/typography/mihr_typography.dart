@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 /// - [bold] (w700)
 ///
 /// ```dart
-/// Text('Heading', style: MihrTypography.displayLg.semibold);
-/// Text('Body', style: MihrTypography.textMd.regular);
+/// final typo = MihrTypography.of(context);
+/// Text('Heading', style: typo.displayLg.semibold);
+/// Text('Body', style: typo.textMd.regular);
 /// ```
 class TypeStyle {
   /// Creates a [TypeStyle] with all four weight variants.
@@ -54,8 +55,7 @@ class TypeStyle {
   }
 }
 
-/// Mihr UI Typography System.
-///
+/// Mihr UI Typography System — a [ThemeExtension] that holds
 /// 11 size levels × 4 weight variants = 44 text styles.
 ///
 /// **Display** styles — headings, hero sections, marketing:
@@ -66,94 +66,146 @@ class TypeStyle {
 /// [textXl] 20px, [textLg] 18px, [textMd] 16px,
 /// [textSm] 14px, [textXs] 12px
 ///
-/// Default font: **Inter**. Override via [textTheme] parameter or
-/// [TypeStyle.withFontFamily].
+/// Default font: **Inter**. Override via `fontFamily` parameter in
+/// `MihrTheme.light` / `MihrTheme.dark`.
+///
+/// ## Usage in widgets (recommended)
 ///
 /// ```dart
-/// // Direct access
-/// Text('Welcome', style: MihrTypography.displayLg.semibold);
-/// Text('Description', style: MihrTypography.textMd.regular);
+/// final typo = MihrTypography.of(context);
+/// Text('Welcome', style: typo.displayLg.semibold);
 ///
-/// // With color from semantic tokens
-/// Text(
-///   'Hello',
-///   style: MihrTypography.textMd.medium.copyWith(
-///     color: context.textColors.primary,
-///   ),
-/// );
+/// // or via context shorthand
+/// Text('Welcome', style: context.typography.displayLg.semibold);
 /// ```
-class MihrTypography {
-  MihrTypography._();
+@immutable
+class MihrTypography extends ThemeExtension<MihrTypography> {
+  /// Creates a typography set with all 11 type styles.
+  const MihrTypography({
+    required this.fontFamily,
+    required this.display2xl,
+    required this.displayXl,
+    required this.displayLg,
+    required this.displayMd,
+    required this.displaySm,
+    required this.displayXs,
+    required this.textXl,
+    required this.textLg,
+    required this.textMd,
+    required this.textSm,
+    required this.textXs,
+  });
+
+  /// Builds a [MihrTypography] for the given [fontFamily].
+  ///
+  /// Returns the default Inter instance when [fontFamily] matches
+  /// [defaultFontFamily].
+  factory MihrTypography.fromFontFamily(String fontFamily) {
+    if (fontFamily == defaultFontFamily) return _inter;
+    return MihrTypography(
+      fontFamily: fontFamily,
+      display2xl: _inter.display2xl.withFontFamily(fontFamily),
+      displayXl: _inter.displayXl.withFontFamily(fontFamily),
+      displayLg: _inter.displayLg.withFontFamily(fontFamily),
+      displayMd: _inter.displayMd.withFontFamily(fontFamily),
+      displaySm: _inter.displaySm.withFontFamily(fontFamily),
+      displayXs: _inter.displayXs.withFontFamily(fontFamily),
+      textXl: _inter.textXl.withFontFamily(fontFamily),
+      textLg: _inter.textLg.withFontFamily(fontFamily),
+      textMd: _inter.textMd.withFontFamily(fontFamily),
+      textSm: _inter.textSm.withFontFamily(fontFamily),
+      textXs: _inter.textXs.withFontFamily(fontFamily),
+    );
+  }
+
+  // ─── Instance fields ──────────────────────────────────────────────
+
+  /// The active font family.
+  final String fontFamily;
+
+  /// Display 2xl — 72px / 90px / -2% tracking.
+  final TypeStyle display2xl;
+
+  /// Display xl — 60px / 72px / -2% tracking.
+  final TypeStyle displayXl;
+
+  /// Display lg — 48px / 60px / -2% tracking.
+  final TypeStyle displayLg;
+
+  /// Display md — 36px / 44px / -2% tracking.
+  final TypeStyle displayMd;
+
+  /// Display sm — 30px / 38px / -2% tracking.
+  final TypeStyle displaySm;
+
+  /// Display xs — 24px / 32px / -2% tracking.
+  final TypeStyle displayXs;
+
+  /// Text xl — 20px / 30px.
+  final TypeStyle textXl;
+
+  /// Text lg — 18px / 28px.
+  final TypeStyle textLg;
+
+  /// Text md — 16px / 24px.
+  final TypeStyle textMd;
+
+  /// Text sm — 14px / 20px.
+  final TypeStyle textSm;
+
+  /// Text xs — 12px / 18px.
+  final TypeStyle textXs;
+
+  /// All 11 [TypeStyle] instances in size-descending order.
+  List<TypeStyle> get allStyles => [
+        display2xl,
+        displayXl,
+        displayLg,
+        displayMd,
+        displaySm,
+        displayXs,
+        textXl,
+        textLg,
+        textMd,
+        textSm,
+        textXs,
+      ];
+
+  // ─── Static constants ─────────────────────────────────────────────
 
   /// Default font family used across all type styles.
   static const String defaultFontFamily = 'Inter';
 
-  // ─── Display styles (headings, -2% letter spacing) ───────────────
+  static final MihrTypography _inter = MihrTypography(
+    fontFamily: defaultFontFamily,
+    display2xl: _build(72, 90, _tracking(72)),
+    displayXl: _build(60, 72, _tracking(60)),
+    displayLg: _build(48, 60, _tracking(48)),
+    displayMd: _build(36, 44, _tracking(36)),
+    displaySm: _build(30, 38, _tracking(30)),
+    displayXs: _build(24, 32, _tracking(24)),
+    textXl: _build(20, 30),
+    textLg: _build(18, 28),
+    textMd: _build(16, 24),
+    textSm: _build(14, 20),
+    textXs: _build(12, 18),
+  );
 
-  /// Display 2xl — 72px / 90px / -2% tracking.
-  /// Hero sections, splash screens, marketing headlines.
-  static final TypeStyle display2xl = _build(72, 90, _tracking(72));
+  // ─── Context access ───────────────────────────────────────────────
 
-  /// Display xl — 60px / 72px / -2% tracking.
-  /// Page-level headings, large section titles.
-  static final TypeStyle displayXl = _build(60, 72, _tracking(60));
+  /// Returns the theme-resolved typography with the active font family.
+  ///
+  /// ```dart
+  /// final typo = MihrTypography.of(context);
+  /// Text('Hello', style: typo.textMd.semibold);
+  /// ```
+  static MihrTypography of(BuildContext context) => Theme.of(context).extension<MihrTypography>()!;
 
-  /// Display lg — 48px / 60px / -2% tracking.
-  /// Section headings, feature titles.
-  static final TypeStyle displayLg = _build(48, 60, _tracking(48));
+  /// Returns the theme-resolved typography, or `null` if no
+  /// [MihrTypography] is registered in the current theme.
+  static MihrTypography? maybeOf(BuildContext context) => Theme.of(context).extension<MihrTypography>();
 
-  /// Display md — 36px / 44px / -2% tracking.
-  /// Subsection headings, card titles on landing pages.
-  static final TypeStyle displayMd = _build(36, 44, _tracking(36));
-
-  /// Display sm — 30px / 38px / -2% tracking.
-  /// Dialog titles, prominent subsection labels.
-  static final TypeStyle displaySm = _build(30, 38, _tracking(30));
-
-  /// Display xs — 24px / 32px / -2% tracking.
-  /// Small headings, widget titles.
-  static final TypeStyle displayXs = _build(24, 32, _tracking(24));
-
-  // ─── Text styles (body, labels, no tracking) ─────────────────────
-
-  /// Text xl — 20px / 30px.
-  /// Large body text, lead paragraphs, emphasized descriptions.
-  static final TypeStyle textXl = _build(20, 30);
-
-  /// Text lg — 18px / 28px.
-  /// Secondary body text, form labels, list items.
-  static final TypeStyle textLg = _build(18, 28);
-
-  /// Text md — 16px / 24px.
-  /// Default body text, paragraph content, input values.
-  static final TypeStyle textMd = _build(16, 24);
-
-  /// Text sm — 14px / 20px.
-  /// Supporting text, table content, secondary labels.
-  static final TypeStyle textSm = _build(14, 20);
-
-  /// Text xs — 12px / 18px.
-  /// Captions, badges, timestamps, helper text.
-  static final TypeStyle textXs = _build(12, 18);
-
-  // ─── All TypeStyle instances for iteration ───────────────────────
-
-  /// All 11 [TypeStyle] instances in size-descending order.
-  static final List<TypeStyle> allStyles = [
-    display2xl,
-    displayXl,
-    displayLg,
-    displayMd,
-    displaySm,
-    displayXs,
-    textXl,
-    textLg,
-    textMd,
-    textSm,
-    textXs,
-  ];
-
-  // ─── Material TextTheme bridge ───────────────────────────────────
+  // ─── Material TextTheme bridge ────────────────────────────────────
 
   /// Builds a Material [TextTheme] mapped to the Mihr UI type scale.
   ///
@@ -175,47 +227,84 @@ class MihrTypography {
   /// | labelMedium      | textXs.medium            | 12px  |
   /// | labelSmall       | textXs.regular           | 12px  |
   ///
-  /// Pass [fontFamily] to generate for a different typeface (e.g. 'DM Sans').
+  /// Pass [fontFamily] to generate for a different typeface.
   static TextTheme textTheme({String fontFamily = defaultFontFamily}) {
-    final isDefault = fontFamily == defaultFontFamily;
+    final source = fontFamily == defaultFontFamily ? _inter : MihrTypography.fromFontFamily(fontFamily);
 
-    final d2xl = isDefault ? display2xl : display2xl.withFontFamily(fontFamily);
-    final dxl = isDefault ? displayXl : displayXl.withFontFamily(fontFamily);
-    final dlg = isDefault ? displayLg : displayLg.withFontFamily(fontFamily);
-    final dmd = isDefault ? displayMd : displayMd.withFontFamily(fontFamily);
-    final dsm = isDefault ? displaySm : displaySm.withFontFamily(fontFamily);
-    final dxs = isDefault ? displayXs : displayXs.withFontFamily(fontFamily);
-    final txl = isDefault ? textXl : textXl.withFontFamily(fontFamily);
-    final tlg = isDefault ? textLg : textLg.withFontFamily(fontFamily);
-    final tmd = isDefault ? textMd : textMd.withFontFamily(fontFamily);
-    final tsm = isDefault ? textSm : textSm.withFontFamily(fontFamily);
-    final txs = isDefault ? textXs : textXs.withFontFamily(fontFamily);
+    return source.toTextTheme();
+  }
 
+  /// Builds a Material [TextTheme] from this typography instance.
+  ///
+  /// Use this when you construct a custom [MihrTypography] directly
+  /// (e.g. via a `MihrThemeConfig(typography: ...)` override) and
+  /// want the Material [TextTheme] to reflect your custom styles.
+  TextTheme toTextTheme() {
     return TextTheme(
-      displayLarge: d2xl.regular,
-      displayMedium: dxl.regular,
-      displaySmall: dlg.regular,
-      headlineLarge: dmd.semibold,
-      headlineMedium: dsm.semibold,
-      headlineSmall: dxs.semibold,
-      titleLarge: txl.semibold,
-      titleMedium: tlg.medium,
-      titleSmall: tmd.medium,
-      bodyLarge: tmd.regular,
-      bodyMedium: tsm.regular,
-      bodySmall: txs.regular,
-      labelLarge: tsm.medium,
-      labelMedium: txs.medium,
-      labelSmall: txs.regular,
+      displayLarge: display2xl.regular,
+      displayMedium: displayXl.regular,
+      displaySmall: displayLg.regular,
+      headlineLarge: displayMd.semibold,
+      headlineMedium: displaySm.semibold,
+      headlineSmall: displayXs.semibold,
+      titleLarge: textXl.semibold,
+      titleMedium: textLg.medium,
+      titleSmall: textMd.medium,
+      bodyLarge: textMd.regular,
+      bodyMedium: textSm.regular,
+      bodySmall: textXs.regular,
+      labelLarge: textSm.medium,
+      labelMedium: textXs.medium,
+      labelSmall: textXs.regular,
     );
   }
 
-  // ─── Private helpers ─────────────────────────────────────────────
+  // ─── ThemeExtension overrides ─────────────────────────────────────
+
+  @override
+  MihrTypography copyWith({
+    String? fontFamily,
+    TypeStyle? display2xl,
+    TypeStyle? displayXl,
+    TypeStyle? displayLg,
+    TypeStyle? displayMd,
+    TypeStyle? displaySm,
+    TypeStyle? displayXs,
+    TypeStyle? textXl,
+    TypeStyle? textLg,
+    TypeStyle? textMd,
+    TypeStyle? textSm,
+    TypeStyle? textXs,
+  }) =>
+      MihrTypography(
+        fontFamily: fontFamily ?? this.fontFamily,
+        display2xl: display2xl ?? this.display2xl,
+        displayXl: displayXl ?? this.displayXl,
+        displayLg: displayLg ?? this.displayLg,
+        displayMd: displayMd ?? this.displayMd,
+        displaySm: displaySm ?? this.displaySm,
+        displayXs: displayXs ?? this.displayXs,
+        textXl: textXl ?? this.textXl,
+        textLg: textLg ?? this.textLg,
+        textMd: textMd ?? this.textMd,
+        textSm: textSm ?? this.textSm,
+        textXs: textXs ?? this.textXs,
+      );
+
+  @override
+  MihrTypography lerp(
+    covariant MihrTypography? other,
+    double t,
+  ) {
+    if (other == null) return this;
+    return t < 0.5 ? this : other;
+  }
+
+  // ─── Private helpers ──────────────────────────────────────────────
 
   static const double _displayTrackingPercent = -0.02;
 
-  static double _tracking(double fontSize) =>
-      fontSize * _displayTrackingPercent;
+  static double _tracking(double fontSize) => fontSize * _displayTrackingPercent;
 
   static TypeStyle _build(
     double fontSize,

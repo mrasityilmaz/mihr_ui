@@ -42,17 +42,104 @@ MaterialApp(
 
 ## Customization
 
-Use a custom brand color:
+Mihr UI exposes four independent customization layers — pick the narrowest one
+that solves your problem.
+
+| # | Layer | Scope | API |
+|---|---|---|---|
+| 1 | **Preset** | App-wide defaults | `MihrThemeConfig` |
+| 2 | **Component theme** | One component family | `MihrThemeConfig.buttonTheme` (and friends) |
+| 3 | **Per-instance** | One widget | `style` / `styleBuilder` on the widget |
+| 4 | **Material escape-hatch** | Raw `ThemeData` | `MihrThemeConfig.materialOverrides` |
+
+### 1. Preset — `MihrThemeConfig`
+
+The canonical configuration object. Groups brand palette, typography, and every
+component theme into a single immutable value you can share across apps.
 
 ```dart
-MihrTheme.light(brand: ColorScaleGenerator.fromHex('#E63946'))
+final cfg = MihrThemeConfig(
+  brand: ColorScaleGenerator.fromHex('#E63946'),
+  fontFamily: 'Roboto',
+);
+
+MaterialApp(
+  theme: MihrTheme.light(config: cfg),
+  darkTheme: MihrTheme.dark(config: cfg),
+);
 ```
 
-Access semantic tokens via context extensions:
+### 2. Component theme
+
+Customize a whole component family (shape, shadows, per-variant style) via a
+theme extension. Example: flatten every button and override the primary fill.
+
+```dart
+MihrThemeConfig(
+  buttonTheme: MihrButtonThemeData(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+    shadows: MihrButtonShadows.flat,
+    primaryStyle: const ButtonStyle(
+      backgroundColor: WidgetStatePropertyAll(Colors.indigo),
+    ),
+  ),
+);
+```
+
+### 3. Per-instance
+
+Every Mihr component accepts a `style` (and often `styleBuilder`) prop that
+wins over theme-level defaults.
+
+```dart
+MihrPrimaryButton(
+  onPressed: _save,
+  style: const ButtonStyle(
+    backgroundColor: WidgetStatePropertyAll(Colors.teal),
+  ),
+  child: const Text('Save'),
+);
+```
+
+### 4. Material escape-hatch — `materialOverrides`
+
+For Material properties Mihr does not model semantically (e.g.
+`scaffoldBackgroundColor`, `AppBarTheme.centerTitle`, `cardTheme`), pass a
+callback that receives the fully-built `ThemeData` with every Mihr default and
+returns a modified copy. Use `base.bgColors`, `base.textColors`,
+`base.mihrTypography`, and friends to read Mihr tokens ergonomically — no new
+classes required.
+
+```dart
+MihrThemeConfig(
+  brand: AccentColors.indigo,
+  materialOverrides: (base) => base.copyWith(
+    scaffoldBackgroundColor: base.bgColors.secondary,
+    appBarTheme: base.appBarTheme.copyWith(
+      centerTitle: true,
+      backgroundColor: base.bgColors.brandSolid,
+      foregroundColor: base.textColors.white,
+    ),
+    cardTheme: base.cardTheme.copyWith(color: base.bgColors.tertiary),
+  ),
+);
+```
+
+### Accessing tokens anywhere
+
+From a widget, use the `BuildContext` extension:
 
 ```dart
 context.textColors.primary
 context.bgColors.brandSolid
+```
+
+From a `ThemeData` (inside `materialOverrides`, tests, or non-widget code),
+use the parallel `ThemeData` extension:
+
+```dart
+theme.textColors.primary
+theme.bgColors.brandSolid
 ```
 
 ## Semantic Token Reference

@@ -1,195 +1,96 @@
-import 'package:flutter/material.dart';
-import 'package:mihr_ui/components/buttons/buttons.dart'
-    show MihrButtonThemeData;
-import 'package:mihr_ui/components/buttons/mihr_button_theme.dart'
-    show MihrButtonThemeData;
-import 'package:mihr_ui/core/theme/typography/mihr_typography.dart';
-import 'package:mihr_ui/mihr_ui.dart' show MihrButtonThemeData;
-
-/// Standard button size variants.
-enum MihrButtonSize {
-  /// Small (36px height).
-  sm,
-
-  /// Medium (40px height) — default.
-  md,
-
-  /// Large (44px height).
-  lg,
-
-  /// Extra-large (48px height).
-  xl,
-}
-
-/// Layout metrics for a single button size level.
+/// Standard button size variants with layout metrics.
 ///
-/// Defines height, padding, text style, and icon size.
-/// Used by [MihrButtonSizes] to provide sm/md/lg/xl presets.
-@immutable
-class MihrButtonSizeData {
-  /// Creates layout metrics for a button size level.
-  const MihrButtonSizeData({
+/// Each variant defines height, horizontal padding, label font size,
+/// icon size, and the corresponding link-button height.
+///
+/// ```dart
+/// MihrPrimaryButton(size: MihrButtonSize.xxs, onPressed: _go, child: Text('Go'))
+/// // uses MihrButtonSize.xxs → 24px height, 12px font, 12px icon
+/// ```
+enum MihrButtonSize {
+  /// Extra-extra-small — 24px height, 12px font, 12px icon.
+  xxs(
+    height: 24,
+    paddingH: 6,
+    fontSize: 12,
+    iconSize: 12,
+    linkHeight: 16,
+  ),
+
+  /// Extra-small — 32px height, 12px font, 14px icon.
+  xs(
+    height: 32,
+    paddingH: 8,
+    fontSize: 12,
+    iconSize: 14,
+    linkHeight: 18,
+  ),
+
+  /// Small — 36px height, 14px font, 16px icon.
+  sm(
+    height: 36,
+    paddingH: 10,
+    fontSize: 14,
+    iconSize: 16,
+    linkHeight: 20,
+  ),
+
+  /// Medium (default) — 40px height, 14px font, 20px icon.
+  md(
+    height: 40,
+    paddingH: 12,
+    fontSize: 14,
+    iconSize: 20,
+    linkHeight: 20,
+  ),
+
+  /// Large — 44px height, 16px font, 20px icon.
+  lg(
+    height: 44,
+    paddingH: 14,
+    fontSize: 16,
+    iconSize: 20,
+    linkHeight: 24,
+  ),
+
+  /// Extra-large — 48px height, 16px font, 24px icon.
+  xl(
+    height: 48,
+    paddingH: 16,
+    fontSize: 16,
+    iconSize: 24,
+    linkHeight: 24,
+  ),
+
+  /// Extra-extra-large — 56px height, 18px font, 24px icon.
+  xxl(
+    height: 56,
+    paddingH: 20,
+    fontSize: 18,
+    iconSize: 24,
+    linkHeight: 28,
+  );
+
+  const MihrButtonSize({
     required this.height,
-    required this.paddingV,
     required this.paddingH,
-    required this.textStyle,
-    this.iconSize = 20.0,
+    required this.fontSize,
+    required this.iconSize,
+    required this.linkHeight,
   });
 
   /// Total button height constraint.
   final double height;
 
-  /// Vertical content padding.
-  final double paddingV;
-
   /// Horizontal content padding.
   final double paddingH;
 
-  /// Label text style (includes font size and weight).
-  final TextStyle textStyle;
+  /// Label font size in logical pixels.
+  final double fontSize;
 
   /// Icon frame size.
   final double iconSize;
-}
 
-/// Size presets for sm/md/lg/xl button variants.
-///
-/// Provide a custom [MihrButtonSizes] via [MihrButtonThemeData]
-/// to override the default sizing globally.
-///
-/// ```dart
-/// MihrButtonThemeData(
-///   sizes: MihrButtonSizes(
-///     md: MihrButtonSizeData(
-///       height: 44,
-///       paddingV: 12,
-///       paddingH: 16,
-///       textStyle: MihrTypography.textMd.semibold,
-///     ),
-///   ),
-/// )
-/// ```
-@immutable
-class MihrButtonSizes {
-  /// Creates size presets, falling back to defaults for any omitted size.
-  MihrButtonSizes({
-    MihrButtonSizeData? sm,
-    MihrButtonSizeData? md,
-    MihrButtonSizeData? lg,
-    MihrButtonSizeData? xl,
-  })  : sm = sm ?? _defaultSm,
-        md = md ?? _defaultMd,
-        lg = lg ?? _defaultLg,
-        xl = xl ?? _defaultXl;
-
-  /// Small button size preset (36px height).
-  final MihrButtonSizeData sm;
-
-  /// Medium button size preset (40px height).
-  final MihrButtonSizeData md;
-
-  /// Large button size preset (44px height).
-  final MihrButtonSizeData lg;
-
-  /// Extra-large button size preset (48px height).
-  final MihrButtonSizeData xl;
-
-  /// Resolves the [MihrButtonSizeData] for a given [size].
-  MihrButtonSizeData forSize(MihrButtonSize size) => switch (size) {
-        MihrButtonSize.sm => sm,
-        MihrButtonSize.md => md,
-        MihrButtonSize.lg => lg,
-        MihrButtonSize.xl => xl,
-      };
-
-  static final _defaultSm = MihrButtonSizeData(
-    height: 36,
-    paddingV: 8,
-    paddingH: 10,
-    textStyle: MihrTypography.textSm.semibold,
-  );
-
-  static final _defaultMd = MihrButtonSizeData(
-    height: 40,
-    paddingV: 10,
-    paddingH: 12,
-    textStyle: MihrTypography.textSm.semibold,
-  );
-
-  static final _defaultLg = MihrButtonSizeData(
-    height: 44,
-    paddingV: 10,
-    paddingH: 14,
-    textStyle: MihrTypography.textMd.semibold,
-  );
-
-  static final _defaultXl = MihrButtonSizeData(
-    height: 48,
-    paddingV: 12,
-    paddingH: 16,
-    textStyle: MihrTypography.textMd.semibold,
-  );
-}
-
-/// Size presets for link-style buttons (no padding, smaller height).
-@immutable
-class MihrLinkButtonSizes {
-  /// Creates link-button size presets, falling back to defaults for any omitted size.
-  MihrLinkButtonSizes({
-    MihrButtonSizeData? sm,
-    MihrButtonSizeData? md,
-    MihrButtonSizeData? lg,
-    MihrButtonSizeData? xl,
-  })  : sm = sm ?? _defaultSm,
-        md = md ?? _defaultMd,
-        lg = lg ?? _defaultLg,
-        xl = xl ?? _defaultXl;
-
-  /// Small link-button size preset (20px height).
-  final MihrButtonSizeData sm;
-
-  /// Medium link-button size preset (20px height).
-  final MihrButtonSizeData md;
-
-  /// Large link-button size preset (24px height).
-  final MihrButtonSizeData lg;
-
-  /// Extra-large link-button size preset (24px height).
-  final MihrButtonSizeData xl;
-
-  /// Resolves the [MihrButtonSizeData] for a given [size].
-  MihrButtonSizeData forSize(MihrButtonSize size) => switch (size) {
-        MihrButtonSize.sm => sm,
-        MihrButtonSize.md => md,
-        MihrButtonSize.lg => lg,
-        MihrButtonSize.xl => xl,
-      };
-
-  static final _defaultSm = MihrButtonSizeData(
-    height: 20,
-    paddingV: 0,
-    paddingH: 0,
-    textStyle: MihrTypography.textSm.semibold,
-  );
-
-  static final _defaultMd = MihrButtonSizeData(
-    height: 20,
-    paddingV: 0,
-    paddingH: 0,
-    textStyle: MihrTypography.textSm.semibold,
-  );
-
-  static final _defaultLg = MihrButtonSizeData(
-    height: 24,
-    paddingV: 0,
-    paddingH: 0,
-    textStyle: MihrTypography.textMd.semibold,
-  );
-
-  static final _defaultXl = MihrButtonSizeData(
-    height: 24,
-    paddingV: 0,
-    paddingH: 0,
-    textStyle: MihrTypography.textMd.semibold,
-  );
+  /// Height when used inside a link-style button.
+  final double linkHeight;
 }

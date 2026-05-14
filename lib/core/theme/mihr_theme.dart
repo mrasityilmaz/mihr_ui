@@ -1,6 +1,12 @@
+// The deprecated positional parameters on MihrTheme.light/dark are
+// intentionally retained through the 0.1.x line to give consumers a
+// grace period. The versioned ignore is per-package policy.
+// ignore_for_file: remove_deprecations_in_breaking_versions
+
 import 'package:flutter/material.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_defaults.dart';
-import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart';
+import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart'
+    show MihrButtonSize;
 import 'package:mihr_ui/components/buttons/mihr_button_theme.dart';
 import 'package:mihr_ui/core/theme/colors/alpha_colors.dart';
 import 'package:mihr_ui/core/theme/colors/background_colors.dart';
@@ -11,45 +17,63 @@ import 'package:mihr_ui/core/theme/colors/foreground_colors.dart';
 import 'package:mihr_ui/core/theme/colors/mihr_colors.dart';
 import 'package:mihr_ui/core/theme/colors/text_colors.dart';
 import 'package:mihr_ui/core/theme/colors/utility_colors.dart';
+import 'package:mihr_ui/core/theme/mihr_theme_config.dart';
 import 'package:mihr_ui/core/theme/radius/mihr_radius.dart';
 import 'package:mihr_ui/core/theme/typography/mihr_typography.dart';
 
-/// Central theme configuration for the Mihr UI design system.
+/// Central theme factory for the Mihr UI design system.
 ///
-/// Provides [light] and [dark] factory methods that wire all semantic
-/// color tokens into Flutter's [ThemeData] via [ThemeExtension], and
-/// provide structural styling for Material buttons via
-/// [MihrButtonDefaults.baseStyle].
+/// Produces a fully wired [ThemeData] with semantic [ThemeExtension]s,
+/// Material widget themes, a complete [ColorScheme], and
+/// production-ready defaults for light and dark modes.
+///
+/// The canonical API takes a single [MihrThemeConfig] preset so apps
+/// can centralize every customization in one shareable value.
 ///
 /// ## Basic usage
+///
 /// ```dart
 /// MaterialApp(
 ///   theme: MihrTheme.light(),
 ///   darkTheme: MihrTheme.dark(),
-///   child: MyApp(),
 /// );
 /// ```
 ///
-/// ## Custom brand color
-/// ```dart
-/// final myBrand = ColorScaleGenerator.fromHex('#E63946');
-/// MaterialApp(
-///   theme: MihrTheme.light(brand: myBrand),
-///   darkTheme: MihrTheme.dark(brand: myBrand),
-/// );
-/// ```
+/// ## Custom preset
 ///
-/// ## Custom button shape
 /// ```dart
-/// MihrTheme.light(
-///   brand: myBrand,
+/// final cfg = MihrThemeConfig(
+///   brand: ColorScaleGenerator.fromHex('#E63946'),
 ///   buttonTheme: MihrButtonThemeData(
 ///     shape: RoundedRectangleBorder(
 ///       borderRadius: BorderRadius.circular(12),
 ///     ),
 ///   ),
-/// )
+/// );
+///
+/// MaterialApp(
+///   theme: MihrTheme.light(config: cfg),
+///   darkTheme: MihrTheme.dark(config: cfg),
+/// );
 /// ```
+///
+/// ## Material escape-hatch
+///
+/// For Material properties Mihr does not model semantically (e.g.
+/// [ThemeData.scaffoldBackgroundColor], [AppBarTheme.centerTitle]),
+/// use [MihrThemeConfig.materialOverrides]:
+///
+/// ```dart
+/// MihrThemeConfig(
+///   materialOverrides: (base) => base.copyWith(
+///     scaffoldBackgroundColor: base.bgColors.secondary,
+///     appBarTheme: base.appBarTheme.copyWith(centerTitle: true),
+///   ),
+/// );
+/// ```
+///
+/// See also: [MihrThemeDataExtension] for the `base.bgColors` / etc.
+/// getters available inside `materialOverrides`.
 class MihrTheme {
   MihrTheme._();
 
@@ -59,31 +83,151 @@ class MihrTheme {
   static const double _chipRadius = MihrRadius.xxl;
   static const double _fabRadius = MihrRadius.xl;
 
-  /// Creates a light mode [ThemeData] with all semantic extensions.
+  /// Builds a light-mode [ThemeData] from the given [config].
   ///
-  /// [brand] — Override the brand color scale. Default: purple.
-  /// [gray] — Override the neutral gray scale.
-  /// [error] — Override error colors.
-  /// [warning] — Override warning colors.
-  /// [success] — Override success colors.
-  /// [fontFamily] — Override the font family. Default: 'Inter'.
-  /// [buttonTheme] — Override button shape, shadows, sizes, or
-  ///   per-variant styles.
+  /// The legacy named parameters ([brand], [gray], ..., [buttonTheme])
+  /// are retained for backward compatibility and forward into [config]
+  /// when non-null. They are scheduled for removal in 0.2.0 — migrate
+  /// to [MihrThemeConfig].
   static ThemeData light({
+    MihrThemeConfig config = const MihrThemeConfig(),
+    @Deprecated('Use MihrThemeConfig.brand. Removed in 0.2.0.')
+    ColorScale? brand,
+    @Deprecated('Use MihrThemeConfig.gray. Removed in 0.2.0.')
+    ColorScale? gray,
+    @Deprecated('Use MihrThemeConfig.error. Removed in 0.2.0.')
+    ColorScale? error,
+    @Deprecated('Use MihrThemeConfig.warning. Removed in 0.2.0.')
+    ColorScale? warning,
+    @Deprecated('Use MihrThemeConfig.success. Removed in 0.2.0.')
+    ColorScale? success,
+    @Deprecated('Use MihrThemeConfig.fontFamily. Removed in 0.2.0.')
+    String? fontFamily,
+    @Deprecated('Use MihrThemeConfig.buttonTheme. Removed in 0.2.0.')
+    MihrButtonThemeData? buttonTheme,
+  }) {
+    return _buildThemeData(
+      _mergeLegacy(
+        config,
+        brand: brand,
+        gray: gray,
+        error: error,
+        warning: warning,
+        success: success,
+        fontFamily: fontFamily,
+        buttonTheme: buttonTheme,
+      ),
+      Brightness.light,
+    );
+  }
+
+  /// Builds a dark-mode [ThemeData] from the given [config].
+  ///
+  /// See [light] for parameter semantics. When `config.gray` is
+  /// `null`, this uses [MihrColors.grayDark] for dark-optimized
+  /// contrast.
+  static ThemeData dark({
+    MihrThemeConfig config = const MihrThemeConfig(),
+    @Deprecated('Use MihrThemeConfig.brand. Removed in 0.2.0.')
+    ColorScale? brand,
+    @Deprecated('Use MihrThemeConfig.gray. Removed in 0.2.0.')
+    ColorScale? gray,
+    @Deprecated('Use MihrThemeConfig.error. Removed in 0.2.0.')
+    ColorScale? error,
+    @Deprecated('Use MihrThemeConfig.warning. Removed in 0.2.0.')
+    ColorScale? warning,
+    @Deprecated('Use MihrThemeConfig.success. Removed in 0.2.0.')
+    ColorScale? success,
+    @Deprecated('Use MihrThemeConfig.fontFamily. Removed in 0.2.0.')
+    String? fontFamily,
+    @Deprecated('Use MihrThemeConfig.buttonTheme. Removed in 0.2.0.')
+    MihrButtonThemeData? buttonTheme,
+  }) {
+    return _buildThemeData(
+      _mergeLegacy(
+        config,
+        brand: brand,
+        gray: gray,
+        error: error,
+        warning: warning,
+        success: success,
+        fontFamily: fontFamily,
+        buttonTheme: buttonTheme,
+      ),
+      Brightness.dark,
+    );
+  }
+
+  /// Folds any non-null legacy parameter into a [MihrThemeConfig],
+  /// leaving unrelated fields untouched.
+  static MihrThemeConfig _mergeLegacy(
+    MihrThemeConfig config, {
     ColorScale? brand,
     ColorScale? gray,
     ColorScale? error,
     ColorScale? warning,
     ColorScale? success,
-    String fontFamily = MihrTypography.defaultFontFamily,
+    String? fontFamily,
     MihrButtonThemeData? buttonTheme,
   }) {
-    final b = brand ?? MihrColors.brand;
-    final g = gray ?? MihrColors.gray;
-    final e = error ?? MihrColors.error;
-    final w = warning ?? MihrColors.warning;
-    final s = success ?? MihrColors.success;
+    final hasLegacy = brand != null ||
+        gray != null ||
+        error != null ||
+        warning != null ||
+        success != null ||
+        fontFamily != null ||
+        buttonTheme != null;
+    if (!hasLegacy) return config;
+    return config.copyWith(
+      brand: brand,
+      gray: gray,
+      error: error,
+      warning: warning,
+      success: success,
+      fontFamily: fontFamily,
+      buttonTheme: buttonTheme,
+    );
+  }
 
+  /// Builds a complete [ThemeData] for the given [brightness] and
+  /// [config]. Runs [MihrThemeConfig.materialOverrides] as the last
+  /// step so users can adjust any Material property on the final
+  /// output.
+  static ThemeData _buildThemeData(
+    MihrThemeConfig config,
+    Brightness brightness,
+  ) {
+    final isDark = brightness == Brightness.dark;
+    final b = config.brand ?? MihrColors.brand;
+    final g = config.gray ?? (isDark ? MihrColors.grayDark : MihrColors.gray);
+    final e = config.error ?? MihrColors.error;
+    final w = config.warning ?? MihrColors.warning;
+    final s = config.success ?? MihrColors.success;
+
+    final typo = config.typography ??
+        MihrTypography.fromFontFamily(config.fontFamily);
+
+    final base = isDark
+        ? _buildDark(config: config, typo: typo, b: b, g: g, e: e, w: w, s: s)
+        : _buildLight(config: config, typo: typo, b: b, g: g, e: e, w: w, s: s);
+
+    final overrides = config.materialOverrides;
+    return overrides == null ? base : overrides(base);
+  }
+
+  // ──────────────────────────────────────────────────────────────────
+  // Light
+  // ──────────────────────────────────────────────────────────────────
+
+  static ThemeData _buildLight({
+    required MihrThemeConfig config,
+    required MihrTypography typo,
+    required ColorScale b,
+    required ColorScale g,
+    required ColorScale e,
+    required ColorScale w,
+    required ColorScale s,
+  }) {
     final colorScheme = ColorScheme(
       brightness: Brightness.light,
       primary: b.shade600,
@@ -122,34 +266,27 @@ class MihrTheme {
       surfaceTint: Colors.transparent,
     );
 
-    final baseTextTheme = MihrTypography.textTheme(fontFamily: fontFamily);
-    final textTheme = baseTextTheme.apply(
-      bodyColor: g.shade900,
-      displayColor: g.shade900,
-    );
+    final textTheme = typo.toTextTheme().apply(
+          bodyColor: g.shade900,
+          displayColor: g.shade900,
+        );
 
-    // Structural button base (shared by Material buttons)
-    final btnTheme = buttonTheme ?? const MihrButtonThemeData();
-    final sizes = btnTheme.sizes ?? MihrButtonSizes();
+    final btnTheme = config.buttonTheme ?? const MihrButtonThemeData();
     final mdBase = MihrButtonDefaults.baseStyle(
-      sizeData: sizes.md,
+      size: MihrButtonSize.md,
       shape: btnTheme.shape,
     );
 
     return ThemeData(
       brightness: Brightness.light,
       colorScheme: colorScheme,
-      fontFamily: fontFamily,
+      fontFamily: typo.fontFamily,
       textTheme: textTheme,
       scaffoldBackgroundColor: MihrColors.white,
       splashFactory: InkSparkle.splashFactory,
-
-      // -- Material buttons: structural base, colors from ColorScheme --
       elevatedButtonTheme: ElevatedButtonThemeData(style: mdBase),
       outlinedButtonTheme: OutlinedButtonThemeData(style: mdBase),
       textButtonTheme: TextButtonThemeData(style: mdBase),
-
-      // -- AppBar --
       appBarTheme: AppBarTheme(
         backgroundColor: MihrColors.white,
         foregroundColor: g.shade900,
@@ -158,8 +295,6 @@ class MihrTheme {
         surfaceTintColor: Colors.transparent,
         iconTheme: IconThemeData(color: g.shade500),
       ),
-
-      // -- Input / TextField --
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: MihrColors.white,
@@ -193,8 +328,6 @@ class MihrTheme {
           vertical: 10,
         ),
       ),
-
-      // -- Card --
       cardTheme: CardThemeData(
         color: MihrColors.white,
         elevation: 0,
@@ -204,8 +337,6 @@ class MihrTheme {
           side: BorderSide(color: g.shade200),
         ),
       ),
-
-      // -- Dialog --
       dialogTheme: DialogThemeData(
         backgroundColor: MihrColors.white,
         surfaceTintColor: Colors.transparent,
@@ -213,8 +344,6 @@ class MihrTheme {
           borderRadius: BorderRadius.circular(_cardRadius),
         ),
       ),
-
-      // -- Bottom Sheet --
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: MihrColors.white,
         surfaceTintColor: Colors.transparent,
@@ -224,11 +353,7 @@ class MihrTheme {
           ),
         ),
       ),
-
-      // -- Divider --
       dividerTheme: DividerThemeData(color: g.shade200, thickness: 1, space: 1),
-
-      // -- Checkbox --
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.disabled)) {
@@ -249,8 +374,6 @@ class MihrTheme {
         side: BorderSide(color: g.shade300, width: 1.5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
-
-      // -- Switch --
       switchTheme: SwitchThemeData(
         thumbColor: const WidgetStatePropertyAll(MihrColors.white),
         trackColor: WidgetStateProperty.resolveWith((states) {
@@ -275,8 +398,6 @@ class MihrTheme {
           return null;
         }),
       ),
-
-      // -- Radio --
       radioTheme: RadioThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
@@ -291,8 +412,6 @@ class MihrTheme {
           return null;
         }),
       ),
-
-      // -- Chip --
       chipTheme: ChipThemeData(
         backgroundColor: b.shade50,
         labelStyle: TextStyle(color: b.shade700),
@@ -301,8 +420,6 @@ class MihrTheme {
           borderRadius: BorderRadius.circular(_chipRadius),
         ),
       ),
-
-      // -- FAB --
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: b.shade600,
         foregroundColor: MihrColors.white,
@@ -311,15 +428,11 @@ class MihrTheme {
           borderRadius: BorderRadius.circular(_fabRadius),
         ),
       ),
-
-      // -- Progress Indicator --
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: b.shade600,
         linearTrackColor: g.shade200,
         circularTrackColor: g.shade200,
       ),
-
-      // -- SnackBar --
       snackBarTheme: SnackBarThemeData(
         backgroundColor: g.shade950,
         contentTextStyle: const TextStyle(color: MihrColors.white),
@@ -328,8 +441,6 @@ class MihrTheme {
         ),
         behavior: SnackBarBehavior.floating,
       ),
-
-      // -- Popup Menu --
       popupMenuTheme: PopupMenuThemeData(
         color: MihrColors.white,
         surfaceTintColor: Colors.transparent,
@@ -337,8 +448,6 @@ class MihrTheme {
           borderRadius: BorderRadius.circular(_defaultRadius),
         ),
       ),
-
-      // -- Tooltip --
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(
           color: g.shade950,
@@ -346,26 +455,18 @@ class MihrTheme {
         ),
         textStyle: const TextStyle(color: MihrColors.white),
       ),
-
-      // -- Icon --
       iconTheme: IconThemeData(color: g.shade400),
-
-      // -- Text Selection --
       textSelectionTheme: TextSelectionThemeData(
         cursorColor: b.shade600,
         selectionColor: b.shade100,
         selectionHandleColor: b.shade600,
       ),
-
-      // -- Tab Bar --
       tabBarTheme: TabBarThemeData(
         labelColor: b.shade700,
         unselectedLabelColor: g.shade500,
         indicatorColor: b.shade600,
         dividerColor: g.shade200,
       ),
-
-      // -- Navigation Bar --
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: MihrColors.white,
         surfaceTintColor: Colors.transparent,
@@ -377,21 +478,15 @@ class MihrTheme {
           return IconThemeData(color: g.shade400);
         }),
       ),
-
-      // -- Drawer --
       drawerTheme: const DrawerThemeData(
         backgroundColor: MihrColors.white,
         surfaceTintColor: Colors.transparent,
       ),
-
-      // -- ListTile --
       listTileTheme: ListTileThemeData(
         iconColor: g.shade400,
         textColor: g.shade900,
       ),
-
-      // -- Semantic extensions --
-      extensions: [
+      extensions: <ThemeExtension<dynamic>>[
         TextColors.light(brand: b, gray: g, error: e, warning: w, success: s),
         BackgroundColors.light(
           brand: b,
@@ -423,29 +518,26 @@ class MihrTheme {
           warning: w,
           success: s,
         ),
+        typo,
         btnTheme,
+        ...config.extraExtensions.cast(),
       ],
     );
   }
 
-  /// Creates a dark mode [ThemeData] with all semantic extensions.
-  ///
-  /// Uses [MihrColors.grayDark] by default for dark-mode-optimized grays.
-  static ThemeData dark({
-    ColorScale? brand,
-    ColorScale? gray,
-    ColorScale? error,
-    ColorScale? warning,
-    ColorScale? success,
-    String fontFamily = MihrTypography.defaultFontFamily,
-    MihrButtonThemeData? buttonTheme,
-  }) {
-    final b = brand ?? MihrColors.brand;
-    final g = gray ?? MihrColors.grayDark;
-    final e = error ?? MihrColors.error;
-    final w = warning ?? MihrColors.warning;
-    final s = success ?? MihrColors.success;
+  // ──────────────────────────────────────────────────────────────────
+  // Dark
+  // ──────────────────────────────────────────────────────────────────
 
+  static ThemeData _buildDark({
+    required MihrThemeConfig config,
+    required MihrTypography typo,
+    required ColorScale b,
+    required ColorScale g,
+    required ColorScale e,
+    required ColorScale w,
+    required ColorScale s,
+  }) {
     final colorScheme = ColorScheme(
       brightness: Brightness.dark,
       primary: b.shade500,
@@ -484,33 +576,27 @@ class MihrTheme {
       surfaceTint: Colors.transparent,
     );
 
-    final baseTextTheme = MihrTypography.textTheme(fontFamily: fontFamily);
-    final textTheme = baseTextTheme.apply(
-      bodyColor: g.shade50,
-      displayColor: g.shade50,
-    );
+    final textTheme = typo.toTextTheme().apply(
+          bodyColor: g.shade50,
+          displayColor: g.shade50,
+        );
 
-    final btnTheme = buttonTheme ?? const MihrButtonThemeData();
-    final sizes = btnTheme.sizes ?? MihrButtonSizes();
+    final btnTheme = config.buttonTheme ?? const MihrButtonThemeData();
     final mdBase = MihrButtonDefaults.baseStyle(
-      sizeData: sizes.md,
+      size: MihrButtonSize.md,
       shape: btnTheme.shape,
     );
 
     return ThemeData(
       brightness: Brightness.dark,
       colorScheme: colorScheme,
-      fontFamily: fontFamily,
+      fontFamily: typo.fontFamily,
       textTheme: textTheme,
       scaffoldBackgroundColor: g.shade950,
       splashFactory: InkSparkle.splashFactory,
-
-      // -- Material buttons: structural base, colors from ColorScheme --
       elevatedButtonTheme: ElevatedButtonThemeData(style: mdBase),
       outlinedButtonTheme: OutlinedButtonThemeData(style: mdBase),
       textButtonTheme: TextButtonThemeData(style: mdBase),
-
-      // -- AppBar --
       appBarTheme: AppBarTheme(
         backgroundColor: g.shade950,
         foregroundColor: g.shade50,
@@ -519,8 +605,6 @@ class MihrTheme {
         surfaceTintColor: Colors.transparent,
         iconTheme: IconThemeData(color: g.shade400),
       ),
-
-      // -- Input / TextField --
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: g.shade950,
@@ -554,8 +638,6 @@ class MihrTheme {
           vertical: 10,
         ),
       ),
-
-      // -- Card --
       cardTheme: CardThemeData(
         color: g.shade900,
         elevation: 0,
@@ -565,8 +647,6 @@ class MihrTheme {
           side: BorderSide(color: g.shade800),
         ),
       ),
-
-      // -- Dialog --
       dialogTheme: DialogThemeData(
         backgroundColor: g.shade900,
         surfaceTintColor: Colors.transparent,
@@ -574,8 +654,6 @@ class MihrTheme {
           borderRadius: BorderRadius.circular(_cardRadius),
         ),
       ),
-
-      // -- Bottom Sheet --
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: g.shade900,
         surfaceTintColor: Colors.transparent,
@@ -585,11 +663,7 @@ class MihrTheme {
           ),
         ),
       ),
-
-      // -- Divider --
       dividerTheme: DividerThemeData(color: g.shade800, thickness: 1, space: 1),
-
-      // -- Checkbox --
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.disabled)) {
@@ -610,8 +684,6 @@ class MihrTheme {
         side: BorderSide(color: g.shade700, width: 1.5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
-
-      // -- Switch --
       switchTheme: SwitchThemeData(
         thumbColor: const WidgetStatePropertyAll(MihrColors.white),
         trackColor: WidgetStateProperty.resolveWith((states) {
@@ -636,8 +708,6 @@ class MihrTheme {
           return null;
         }),
       ),
-
-      // -- Radio --
       radioTheme: RadioThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
@@ -652,8 +722,6 @@ class MihrTheme {
           return null;
         }),
       ),
-
-      // -- Chip --
       chipTheme: ChipThemeData(
         backgroundColor: b.shade900,
         labelStyle: TextStyle(color: b.shade200),
@@ -662,8 +730,6 @@ class MihrTheme {
           borderRadius: BorderRadius.circular(_chipRadius),
         ),
       ),
-
-      // -- FAB --
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: b.shade600,
         foregroundColor: MihrColors.white,
@@ -672,15 +738,11 @@ class MihrTheme {
           borderRadius: BorderRadius.circular(_fabRadius),
         ),
       ),
-
-      // -- Progress Indicator --
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: b.shade500,
         linearTrackColor: g.shade800,
         circularTrackColor: g.shade800,
       ),
-
-      // -- SnackBar --
       snackBarTheme: SnackBarThemeData(
         backgroundColor: g.shade200,
         contentTextStyle: TextStyle(color: g.shade900),
@@ -689,8 +751,6 @@ class MihrTheme {
         ),
         behavior: SnackBarBehavior.floating,
       ),
-
-      // -- Popup Menu --
       popupMenuTheme: PopupMenuThemeData(
         color: g.shade900,
         surfaceTintColor: Colors.transparent,
@@ -698,8 +758,6 @@ class MihrTheme {
           borderRadius: BorderRadius.circular(_defaultRadius),
         ),
       ),
-
-      // -- Tooltip --
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(
           color: g.shade200,
@@ -707,26 +765,18 @@ class MihrTheme {
         ),
         textStyle: TextStyle(color: g.shade950),
       ),
-
-      // -- Icon --
       iconTheme: IconThemeData(color: g.shade400),
-
-      // -- Text Selection --
       textSelectionTheme: TextSelectionThemeData(
         cursorColor: b.shade500,
         selectionColor: b.shade800,
         selectionHandleColor: b.shade500,
       ),
-
-      // -- Tab Bar --
       tabBarTheme: TabBarThemeData(
         labelColor: g.shade50,
         unselectedLabelColor: g.shade500,
         indicatorColor: b.shade500,
         dividerColor: g.shade800,
       ),
-
-      // -- Navigation Bar --
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: g.shade950,
         surfaceTintColor: Colors.transparent,
@@ -738,21 +788,15 @@ class MihrTheme {
           return IconThemeData(color: g.shade400);
         }),
       ),
-
-      // -- Drawer --
       drawerTheme: DrawerThemeData(
         backgroundColor: g.shade950,
         surfaceTintColor: Colors.transparent,
       ),
-
-      // -- ListTile --
       listTileTheme: ListTileThemeData(
         iconColor: g.shade400,
         textColor: g.shade50,
       ),
-
-      // -- Semantic extensions --
-      extensions: [
+      extensions: <ThemeExtension<dynamic>>[
         TextColors.dark(gray: g, error: e, warning: w, success: s),
         BackgroundColors.dark(
           brand: b,
@@ -778,14 +822,21 @@ class MihrTheme {
           warning: w,
           success: s,
         ),
+        typo,
         btnTheme,
+        ...config.extraExtensions.cast(),
       ],
     );
   }
 }
 
-/// Convenience extensions for accessing semantic tokens
-/// from [BuildContext].
+/// Convenience extensions for accessing Mihr semantic tokens from a
+/// [BuildContext].
+///
+/// ```dart
+/// Container(color: context.bgColors.brandSolid);
+/// Text('Hi', style: context.typography.textMd.semibold);
+/// ```
 extension MihrThemeExtension on BuildContext {
   /// Semantic text color tokens (23 tokens).
   TextColors get textColors => Theme.of(this).extension<TextColors>()!;
@@ -811,7 +862,62 @@ extension MihrThemeExtension on BuildContext {
   ComponentColors get componentColors =>
       Theme.of(this).extension<ComponentColors>()!;
 
+  /// Typography theme with font-family-resolved [TypeStyle] instances.
+  MihrTypography get typography =>
+      Theme.of(this).extension<MihrTypography>()!;
+
   /// Mihr button theme overrides, or `null` if none registered.
   MihrButtonThemeData? get mihrButtonTheme =>
       Theme.of(this).extension<MihrButtonThemeData>();
+}
+
+/// Convenience extensions for accessing Mihr semantic tokens directly
+/// from a [ThemeData].
+///
+/// Mirrors the [BuildContext] getters so tokens remain ergonomic
+/// inside [MihrThemeConfig.materialOverrides], tests, and any context
+/// where only a [ThemeData] is available:
+///
+/// ```dart
+/// MihrThemeConfig(
+///   materialOverrides: (base) => base.copyWith(
+///     scaffoldBackgroundColor: base.bgColors.secondary,
+///     appBarTheme: base.appBarTheme.copyWith(
+///       backgroundColor: base.bgColors.brandSolid,
+///       foregroundColor: base.textColors.white,
+///     ),
+///   ),
+/// );
+/// ```
+extension MihrThemeDataExtension on ThemeData {
+  /// Semantic text color tokens (23 tokens).
+  TextColors get textColors => extension<TextColors>()!;
+
+  /// Semantic background color tokens (32 tokens).
+  BackgroundColors get bgColors => extension<BackgroundColors>()!;
+
+  /// Semantic border color tokens (10 tokens).
+  BorderColors get borderColors => extension<BorderColors>()!;
+
+  /// Semantic foreground/icon color tokens (21 tokens).
+  ForegroundColors get fgColors => extension<ForegroundColors>()!;
+
+  /// White/black opacity tokens (20 tokens).
+  AlphaColors get alphaColors => extension<AlphaColors>()!;
+
+  /// Multi-color utility tokens for badges, tags, and charts.
+  UtilityColors get utilityColors => extension<UtilityColors>()!;
+
+  /// Component-specific color tokens (29 tokens).
+  ComponentColors get componentColors => extension<ComponentColors>()!;
+
+  /// Mihr typography theme with font-family-resolved [TypeStyle]s.
+  ///
+  /// Named `mihrTypography` to avoid collision with the built-in
+  /// Material [ThemeData.typography] (which returns a Material
+  /// [Typography], not [MihrTypography]).
+  MihrTypography get mihrTypography => extension<MihrTypography>()!;
+
+  /// Mihr button theme overrides, or `null` if none registered.
+  MihrButtonThemeData? get mihrButtonTheme => extension<MihrButtonThemeData>();
 }

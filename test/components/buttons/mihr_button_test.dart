@@ -1,8 +1,10 @@
 import 'dart:ui';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mihr_ui/components/buttons/buttons.dart';
+import 'package:mihr_ui/components/buttons/mihr_button_container.dart';
 import 'package:mihr_ui/core/theme/mihr_theme.dart';
 
 Widget _wrap(Widget child, {Brightness brightness = Brightness.light}) {
@@ -12,6 +14,34 @@ Widget _wrap(Widget child, {Brightness brightness = Brightness.light}) {
     theme: theme,
     home: Scaffold(body: Center(child: child)),
   );
+}
+
+/// Renders [button], simulates a mouse hover, and returns the resolved
+/// [MihrButtonContainer.color] that the button displays while hovered.
+///
+/// Use this to assert that hover feedback (a) exists, (b) is not the same
+/// as the resting surface color, and (c) matches the expected semantic token.
+Future<Color> _resolvedHoverColor(
+  WidgetTester tester,
+  Widget button, {
+  Brightness brightness = Brightness.light,
+}) async {
+  await tester.pumpWidget(_wrap(button, brightness: brightness));
+  await tester.pumpAndSettle();
+
+  final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+  await gesture.addPointer(location: Offset.zero);
+  addTearDown(gesture.removePointer);
+  await tester.pump();
+
+  await gesture.moveTo(
+    tester.getCenter(find.byType(MihrButtonContainer).first),
+  );
+  await tester.pumpAndSettle();
+
+  return tester
+      .widget<MihrButtonContainer>(find.byType(MihrButtonContainer).first)
+      .color;
 }
 
 void main() {
@@ -236,6 +266,47 @@ void main() {
 
       expect(find.text('Dark'), findsOneWidget);
     });
+
+    testWidgets(
+        'hover bg equals bg.primaryHover (not same as resting bg)', (tester) async {
+      final theme = MihrTheme.light();
+
+      final hovered = await _resolvedHoverColor(
+        tester,
+        MihrSecondaryButton(onPressed: () {}, child: const Text('Cancel')),
+      );
+
+      expect(
+        hovered,
+        isNot(theme.bgColors.primary),
+        reason: 'hover must differ from the resting bg.primary',
+      );
+      expect(
+        hovered,
+        theme.bgColors.primaryHover,
+        reason: 'secondary button hover must use bg.primaryHover',
+      );
+    });
+
+    testWidgets('hover bg differs from resting bg in dark mode', (tester) async {
+      final theme = MihrTheme.dark();
+
+      final hovered = await _resolvedHoverColor(
+        tester,
+        MihrSecondaryButton(onPressed: () {}, child: const Text('Cancel')),
+        brightness: Brightness.dark,
+      );
+
+      expect(
+        hovered,
+        isNot(theme.bgColors.primary),
+        reason: 'hover must differ from the dark primary surface',
+      );
+      expect(
+        hovered,
+        theme.bgColors.primaryHover,
+      );
+    });
   });
 
   // -----------------------------------------------------------------------
@@ -272,6 +343,62 @@ void main() {
       final size = tester.getSize(find.byType(MihrTertiaryButton));
       expect(size.width, 44);
       expect(size.height, 44);
+    });
+
+    testWidgets(
+        'hover bg equals bg.primaryHover in light mode '
+        '(not transparent, not same as primary surface)', (tester) async {
+      final theme = MihrTheme.light();
+
+      final hovered = await _resolvedHoverColor(
+        tester,
+        MihrTertiaryButton(onPressed: () {}, child: const Text('More')),
+      );
+
+      expect(
+        hovered,
+        isNot(Colors.transparent),
+        reason: 'hover must provide visual feedback',
+      );
+      expect(
+        hovered,
+        isNot(theme.bgColors.primary),
+        reason: 'hover must be distinguishable from the primary surface',
+      );
+      expect(
+        hovered,
+        theme.bgColors.primaryHover,
+        reason: 'ghost button hover must use bg.primaryHover '
+            '(one step above primary surface)',
+      );
+    });
+
+    testWidgets(
+        'hover bg equals bg.primaryHover in dark mode '
+        '(not transparent, not same as primary surface)', (tester) async {
+      final theme = MihrTheme.dark();
+
+      final hovered = await _resolvedHoverColor(
+        tester,
+        MihrTertiaryButton(onPressed: () {}, child: const Text('More')),
+        brightness: Brightness.dark,
+      );
+
+      expect(
+        hovered,
+        isNot(Colors.transparent),
+        reason: 'hover must provide visual feedback',
+      );
+      expect(
+        hovered,
+        isNot(theme.bgColors.primary),
+        reason: 'hover must be distinguishable from the primary surface',
+      );
+      expect(
+        hovered,
+        theme.bgColors.primaryHover,
+        reason: 'ghost button hover must use bg.primaryHover in dark mode',
+      );
     });
   });
 
@@ -401,6 +528,69 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Dark Delete'), findsOneWidget);
+    });
+
+    testWidgets(
+        'tertiary variant: hover bg equals bg.errorPrimary in light mode '
+        '(not transparent, not same as primary surface)', (tester) async {
+      final theme = MihrTheme.light();
+
+      final hovered = await _resolvedHoverColor(
+        tester,
+        MihrDestructiveButton.tertiary(
+          onPressed: () {},
+          child: const Text('Delete'),
+        ),
+      );
+
+      expect(
+        hovered,
+        isNot(Colors.transparent),
+        reason: 'destructive ghost hover must provide visual feedback',
+      );
+      expect(
+        hovered,
+        isNot(theme.bgColors.primary),
+        reason: 'hover must be distinguishable from the primary surface',
+      );
+      expect(
+        hovered,
+        theme.bgColors.errorPrimary,
+        reason:
+            'destructive ghost button hover must use bg.errorPrimary tint',
+      );
+    });
+
+    testWidgets(
+        'tertiary variant: hover bg equals bg.errorPrimary in dark mode '
+        '(not transparent, not same as primary surface)', (tester) async {
+      final theme = MihrTheme.dark();
+
+      final hovered = await _resolvedHoverColor(
+        tester,
+        MihrDestructiveButton.tertiary(
+          onPressed: () {},
+          child: const Text('Delete'),
+        ),
+        brightness: Brightness.dark,
+      );
+
+      expect(
+        hovered,
+        isNot(Colors.transparent),
+        reason: 'destructive ghost hover must provide visual feedback in dark',
+      );
+      expect(
+        hovered,
+        isNot(theme.bgColors.primary),
+        reason: 'hover must be distinguishable from the dark primary surface',
+      );
+      expect(
+        hovered,
+        theme.bgColors.errorPrimary,
+        reason: 'destructive ghost button hover must use bg.errorPrimary '
+            'in dark mode',
+      );
     });
   });
 
