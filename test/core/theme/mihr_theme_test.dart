@@ -1,3 +1,7 @@
+// Legacy tests exercise the deprecated positional parameters on
+// MihrTheme.light/dark. Suppressed until removal in 0.2.0.
+// ignore_for_file: deprecated_member_use_from_same_package
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mihr_ui/mihr_ui.dart';

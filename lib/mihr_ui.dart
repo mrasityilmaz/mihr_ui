@@ -36,6 +36,7 @@ export 'core/theme/colors/utility_colors.dart';
 export 'core/theme/colors/utility_scale.dart';
 // Theme
 export 'core/theme/mihr_theme.dart';
+export 'core/theme/mihr_theme_config.dart';
 // Radius
 export 'core/theme/radius/mihr_radius.dart';
 // Shadows

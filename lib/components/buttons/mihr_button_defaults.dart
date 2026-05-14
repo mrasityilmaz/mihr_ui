@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart';
+import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart'
+    show MihrButtonSize;
 import 'package:mihr_ui/core/theme/colors/background_colors.dart';
 import 'package:mihr_ui/core/theme/colors/border_colors.dart';
 import 'package:mihr_ui/core/theme/colors/foreground_colors.dart';
@@ -31,24 +32,28 @@ class MihrButtonDefaults {
   /// splash factory, animation duration, and cursor. Does NOT contain
   /// backgroundColor, foregroundColor, side, or elevation.
   static ButtonStyle baseStyle({
-    required MihrButtonSizeData sizeData,
+    required MihrButtonSize size,
     OutlinedBorder? shape,
     bool isSquare = false,
   }) {
     final effectiveShape = shape ??
         const RoundedRectangleBorder(borderRadius: MihrRadius.borderMd);
+    final ts = TextStyle(
+      fontSize: size.fontSize,
+      fontWeight: FontWeight.w600,
+    );
 
     if (isSquare) {
       return ButtonStyle(
         minimumSize: WidgetStatePropertyAll(
-          Size(sizeData.height, sizeData.height),
+          Size(size.height, size.height),
         ),
         fixedSize: WidgetStatePropertyAll(
-          Size(sizeData.height, sizeData.height),
+          Size(size.height, size.height),
         ),
         padding: const WidgetStatePropertyAll(EdgeInsets.zero),
-        textStyle: WidgetStatePropertyAll(sizeData.textStyle),
-        iconSize: WidgetStatePropertyAll(sizeData.iconSize),
+        textStyle: WidgetStatePropertyAll(ts),
+        iconSize: WidgetStatePropertyAll(size.iconSize),
         shape: WidgetStatePropertyAll(effectiveShape),
         overlayColor: const WidgetStatePropertyAll(Colors.transparent),
         splashFactory: NoSplash.splashFactory,
@@ -64,17 +69,16 @@ class MihrButtonDefaults {
 
     return ButtonStyle(
       padding: WidgetStatePropertyAll(
-        EdgeInsets.symmetric(
-          vertical: sizeData.paddingV,
-          horizontal: sizeData.paddingH,
-        ),
+        EdgeInsets.symmetric(horizontal: size.paddingH),
       ),
-      minimumSize: WidgetStatePropertyAll(Size(0, sizeData.height)),
+      minimumSize: WidgetStatePropertyAll(
+        Size(0, size.height),
+      ),
       maximumSize: WidgetStatePropertyAll(
-        Size(double.infinity, sizeData.height),
+        Size(double.maxFinite, size.height),
       ),
-      textStyle: WidgetStatePropertyAll(sizeData.textStyle),
-      iconSize: WidgetStatePropertyAll(sizeData.iconSize),
+      textStyle: WidgetStatePropertyAll(ts),
+      iconSize: WidgetStatePropertyAll(size.iconSize),
       shape: WidgetStatePropertyAll(effectiveShape),
       overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       splashFactory: NoSplash.splashFactory,
@@ -91,30 +95,36 @@ class MihrButtonDefaults {
   /// Structural style for link-style buttons (no padding, underline
   /// on hover).
   static ButtonStyle linkBaseStyle({
-    required MihrButtonSizeData sizeData,
+    required MihrButtonSize size,
     required Color hoverDecorationColor,
     OutlinedBorder? shape,
   }) {
     final effectiveShape = shape ??
         const RoundedRectangleBorder(borderRadius: MihrRadius.borderXs);
+    final ts = TextStyle(
+      fontSize: size.fontSize,
+      fontWeight: FontWeight.w600,
+    );
 
     return ButtonStyle(
       padding: const WidgetStatePropertyAll(EdgeInsets.zero),
-      minimumSize: WidgetStatePropertyAll(Size(0, sizeData.height)),
+      minimumSize: WidgetStatePropertyAll(
+        Size(0, size.linkHeight),
+      ),
       maximumSize: WidgetStatePropertyAll(
-        Size(double.infinity, sizeData.height),
+        Size(double.infinity, size.linkHeight),
       ),
       textStyle: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.hovered) ||
             states.contains(WidgetState.pressed)) {
-          return sizeData.textStyle.copyWith(
+          return ts.copyWith(
             decoration: TextDecoration.underline,
             decorationColor: hoverDecorationColor,
           );
         }
-        return sizeData.textStyle;
+        return ts;
       }),
-      iconSize: WidgetStatePropertyAll(sizeData.iconSize),
+      iconSize: WidgetStatePropertyAll(size.iconSize),
       shape: WidgetStatePropertyAll(effectiveShape),
       elevation: const WidgetStatePropertyAll(0),
       shadowColor: const WidgetStatePropertyAll(Colors.transparent),
@@ -227,6 +237,12 @@ class MihrButtonDefaults {
       );
 
   /// Tertiary button colors — ghost, transparent background.
+  ///
+  /// Hover uses [BackgroundColors.primaryHover] because ghost buttons rest on
+  /// [BackgroundColors.primary] surfaces. One step up the hierarchy gives
+  /// subtle but consistent feedback, matching the secondary button hover.
+  /// [BackgroundColors.tertiary] is intentionally reserved for stronger
+  /// contrast elements (toggles, sliders) and must not be used here.
   static ButtonStyle tertiaryColors({
     required BackgroundColors bg,
     required ForegroundColors fg,

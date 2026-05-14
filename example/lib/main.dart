@@ -10,10 +10,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final config = MihrThemeConfig(
+      brand: AccentColors.indigo,
+      buttonTheme: MihrButtonThemeData(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+      materialOverrides: (base) => base.copyWith(
+        scaffoldBackgroundColor: base.bgColors.secondary,
+        appBarTheme: base.appBarTheme.copyWith(
+          centerTitle: true,
+          backgroundColor: base.bgColors.brandSolid,
+          foregroundColor: base.textColors.white,
+        ),
+      ),
+    );
+
     return MaterialApp(
       title: 'Mihr UI',
-      theme: MihrTheme.light(brand: AccentColors.indigo),
-      darkTheme: MihrTheme.dark(brand: AccentColors.indigo),
+      theme: MihrTheme.light(config: config),
+      darkTheme: MihrTheme.dark(config: config),
       themeMode: ThemeMode.light,
       home: const _ButtonPreviewPage(),
     );
@@ -37,19 +52,16 @@ class _ButtonPreviewPageState extends State<_ButtonPreviewPage> {
   @override
   Widget build(BuildContext context) {
     final textColors = context.textColors;
-    final bgColors = context.bgColors;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: bgColors.brandSolid,
-        foregroundColor: textColors.white,
         title: const Text('Button Preview'),
         actions: [
           Row(
             children: [
               Text(
                 'Enabled',
-                style: MihrTypography.textSm.medium.copyWith(
+                style: context.typography.textSm.medium.copyWith(
                   color: textColors.white,
                 ),
               ),
@@ -97,7 +109,7 @@ class _ButtonPreviewPageState extends State<_ButtonPreviewPage> {
         MihrSpacing.gapVXl,
         Text(
           title,
-          style: MihrTypography.textLg.semibold.copyWith(
+          style: context.typography.textLg.semibold.copyWith(
             color: context.textColors.primary,
           ),
         ),

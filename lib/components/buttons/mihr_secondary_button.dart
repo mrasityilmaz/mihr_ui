@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_base.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_defaults.dart';
-import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart';
+import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart'
+    show MihrButtonSize;
 import 'package:mihr_ui/components/buttons/mihr_button_theme.dart';
 import 'package:mihr_ui/core/theme/mihr_theme.dart';
 
@@ -14,22 +15,24 @@ import 'package:mihr_ui/core/theme/mihr_theme.dart';
 /// )
 /// ```
 class MihrSecondaryButton extends MihrButtonBase {
-  /// Creates a medium secondary button.
+  /// Creates a secondary button with the given [size] (defaults to md).
   const MihrSecondaryButton({
     required super.onPressed,
     required super.child,
     super.key,
+    MihrButtonSize size = MihrButtonSize.md,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  })  : _size = MihrButtonSize.md,
+  })  : _size = size,
         _isSquare = false;
 
   /// Creates a small secondary button.
@@ -41,6 +44,7 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -59,6 +63,7 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -77,6 +82,7 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -86,20 +92,22 @@ class MihrSecondaryButton extends MihrButtonBase {
   })  : _size = MihrButtonSize.xl,
         _isSquare = false;
 
-  /// Creates an icon-only secondary button (medium, square).
+  /// Creates an icon-only secondary button (square) with the given [size].
   const MihrSecondaryButton.icon({
     required super.onPressed,
     required Widget icon,
     super.key,
+    MihrButtonSize size = MihrButtonSize.md,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
     super.tooltip,
-  })  : _size = MihrButtonSize.md,
+  })  : _size = size,
         _isSquare = true,
         super(child: icon);
 
@@ -112,6 +120,7 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -129,6 +138,7 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -146,6 +156,7 @@ class MihrSecondaryButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -160,10 +171,9 @@ class MihrSecondaryButton extends MihrButtonBase {
   @override
   ButtonStyle defaultStyleOf(BuildContext context) {
     final theme = MihrButtonThemeData.of(context);
-    final sizes = theme?.sizes ?? MihrButtonSizes();
 
     final base = MihrButtonDefaults.baseStyle(
-      sizeData: sizes.forSize(_size),
+      size: _size,
       shape: theme?.shape,
       isSquare: _isSquare,
     );

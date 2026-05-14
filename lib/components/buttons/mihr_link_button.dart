@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_base.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_defaults.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_shadows.dart';
-import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart';
+import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart'
+    show MihrButtonSize;
 import 'package:mihr_ui/components/buttons/mihr_button_theme.dart';
 import 'package:mihr_ui/core/theme/mihr_theme.dart';
 
@@ -23,22 +24,24 @@ import 'package:mihr_ui/core/theme/mihr_theme.dart';
 /// )
 /// ```
 class MihrLinkButton extends MihrButtonBase {
-  /// Creates a medium brand-colored link button.
+  /// Creates a brand-colored link button with the given [size] (defaults to md).
   const MihrLinkButton({
     required super.onPressed,
     required super.child,
     super.key,
+    MihrButtonSize size = MihrButtonSize.md,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  })  : _size = MihrButtonSize.md,
+  })  : _size = size,
         _isGray = false;
 
   /// Creates a small brand-colored link button.
@@ -50,6 +53,7 @@ class MihrLinkButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -68,6 +72,7 @@ class MihrLinkButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -86,6 +91,7 @@ class MihrLinkButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -95,22 +101,24 @@ class MihrLinkButton extends MihrButtonBase {
   })  : _size = MihrButtonSize.xl,
         _isGray = false;
 
-  /// Creates a medium gray link button.
+  /// Creates a gray link button with the given [size] (defaults to md).
   const MihrLinkButton.gray({
     required super.onPressed,
     required super.child,
     super.key,
+    MihrButtonSize size = MihrButtonSize.md,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
     super.leadingIcon,
     super.trailingIcon,
     super.tooltip,
-  })  : _size = MihrButtonSize.md,
+  })  : _size = size,
         _isGray = true;
 
   /// Creates a small gray link button.
@@ -122,6 +130,7 @@ class MihrLinkButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -140,6 +149,7 @@ class MihrLinkButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -158,6 +168,7 @@ class MihrLinkButton extends MihrButtonBase {
     super.onHover,
     super.onFocusChange,
     super.style,
+    super.styleBuilder,
     super.focusNode,
     super.autofocus,
     super.statesController,
@@ -174,12 +185,11 @@ class MihrLinkButton extends MihrButtonBase {
   ButtonStyle defaultStyleOf(BuildContext context) {
     final theme = MihrButtonThemeData.of(context);
     final fg = context.fgColors;
-    final linkSizes = theme?.linkSizes ?? MihrLinkButtonSizes();
 
     final hoverFg = _isGray ? fg.secondaryHover : fg.brandSecondaryHover;
 
     final base = MihrButtonDefaults.linkBaseStyle(
-      sizeData: linkSizes.forSize(_size),
+      size: _size,
       hoverDecorationColor: hoverFg,
       shape: theme?.shape,
     );

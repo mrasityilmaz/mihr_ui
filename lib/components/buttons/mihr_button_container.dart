@@ -10,14 +10,13 @@ import 'package:mihr_ui/components/buttons/mihr_button_shadows.dart';
 /// Uses [Material] for the background color, shape, and clip — giving
 /// [InkWell] a proper ancestor. Outer shadows are painted via a
 /// [DecoratedBox] underneath, and inner shadows via [CustomPaint]
-/// on top of the content.
+/// behind the content.
 class MihrButtonContainer extends StatelessWidget {
   /// Creates a button container with the given surface and shadow config.
   const MihrButtonContainer({
     required this.color,
     required this.shape,
     required this.shadows,
-    required this.isFocused,
     required this.animationDuration,
     required this.child,
     super.key,
@@ -33,11 +32,8 @@ class MihrButtonContainer extends StatelessWidget {
   /// Border side drawn on top of the shape.
   final BorderSide side;
 
-  /// Shadow configuration (outer + inner + focus ring).
+  /// Shadow configuration (outer + inner).
   final MihrButtonShadows shadows;
-
-  /// Whether the button is currently focused (shows focus ring).
-  final bool isFocused;
 
   /// Duration for color/shape transitions.
   final Duration animationDuration;
@@ -45,22 +41,23 @@ class MihrButtonContainer extends StatelessWidget {
   /// The button content (InkWell + padding + label).
   final Widget child;
 
+  /// The effective shape with [side] applied.
+  ///
+  /// Used by both the visual surface and the InkWell splash clip so
+  /// that they always match.
+  OutlinedBorder get effectiveShape => shape.copyWith(side: side);
+
   @override
   Widget build(BuildContext context) {
-    final outerShadows = [
-      ...shadows.outer,
-      if (isFocused) ...shadows.focusOuter,
-    ];
-
+    final resolvedShape = effectiveShape;
     final hasInnerShadows = shadows.inner.isNotEmpty;
-    final effectiveShape = shape.copyWith(side: side);
 
     var result = child;
 
     if (hasInnerShadows) {
       result = CustomPaint(
-        foregroundPainter: _InnerShadowPainter(
-          shape: effectiveShape,
+        painter: _InnerShadowPainter(
+          shape: resolvedShape,
           shadows: shadows.inner,
         ),
         child: result,
@@ -70,17 +67,17 @@ class MihrButtonContainer extends StatelessWidget {
     result = Material(
       type: MaterialType.button,
       color: color,
-      shape: effectiveShape,
+      shape: resolvedShape,
       clipBehavior: Clip.antiAlias,
       animationDuration: animationDuration,
       child: result,
     );
 
-    if (outerShadows.isNotEmpty) {
+    if (shadows.outer.isNotEmpty) {
       result = DecoratedBox(
         decoration: ShapeDecoration(
-          shape: effectiveShape,
-          shadows: outerShadows,
+          shape: resolvedShape,
+          shadows: shadows.outer,
         ),
         child: result,
       );
@@ -148,23 +145,59 @@ class _InnerShadowPainter extends CustomPainter {
   ///
   /// Guarantees `innerRadius + inset == outerRadius` so that the
   /// inset border has uniform thickness around corners.
+  ///
+  /// Shapes without an explicit border radius (`StadiumBorder`,
+  /// `CircleBorder`, `StarBorder`) derive their curvature from the
+  /// rect they are painted into. Since the cutout rect is already
+  /// deflated by [inset], returning them unchanged is correct.
   ShapeBorder _shrinkShape(double inset) {
     if (inset <= 0) return shape;
 
     if (shape is RoundedRectangleBorder) {
       final rrb = shape as RoundedRectangleBorder;
       final resolved = rrb.borderRadius.resolve(TextDirection.ltr);
-      final adjusted = BorderRadius.only(
+      return RoundedRectangleBorder(
+        borderRadius: _shrinkBorderRadius(resolved, inset),
+      );
+    }
+
+    if (shape is RoundedSuperellipseBorder) {
+      final rseb = shape as RoundedSuperellipseBorder;
+      final resolved = rseb.borderRadius.resolve(TextDirection.ltr);
+      return RoundedSuperellipseBorder(
+        borderRadius: _shrinkBorderRadius(resolved, inset),
+      );
+    }
+
+    if (shape is BeveledRectangleBorder) {
+      final brb = shape as BeveledRectangleBorder;
+      final resolved = brb.borderRadius.resolve(TextDirection.ltr);
+      return BeveledRectangleBorder(
+        borderRadius: _shrinkBorderRadius(resolved, inset),
+      );
+    }
+
+    if (shape is ContinuousRectangleBorder) {
+      final crb = shape as ContinuousRectangleBorder;
+      final resolved = crb.borderRadius.resolve(TextDirection.ltr);
+      return ContinuousRectangleBorder(
+        borderRadius: _shrinkBorderRadius(resolved, inset),
+      );
+    }
+
+    return shape;
+  }
+
+  static BorderRadius _shrinkBorderRadius(
+    BorderRadius resolved,
+    double inset,
+  ) =>
+      BorderRadius.only(
         topLeft: _shrinkRadius(resolved.topLeft, inset),
         topRight: _shrinkRadius(resolved.topRight, inset),
         bottomLeft: _shrinkRadius(resolved.bottomLeft, inset),
         bottomRight: _shrinkRadius(resolved.bottomRight, inset),
       );
-      return RoundedRectangleBorder(borderRadius: adjusted);
-    }
-
-    return shape;
-  }
 
   static Radius _shrinkRadius(Radius r, double inset) =>
       Radius.elliptical(math.max(0, r.x - inset), math.max(0, r.y - inset));

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_shadows.dart';
-import 'package:mihr_ui/components/buttons/mihr_button_sizes.dart';
 import 'package:mihr_ui/mihr_ui.dart'
     show
         MihrDestructiveButton,
@@ -49,8 +48,6 @@ class MihrButtonThemeData extends ThemeExtension<MihrButtonThemeData> {
   const MihrButtonThemeData({
     this.shape,
     this.shadows,
-    this.sizes,
-    this.linkSizes,
     this.primaryStyle,
     this.secondaryStyle,
     this.tertiaryStyle,
@@ -68,16 +65,6 @@ class MihrButtonThemeData extends ThemeExtension<MihrButtonThemeData> {
   ///
   /// When `null`, defaults to [MihrButtonShadows.standard].
   final MihrButtonShadows? shadows;
-
-  /// Size presets (sm/md/lg/xl) for regular buttons.
-  ///
-  /// When `null`, uses default sizes.
-  final MihrButtonSizes? sizes;
-
-  /// Size presets for link-style buttons.
-  ///
-  /// When `null`, uses default link sizes.
-  final MihrLinkButtonSizes? linkSizes;
 
   /// Style override merged on top of [MihrPrimaryButton] defaults.
   final ButtonStyle? primaryStyle;
@@ -102,8 +89,6 @@ class MihrButtonThemeData extends ThemeExtension<MihrButtonThemeData> {
   MihrButtonThemeData copyWith({
     OutlinedBorder? shape,
     MihrButtonShadows? shadows,
-    MihrButtonSizes? sizes,
-    MihrLinkButtonSizes? linkSizes,
     ButtonStyle? primaryStyle,
     ButtonStyle? secondaryStyle,
     ButtonStyle? tertiaryStyle,
@@ -113,8 +98,6 @@ class MihrButtonThemeData extends ThemeExtension<MihrButtonThemeData> {
       MihrButtonThemeData(
         shape: shape ?? this.shape,
         shadows: shadows ?? this.shadows,
-        sizes: sizes ?? this.sizes,
-        linkSizes: linkSizes ?? this.linkSizes,
         primaryStyle: primaryStyle ?? this.primaryStyle,
         secondaryStyle: secondaryStyle ?? this.secondaryStyle,
         tertiaryStyle: tertiaryStyle ?? this.tertiaryStyle,
@@ -128,8 +111,6 @@ class MihrButtonThemeData extends ThemeExtension<MihrButtonThemeData> {
     return MihrButtonThemeData(
       shape: OutlinedBorder.lerp(shape, other.shape, t),
       shadows: t < 0.5 ? shadows : other.shadows,
-      sizes: t < 0.5 ? sizes : other.sizes,
-      linkSizes: t < 0.5 ? linkSizes : other.linkSizes,
       primaryStyle: ButtonStyle.lerp(primaryStyle, other.primaryStyle, t),
       secondaryStyle: ButtonStyle.lerp(secondaryStyle, other.secondaryStyle, t),
       tertiaryStyle: ButtonStyle.lerp(tertiaryStyle, other.tertiaryStyle, t),

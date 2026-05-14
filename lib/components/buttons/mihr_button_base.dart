@@ -6,6 +6,63 @@ import 'package:mihr_ui/components/buttons/mihr_button_container.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_shadows.dart';
 import 'package:mihr_ui/components/buttons/mihr_button_theme.dart';
 import 'package:mihr_ui/core/theme/spacing/mihr_spacing.dart';
+import 'package:mihr_ui/core/theme/typography/mihr_typography.dart';
+
+/// Exposes resolved button colors to descendant widgets.
+///
+/// Inserted automatically by [MihrButtonBase] above the button
+/// content. Works alongside [IconTheme] (for [Icon] widgets) and
+/// [DefaultTextStyle] (for [Text] widgets) to propagate colors to
+/// any child type — including [CircularProgressIndicator],
+/// `SvgPicture`, or custom painters.
+///
+/// ```dart
+/// MihrPrimaryButton(
+///   onPressed: _save,
+///   child: Builder(builder: (context) {
+///     final btn = MihrButtonData.of(context);
+///     return SizedBox(
+///       width: 20, height: 20,
+///       child: CircularProgressIndicator(
+///         strokeWidth: 2,
+///         valueColor: AlwaysStoppedAnimation(btn.foregroundColor),
+///       ),
+///     );
+///   }),
+/// )
+/// ```
+class MihrButtonData extends InheritedWidget {
+  /// Creates a button data scope.
+  const MihrButtonData({
+    required this.foregroundColor,
+    required this.iconColor,
+    required this.backgroundColor,
+    required super.child,
+    super.key,
+  });
+
+  /// Label / text color resolved for the current state.
+  final Color foregroundColor;
+
+  /// Icon color resolved for the current state.
+  final Color iconColor;
+
+  /// Background fill color resolved for the current state.
+  final Color backgroundColor;
+
+  /// Returns the nearest [MihrButtonData], or `null`.
+  static MihrButtonData? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<MihrButtonData>();
+
+  /// Returns the nearest [MihrButtonData].
+  static MihrButtonData of(BuildContext context) => maybeOf(context)!;
+
+  @override
+  bool updateShouldNotify(MihrButtonData oldWidget) =>
+      foregroundColor != oldWidget.foregroundColor ||
+      iconColor != oldWidget.iconColor ||
+      backgroundColor != oldWidget.backgroundColor;
+}
 
 /// Abstract base for all Mihr button widgets.
 ///
@@ -18,13 +75,14 @@ import 'package:mihr_ui/core/theme/spacing/mihr_spacing.dart';
 /// ```text
 /// Tooltip? > Semantics > _InputPadding > ConstrainedBox >
 ///   MihrButtonContainer(bg, shape, shadows) > InkWell(states) >
-///     Padding > IconTheme + DefaultTextStyle > _ButtonContent
+///     Padding(H) > Center > MihrButtonData >
+///       IconTheme + DefaultTextStyle > _ButtonContent
 /// ```
 ///
 /// ## Style resolution
 ///
 /// ```text
-/// widget.style  >  themeStyleOf(context)  >  defaultStyleOf(context)
+/// widget.style / styleBuilder  >  themeStyleOf  >  defaultStyleOf
 /// ```
 abstract class MihrButtonBase extends StatefulWidget {
   /// Creates a Mihr button with the given callbacks and content.
@@ -36,13 +94,17 @@ abstract class MihrButtonBase extends StatefulWidget {
     this.onHover,
     this.onFocusChange,
     this.style,
+    this.styleBuilder,
     this.focusNode,
     this.autofocus = false,
     this.statesController,
     this.leadingIcon,
     this.trailingIcon,
     this.tooltip,
-  });
+  }) : assert(
+          style == null || styleBuilder == null,
+          'Cannot set both style and styleBuilder on a Mihr button.',
+        );
 
   /// Called when the button is tapped. Pass `null` to disable.
   final VoidCallback? onPressed;
@@ -57,7 +119,25 @@ abstract class MihrButtonBase extends StatefulWidget {
   final ValueChanged<bool>? onFocusChange;
 
   /// Overrides the resolved [ButtonStyle] for this button instance.
+  ///
+  /// Mutually exclusive with [styleBuilder].
   final ButtonStyle? style;
+
+  /// Receives the fully merged default+theme style and returns a
+  /// modified copy.
+  ///
+  /// ```dart
+  /// MihrPrimaryButton(
+  ///   onPressed: () {},
+  ///   styleBuilder: (resolved) => resolved.copyWith(
+  ///     padding: const WidgetStatePropertyAll(EdgeInsets.all(24)),
+  ///   ),
+  ///   child: const Text('Wide'),
+  /// )
+  /// ```
+  ///
+  /// Mutually exclusive with [style].
+  final ButtonStyle Function(ButtonStyle resolved)? styleBuilder;
 
   /// Controls keyboard focus.
   final FocusNode? focusNode;
@@ -168,7 +248,15 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
 
     final defaultStyle = widget.defaultStyleOf(context);
     final themeStyle = widget.themeStyleOf(context);
-    final widgetStyle = widget.style;
+
+    // -- styleBuilder / style resolution --
+    final ButtonStyle? widgetStyle;
+    if (widget.styleBuilder != null) {
+      final merged = defaultStyle.merge(themeStyle ?? const ButtonStyle());
+      widgetStyle = widget.styleBuilder!(merged);
+    } else {
+      widgetStyle = widget.style;
+    }
 
     T? rs<T>(WidgetStateProperty<T>? Function(ButtonStyle?) g) =>
         _resolve(g, states, widgetStyle, themeStyle, defaultStyle);
@@ -178,7 +266,12 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
     final iconColor = rs((s) => s?.iconColor) ?? fgColor;
     final side = rs((s) => s?.side) ?? BorderSide.none;
     final padding = rs((s) => s?.padding) ?? EdgeInsets.zero;
-    final textStyle = rs((s) => s?.textStyle);
+    final resolvedTextStyle = rs((s) => s?.textStyle);
+    final typoTheme = MihrTypography.maybeOf(context);
+    final textStyle = typoTheme != null
+        ? (resolvedTextStyle ?? const TextStyle())
+            .copyWith(fontFamily: typoTheme.fontFamily)
+        : resolvedTextStyle;
     final mouseCursor = rs((s) => s?.mouseCursor) ?? SystemMouseCursors.click;
     final resolvedIconSize = rs((s) => s?.iconSize) ?? 20.0;
 
@@ -230,31 +323,45 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
     // -- shadows --
 
     final shadows = widget.shadowsOf(context);
-    final isFocused = states.contains(WidgetState.focused);
+    final effectiveShape = shape.copyWith(side: side);
 
     // -- content --
+
+    final isSquare = fixedSize != null && fixedSize.width == fixedSize.height;
 
     Widget content = _ButtonContent(
       leadingIcon: widget.leadingIcon,
       trailingIcon: widget.trailingIcon,
       iconSize: resolvedIconSize,
+      isSquare: isSquare,
       child: widget.child,
     );
 
-    content = IconTheme.merge(
-      data: IconThemeData(color: iconColor, size: resolvedIconSize),
-      child: DefaultTextStyle.merge(
-        style: (textStyle ?? const TextStyle()).copyWith(color: fgColor),
-        child: content,
+    content = MihrButtonData(
+      foregroundColor: fgColor,
+      iconColor: iconColor,
+      backgroundColor: bgColor,
+      child: IconTheme.merge(
+        data: IconThemeData(color: iconColor, size: resolvedIconSize),
+        child: DefaultTextStyle.merge(
+          style: (textStyle ?? const TextStyle()).copyWith(color: fgColor),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          child: content,
+        ),
       ),
     );
 
     content = Padding(
       padding: padding,
-      child: Align(widthFactor: 1, heightFactor: 1, child: content),
+      child: Center(
+        widthFactor: 1,
+        heightFactor: 1,
+        child: content,
+      ),
     );
 
-    // -- ink well --
+    // -- ink well (uses effectiveShape so splash clips match border) --
 
     Widget result = InkWell(
       onTap: _isDisabled ? null : widget.onPressed,
@@ -267,7 +374,7 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
       statesController: _controller,
       overlayColor: const WidgetStatePropertyAll(Colors.transparent),
       mouseCursor: mouseCursor,
-      customBorder: shape,
+      customBorder: effectiveShape,
       child: content,
     );
 
@@ -278,7 +385,6 @@ class _MihrButtonBaseState extends State<MihrButtonBase> {
       shape: shape,
       side: side,
       shadows: shadows,
-      isFocused: isFocused,
       animationDuration: animDuration,
       child: result,
     );
@@ -308,6 +414,7 @@ class _ButtonContent extends StatelessWidget {
   const _ButtonContent({
     required this.iconSize,
     required this.child,
+    required this.isSquare,
     this.leadingIcon,
     this.trailingIcon,
   });
@@ -315,12 +422,19 @@ class _ButtonContent extends StatelessWidget {
   final Widget? leadingIcon;
   final Widget? trailingIcon;
   final double iconSize;
+  final bool isSquare;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    const opticalPad = EdgeInsets.symmetric(horizontal: MihrSpacing.xs);
-    final wrappedChild = Padding(padding: opticalPad, child: child);
+    final wrappedChild = isSquare
+        ? child
+        : Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: MihrSpacing.xs,
+            ),
+            child: child,
+          );
 
     if (leadingIcon == null && trailingIcon == null) {
       return wrappedChild;
@@ -332,7 +446,11 @@ class _ButtonContent extends StatelessWidget {
       children: [
         if (leadingIcon != null) _iconFrame(leadingIcon!),
         Flexible(
-          child: Center(widthFactor: 1, heightFactor: 1, child: wrappedChild),
+          child: Center(
+            widthFactor: 1,
+            heightFactor: 1,
+            child: wrappedChild,
+          ),
         ),
         if (trailingIcon != null) _iconFrame(trailingIcon!),
       ],
@@ -344,8 +462,13 @@ class _ButtonContent extends StatelessWidget {
     return SizedBox(
       width: frame,
       height: frame,
-      child: Center(
-        child: SizedBox(width: iconSize, height: iconSize, child: icon),
+      child: SizedBox(
+        width: iconSize,
+        height: iconSize,
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: icon,
+        ),
       ),
     );
   }
@@ -426,7 +549,10 @@ class _RenderInputPadding extends RenderShiftedBox {
     }
   }
 
-  Size _computeLayout(BoxConstraints constraints, ChildLayouter layoutChild) {
+  Size _computeLayout(
+    BoxConstraints constraints,
+    ChildLayouter layoutChild,
+  ) {
     if (child != null) {
       final childSize = layoutChild(child!, constraints);
       final height = math.max(childSize.height, minSize.height);
